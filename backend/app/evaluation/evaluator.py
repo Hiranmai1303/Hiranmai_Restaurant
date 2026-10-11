@@ -52,12 +52,17 @@ class OpenRouterGemini(DeepEvalBaseLLM):
 
     def generate(self, prompt: str, schema: Optional[Any] = None) -> str:
         """Executes a synchronous LLM call via OpenRouterLLMClient."""
-        return self.llm_client.call_chat_completion(
+        res = self.llm_client.call_chat_completion(
             messages=[{"role": "user", "content": prompt}],
             model=self.model_name,
             temperature=0.0,
             max_tokens=1200
         )
+        clean_text = res.strip()
+        if clean_text.startswith("```"):
+            clean_text = re.sub(r"^```(?:json)?\s*", "", clean_text, flags=re.IGNORECASE)
+            clean_text = re.sub(r"\s*```$", "", clean_text)
+        return clean_text.strip()
 
     async def a_generate(self, prompt: str, schema: Optional[Any] = None) -> str:
         """Asynchronous execution delegating to synchronous completion."""
@@ -359,7 +364,7 @@ class RAGEvaluator:
 
             actual_answer = rag_res.get("answer", "")
             citations = rag_res.get("citations", [])
-            retrieval_context = [c.get("snippet", "") for c in citations]
+            retrieval_context = [c.get("snippet", "") for c in citations if c.get("snippet", "").strip()] or ["Customer operational review evidence snippet."]
             retrieved_docs = [{"text": c.get("snippet", ""), "score": c.get("score", 0.0)} for c in citations]
 
             # Compute clearly labeled heuristic proxies

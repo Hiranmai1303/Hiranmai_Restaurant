@@ -1,0 +1,196 @@
+{
+  "evaluation_date": "2026-10-11T08:22:24.220995",
+  "model_used": "google/gemini-2.5-flash",
+  "total_benchmark_cases": 5,
+  "evaluated_cases": 5,
+  "not_evaluated_cases": 0,
+  "aggregate_deepeval_metrics": {
+    "faithfulness": 1.0,
+    "answer_relevancy": 0.9496,
+    "contextual_precision": 0.0,
+    "contextual_recall": 0.0,
+    "recommendation_quality": 0.84
+  },
+  "target_thresholds": {
+    "faithfulness": 0.85,
+    "answer_relevancy": 0.85,
+    "context_precision": 0.8,
+    "context_recall": 0.8,
+    "recommendation_quality": 0.8
+  },
+  "verdict_by_target": {
+    "faithfulness": {
+      "actual": 1.0,
+      "target": 0.85,
+      "passed": true
+    },
+    "answer_relevancy": {
+      "actual": 0.9496,
+      "target": 0.85,
+      "passed": true
+    },
+    "context_precision": {
+      "actual": null,
+      "target": 0.8,
+      "status": "not_evaluated"
+    },
+    "context_recall": {
+      "actual": null,
+      "target": 0.8,
+      "status": "not_evaluated"
+    },
+    "recommendation_quality": {
+      "actual": 0.84,
+      "target": 0.8,
+      "passed": true
+    }
+  },
+  "retrieval_benchmarks": {
+    "bm25": {
+      "precision_at_5": 0.44,
+      "recall_at_5": 0.55,
+      "mrr": 1.0,
+      "evaluated_queries": 5
+    },
+    "vector": {
+      "precision_at_5": 0.4,
+      "recall_at_5": 0.5,
+      "mrr": 1.0,
+      "evaluated_queries": 5
+    },
+    "hybrid": {
+      "precision_at_5": 0.76,
+      "recall_at_5": 0.95,
+      "mrr": 0.8667,
+      "evaluated_queries": 5
+    }
+  },
+  "aggregate_heuristic_proxies": {
+    "mean_heuristic_faithfulness": 0.0107,
+    "mean_heuristic_answer_relevancy": 0.7496,
+    "mean_heuristic_context_precision": 0.0,
+    "mean_heuristic_context_recall": 0.0
+  },
+  "case_results": [
+    {
+      "id": "TC_01",
+      "category": "Waiting Time",
+      "query": "What are the primary factors contributing to long customer wait times during peak dinner rushes?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Diagnosis & Problem Classification\nThe primary factors contributing to long wait times and poor service experiences across the analyzed establishments are categorized into three operational failures: **Inefficient Front-of-House (FOH) Management**, **Inadequate Staffing/Training**, and **Lack of Transparency**. \n\nThe data indicates that wait times are not merely a function of high volume, but a result of systemic breakdowns in communication, table management, and service execution.\n\n---\n\n### Root-Cause Evidence Breakdown\n\n*   **Front-of-House (FOH) Management Failures:**\n    *   **Inaccurate Quoting & Priority Issues:** Customers are being quoted inaccurate wait times and experiencing \"bumping,\" where parties arriving later are seated before those on the waitlist [Source #3].\n    *   **Favoritism/VIP Prioritization:** Operational focus is being diverted to accommodate \"moderate celebrities\" or specific guests, leading to excessive wait times for the general public [Source #5].\n    *   **Communication Breakdown:** Failure to utilize notification systems (e.g., text alerts) effectively leaves customers in limbo [Source #3].\n\n*   **Staffing & Training Deficiencies:**\n    *   **Incompetence & Bandwidth Issues:** Servers are unable to manage more than one table at a time, or are \"under-equipped\" to handle peak crowds [Source #1, Source #4].\n    *   **Lack of Proactive Service:** Guests are forced to \"pull\" servers from the floor to get attention, indicating a lack of floor supervision [Source #1].\n    *   **Engagement Failures:** Staff appear dismissive or overwhelmed, failing to listen to orders or acknowledge customer concerns [Source #2].\n\n*   **Transparency & Expectation Management:**\n    *   **Failure to Communicate Delays:** Restaurants are failing to provide honest, upfront information regarding wait times for both seating and food preparation [Source #1].\n\n---\n\n### Actionable Managerial Recommendations\n\n#### Immediate Actions (Short-Term)\n1.  **Implement \"Honest Wait\" Protocols:** Mandate that hosts provide realistic wait time estimates. If a delay occurs, staff must proactively inform the guest rather than leaving them to wait indefinitely [Source #1].\n2.  **Standardize Seating Procedures:** Enforce a strict \"First-Come, First-Served\" policy to prevent guest frustration regarding table priority [Source #3].\n3.  **Service Recovery Program:** Empower staff to offer meaningful compensation (e.g., comp cards or significant discounts) immediately when service failures occur, rather than offering nominal discounts that feel insulting to the guest [Source #1].\n\n#### Long-Term Strategic Improvements\n1.  **Staff Competency Training:** Conduct rigorous training for servers on multi-tasking and table management. Identify high-performing staff members to mentor those struggling with floor coverage [Source #1].\n2.  **Operational Audit of FOH:** Invest in or audit current waitlist management technology to ensure text notifications are reliable and that the host stand has clear, objective criteria for seating [Source #3].\n3.  **Capacity Planning:** If the restaurant is consistently \"under-equipped\" for peak rushes, management must adjust staffing levels or limit covers to match the kitchen and floor's actual capacity [Source #4].\n\n---\n\n### Risk & Business Impact Analysis\n*   **Customer Churn:** The evidence shows a direct correlation between poor wait management and the loss of repeat business. Customers explicitly state they \"won't go back\" due to these experiences [Source #2, Source #3].\n*   **Brand Reputation:** Inconsistent service and perceived unfairness (bumping guests for celebrities or others) create a negative brand image that discourages new patrons [Source #3, Source #5].\n*   **Financial Leakage:** Ineffective service recovery (e.g., small discounts for major failures) fails to retain customers and may actually exacerbate dissatisfaction, leading to lower tips and negative public reviews [Source #1].",
+      "expected_output": "Long wait times during peak dinner rushes stem from front-of-house host seating pacing bottlenecks, kitchen cook-line ticket backlogs, and delayed busser table turnaround.",
+      "latency_ms": 6573.58,
+      "status": "evaluated",
+      "deepeval_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.7895,
+        "contextual_precision": 0.0,
+        "contextual_recall": 0.0,
+        "recommendation_quality": 0.8
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.0115,
+        "heuristic_answer_relevancy": 0.75,
+        "heuristic_context_precision": 0.0,
+        "heuristic_context_recall": 0.0
+      },
+      "error": null
+    },
+    {
+      "id": "TC_02",
+      "category": "Waiting Time",
+      "query": "Why are guests experiencing severe delays when ordering drinks and waiting at the bar?",
+      "is_out_of_scope": false,
+      "actual_output": "Based on the provided reviews, the delays at the bar and in drink service are not isolated incidents but symptoms of systemic operational failures. Below is the diagnosis and recommended action plan.\n\n### Executive Diagnosis & Problem Classification\nThe delays in drink service are classified into three distinct operational failures:\n1.  **Inventory & Resource Management:** Lack of basic supplies (glassware) and stock (wine) creates immediate bottlenecks [Source #3].\n2.  **Staff Competency & Training:** Bartenders and waitstaff lack basic product knowledge and professional service standards [Source #3].\n3.  **Service Bias & Cultural Issues:** Staff are prioritizing \"regulars\" over general guests, leading to intentional neglect of non-regular patrons [Source #4].\n\n### Root-Cause Evidence Breakdown\n*   **Supply Chain/Inventory Failure:** At *Salsa*, the bar was out of 10 of 14 wines and lacked proper glassware, forcing the use of inappropriate vessels (champagne flutes/highballs) [Source #3]. This creates a \"confusion\" loop that slows down every transaction.\n*   **Staff Negligence & Attitude:** At *Double D Lounge*, bartenders are actively ignoring non-regular guests to socialize, and when confronted, respond with hostility [Source #4]. At *Salsa*, the waiter was openly combative, citing \"I only have 2 hands\" when asked about order status [Source #3].\n*   **Lack of Product Knowledge:** Bartenders are unable to describe basic menu items (e.g., wine profiles), which forces guests to spend more time at the bar asking questions, further increasing wait times [Source #3].\n\n### Actionable Managerial Recommendations\n\n**Immediate (Next 48 Hours):**\n*   **Inventory Audit:** Conduct an immediate par-level check for all glassware and high-velocity bar items. If items are out of stock, remove them from the menu immediately to prevent service delays caused by \"menu confusion.\"\n*   **Service Standards Reset:** Hold a mandatory pre-shift meeting to explicitly ban \"regular-only\" service bias. Establish a \"First-In, First-Out\" (FIFO) service policy for all guests, regardless of their status.\n*   **Scripting for Staff:** Provide staff with a \"cheat sheet\" for menu items (e.g., wine profiles) to eliminate the need for guests to ask clarifying questions that slow down the ordering process.\n\n**Long-Term (Next 30 Days):**\n*   **Training Program:** Implement a formal training module focusing on professional communication. Staff must be trained to handle service delays with transparency rather than hostility (e.g., replacing the \"I only have 2 hands\" attitude with proactive communication) [Source #3].\n*   **Staffing Assessment:** Evaluate if the current staffing levels are sufficient for peak hours. If staff are overwhelmed, consider adding a bar-back to handle glassware replenishment and prep, allowing the bartender to focus solely on drink production [Source #3].\n*   **Performance Accountability:** Monitor staff interactions with non-regular guests. Use the feedback from [Source #4] as a case study for why discriminatory service leads to permanent loss of business.\n\n### Risk & Business Impact Analysis\n*   **Revenue Loss:** The current environment is driving away customers who feel ignored or inconvenienced [Source #4, Source #5].\n*   **Brand Erosion:** The combination of poor service, lack of inventory, and rude staff is creating a \"comical\" and unprofessional reputation that is difficult to reverse [Source #3].\n*   **Operational Inefficiency:** When staff are unknowledgeable and inventory is missing, the \"time-per-guest\" increases, effectively lowering the maximum capacity of the bar and reducing potential revenue per hour.",
+      "expected_output": "Bar delays are driven by single-bartender staffing during surge hours, glassware dishwashing bottlenecks, and service-well ticket priority conflicts.",
+      "latency_ms": 4031.47,
+      "status": "evaluated",
+      "deepeval_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 1.0,
+        "contextual_precision": 0.0,
+        "contextual_recall": 0.0,
+        "recommendation_quality": 1.0
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.0082,
+        "heuristic_answer_relevancy": 0.5,
+        "heuristic_context_precision": 0.0,
+        "heuristic_context_recall": 0.0
+      },
+      "error": null
+    },
+    {
+      "id": "TC_03",
+      "category": "Waiting Time",
+      "query": "What is causing long lobby queues and slow table assignment on Friday evenings?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Diagnosis & Problem Classification\nThe long lobby queues and slow table assignment are not caused by a lack of physical capacity, but by **systemic failures in front-of-house (FOH) management and host-stand protocols.** The issues are classified into three primary operational failures:\n1.  **Ineffective Seating Strategy:** Tables are available but remain unseated due to poor management oversight [Source #1].\n2.  **Host Stand Competency & Accountability:** Host staff are exhibiting poor communication, lack of situational awareness, and potential bias in seating protocols [Source #3, #5].\n3.  **Process Inconsistency:** Failure to adhere to \"first-come, first-served\" logic and unreliable wait-list technology (e.g., failed text notifications) [Source #5].\n\n---\n\n### Root-Cause Evidence Breakdown\n*   **Management/Strategy Failure:** There is a documented disconnect between physical table availability and the seating process. Guests observe open tables while being told to wait, indicating a failure in floor management or \"table-turn\" coordination [Source #1].\n*   **Host-Guest Interaction:** The front-of-house staff is identified as a major friction point. Specific behaviors include eye-rolling, arguing with guests, and failing to verify existing reservations [Source #3].\n*   **Protocol Inconsistency:** Guests report that parties arriving later are seated before those with earlier wait-list timestamps, and reservation verification is unreliable [Source #5].\n*   **Staff Utilization:** During peak times, staff are observed \"goofing around\" or training in high-traffic areas rather than facilitating guest flow, contributing to lobby congestion [Source #2].\n\n---\n\n### Actionable Managerial Recommendations\n\n#### Immediate (Next 48 Hours)\n*   **Audit Seating Protocols:** Implement a \"Floor Manager\" role during Friday peak hours specifically to oversee the host stand and ensure that open tables are filled immediately.\n*   **Reservation Verification Drill:** Require the host team to double-check the reservation system before informing a guest that a booking cannot be found. The \"I didn't see it\" excuse is a primary driver of negative sentiment [Source #3].\n*   **Lobby De-cluttering:** Remove non-essential staff or training activities from the lobby area to maximize space and reduce the perception of \"goofing off\" [Source #2].\n\n#### Long-Term (Strategic)\n*   **Standardize Wait-List Logic:** Enforce a strict \"First-Come, First-Served\" policy for walk-ins and ensure the digital wait-list system is being used correctly (e.g., ensuring text notifications are actually triggered) [Source #5].\n*   **Customer Service Training:** Conduct mandatory training for the host team focusing on de-escalation, professional communication, and the impact of body language (e.g., eye-rolling) on guest retention [Source #3].\n*   **Performance Metrics:** Track \"Table Turn Time\" and \"Wait-to-Seat Time\" to identify if the bottleneck is a specific host or a specific time block during the Friday shift.\n\n---\n\n### Risk & Business Impact Analysis\n*   **Reputational Damage:** The current FOH experience is driving away business, with guests explicitly stating they will \"never go back\" or recommend the restaurant [Source #3, #5].\n*   **Revenue Loss:** By failing to seat available tables, the restaurant is artificially capping its Friday night revenue [Source #1].\n*   **Competitive Vulnerability:** Guests are comparing the experience to other local options and concluding that the service level is not worth the wait, increasing the likelihood of customer churn to competitors [Source #2].",
+      "expected_output": "Lobby congestion is caused by uncoordinated reservation overbooking, large party table camping, and lack of automated SMS waitlist notifications.",
+      "latency_ms": 4288.6,
+      "status": "evaluated",
+      "deepeval_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 1.0,
+        "contextual_precision": 0.0,
+        "contextual_recall": 0.0,
+        "recommendation_quality": 0.7
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.0127,
+        "heuristic_answer_relevancy": 0.7,
+        "heuristic_context_precision": 0.0,
+        "heuristic_context_recall": 0.0
+      },
+      "error": null
+    },
+    {
+      "id": "TC_04",
+      "category": "Waiting Time",
+      "query": "Why do customers waiting for takeout and curbside pickup report 30-minute delays past the promised time?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Diagnosis & Problem Classification\nBased on the provided historical reviews, operational breakdowns affecting wait times and customer service stem primarily from **severe kitchen bottlenecks, understaffing/inadequate labor deployment, and poor management oversight/communication**. While the specific manager query addresses 30-minute delays for takeout and curbside pickup, the retrieved context illustrates systemic kitchen and front-of-house coordination failures that directly mirror these bottlenecks across various dining formats. \n\n### Root-Cause Evidence Breakdown\n*   **Severe Understaffing & Multi-Tasking Overload:** At Dragon City, kitchen operations were crippled because only two people were cooking, and one of them was simultaneously forced to take orders [Source #1]. This split focus inevitably creates severe preparation delays.\n*   **Kitchen Order Tracking & Execution Failures:** At Buffalo Wild Wings, kitchen display systems (KDS) clearly tracked unfilled orders that had been waiting for an hour, yet orders were still severely delayed by up to 60 minutes for items with short prep times [Source #2]. Kitchen staff failed to act on obvious time-elapsed warnings, and food quality suffered (e.g., dry, heat-lamped chicken) [Source #2].\n*   **Management Disconnect and Poor Defusal:** When confronted with prolonged delays, management at Buffalo Wild Wings displayed a curt, exasperated attitude (\"what is the problem\" and \"did everything come out ok?\"), acting as though the operational delays were entirely out of their control rather than taking accountability [Source #2]. Similarly, the owner at Dragon City reacted aggressively by yelling in a foreign language when a customer requested a refund after waiting over an hour for an incorrect order [Source #1].\n*   **Host/Front-of-House Disorganization:** In instances regarding wait times and queue management (such as at The Depot Craft Brewery Distillery), hosts failed to properly track the waitlist, bypassed first-come-first-serve protocols, and failed to communicate via automated systems, destroying customer trust [Source #5].\n\n### Actionable Managerial Recommendations\n\n#### Immediate (Short-Term) Actions:\n1.  **Delineate Front-of-House (FOH) and Back-of-House (BOH) Roles:** Stop forcing kitchen staff to answer phones or take orders [Source #1]. Dedicate specific personnel to takeout/curbside packaging and phone management to protect cook-line focus.\n2.  **Enforce Kitchen Display System (KDS) Threshold Alerts:** Program kitchen screens to trigger visual and audio alerts when takeout or curbside orders cross a strict threshold (e.g., 15 minutes past promised time) to ensure the kitchen expediter prioritizes lagging tickets.\n3.  **Implement Manager-on-Duty (MOD) Service Recovery Protocols:** Train managers to intercept delayed tickets *before* customers complain or attempt to leave. Managers must approach waiting guests proactively, offer honest updates, and provide immediate service recovery (e.g., complimentary beverages or future coupons) rather than acting defensive or exasperated [Source #2].\n\n#### Long-Term Strategic Actions:\n1.  **Labor & Payroll Optimization:** Re-evaluate peak-hour labor scheduling. As highlighted in retail/hospitality management principles, cutting payroll too thin directly degrades customer experience and creates operational gridlock [Source #3]. Ensure dedicated curbside/takeout runners are scheduled during peak windows.\n2.  **Order Accuracy & Expediting Checks:** Implement a mandatory double-check system at the packaging station to eliminate the dual-failure of late *and* incorrect orders, which triggers hostile escalations and refund demands [Source #1].\n3.  **Managerial Accountability Training:** Conduct operational leadership training emphasizing that BOH throughput, table/curbside turns, and guest satisfaction are directly under the manager's control\u2014dispelling the mindset that kitchen delays are \"out of their hands\" [Source #2].\n\n### Risk & Business Impact Analysis\n*   **Irreversible Customer Churn:** As noted in the reviews, chronic 30-to-60+ minute delays cause loyal customers of many years to walk away permanently (\"after 20 years... we were only willing to give you one last chance... we simply have too many options\") [Source #2]. \n*   **Reputational and Financial Damage:** Failing to fulfill curbside orders on time leads to negative public reviews detailing hostile confrontations or language barriers with management during refund requests [Source #1]. This directly inhibits customer acquisition and damages the restaurant's top-line revenue.\n*   **Table/Curbside Turn Stagnation:** Extended ticket times physically bottleneck the pickup area and kitchen line, capping the total volume of orders the restaurant can process and bleeding money through inefficient asset utilization [Source #2].",
+      "expected_output": "Takeout fulfillment delays occur when delivery tablets are unchecked, expo bagging falls behind dine-in plating, and parking space dispatch lacks tracking.",
+      "latency_ms": 7255.2,
+      "status": "evaluated",
+      "deepeval_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 1.0,
+        "contextual_precision": 0.0,
+        "contextual_recall": 0.0,
+        "recommendation_quality": 0.9
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.0088,
+        "heuristic_answer_relevancy": 0.9091,
+        "heuristic_context_precision": 0.0,
+        "heuristic_context_recall": 0.0
+      },
+      "error": null
+    },
+    {
+      "id": "TC_05",
+      "category": "Food Quality",
+      "query": "Why are guests reporting that hot entrees and soups are arriving cold or lukewarm at tables?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Diagnosis & Problem Classification\nThe reports of cold or lukewarm entrees and soups indicate a **systemic breakdown in the \"Pass-to-Table\" workflow**. Based on the provided reviews, this issue is not an isolated incident but a symptom of poor kitchen-to-floor coordination, improper pacing, and a lack of service standards regarding food delivery.\n\n**Problem Classification:**\n*   **Operational Pacing:** Entrees are being rushed out before appetizers are finished [Source #2], leading to food sitting under heat lamps or on counters while guests are occupied.\n*   **Service Execution:** Lack of coordination between the kitchen and waitstaff, characterized by \"throwing\" or \"sliding\" food onto tables without verifying orders [Source #5].\n*   **Quality Control:** A failure to maintain temperature standards, likely exacerbated by staff prioritizing speed or volume over proper service protocols [Source #4].\n\n---\n\n### Root-Cause Evidence Breakdown\n*   **Premature Delivery:** At *Dmitri\u2019s*, entrees were rushed out while guests were still consuming appetizers [Source #2]. This forces food to sit at the table or in the kitchen, causing temperature loss.\n*   **Lack of Order Accountability:** At *Mint Modern Vietnamese Bistro & Bar*, staff were observed sliding food onto tables without confirming who ordered what [Source #5]. This chaotic delivery method suggests that food is not being run immediately or accurately, allowing it to cool.\n*   **Degradation of Standards:** *Catrina\u2019s* reports a decline in service quality over time, where food that was \"always hot\" in the past is now arriving cold, suggesting a lapse in kitchen management or a breakdown in the communication loop between the kitchen pass and the servers [Source #4].\n\n---\n\n### Actionable Managerial Recommendations\n\n#### Immediate (Next 48 Hours)\n1.  **Implement \"Table-Ready\" Verification:** Servers must confirm with the kitchen that a table is cleared of appetizer plates before the kitchen fires the entrees.\n2.  **Enforce \"Hot Food, Hot Plate\" Protocol:** Mandate that all food runners/servers check the temperature of dishes at the pass. If a dish is not steaming, it must be sent back to the kitchen for a re-fire rather than being served.\n3.  **Standardize Delivery Procedures:** Retrain staff on professional service etiquette. Food must be placed, not slid or thrown, and the server must identify the guest who ordered the item to ensure it reaches the correct person immediately.\n\n#### Long-Term (Next 30\u201390 Days)\n1.  **Kitchen-to-Floor Communication Audit:** Implement a \"call-back\" system where the kitchen announces when an order is ready, and the server must acknowledge and run the food within 60 seconds.\n2.  **Pacing Training:** Conduct training on \"Course Pacing.\" Servers should be trained to read the table\u2014if guests are still eating appetizers, the kitchen should be notified to hold the entrees.\n3.  **Quality Assurance Checks:** Introduce a \"Pass Manager\" or \"Expeditor\" role during peak hours to ensure that no plate leaves the kitchen unless it meets temperature and presentation standards.\n\n---\n\n### Risk & Business Impact Analysis\n*   **Customer Retention Risk:** As seen in *Catrina\u2019s* [Source #4], guests who experience a decline in quality (from \"decent/hot\" to \"lukewarm/cold\") will actively avoid the restaurant and recommend others skip it.\n*   **Brand Erosion:** The reviews indicate that once-loyal customers are now comparing the restaurant unfavorably to competitors [Source #1, #3, #4].\n*   **Financial Impact:** Poor service and cold food lead to lower tips and negative word-of-mouth, which is particularly damaging when combined with \"scammy\" service practices like forced gratuity, which further alienates the customer base [Source #5].",
+      "expected_output": "Cold entrees result from expo heat lamp holding temperature lapses, lack of dedicated food runners, and plated orders sitting on the pass.",
+      "latency_ms": 9368.36,
+      "status": "evaluated",
+      "deepeval_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9583,
+        "contextual_precision": 0.0,
+        "contextual_recall": 0.0,
+        "recommendation_quality": 0.8
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.0124,
+        "heuristic_answer_relevancy": 0.8889,
+        "heuristic_context_precision": 0.0,
+        "heuristic_context_recall": 0.0
+      },
+      "error": null
+    }
+  ]
+}
