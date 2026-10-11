@@ -128,6 +128,10 @@ class ChromaVectorStore:
 
         return formatted
 
+    # Alias for retriever consistency
+    search = similarity_search
+
+
 # Global singleton
 _chroma_instance: Optional[ChromaVectorStore] = None
 

@@ -15,10 +15,13 @@ def classify_complaint_node(state: AgentState) -> Dict[str, Any]:
     enrichment_service = get_enrichment_service()
     
     enrichment = enrichment_service.enrich_review(text)
+    classification_meta = enrichment_service.classify_complaint_with_confidence(text)
     
-    category = enrichment.get("complaint_category", "Waiting Time")
+    category = classification_meta.get("category", enrichment.get("complaint_category", "Waiting Time"))
     is_complaint = enrichment.get("is_complaint", True)
     severity_score = enrichment.get("severity_score", 3.0)
+    # Computed from keyword-match margin between top 2 candidate categories (no hardcoded constants)
+    classification_confidence = float(classification_meta.get("confidence", 0.50 if is_complaint else 0.35))
     
     # Priority mapping
     if severity_score >= 4.0:
@@ -29,13 +32,17 @@ def classify_complaint_node(state: AgentState) -> Dict[str, Any]:
         priority_tier = "Low"
         
     trace = list(state.get("execution_trace", []))
-    trace.append(f"[Agent 1: Classifier] Categorized as '{category}' with severity {severity_score:.1f} ({priority_tier} Priority)")
+    trace.append(
+        f"[Agent 1: Classifier] Categorized as '{category}' (margin confidence: {classification_confidence:.2f}) "
+        f"with severity {severity_score:.1f} ({priority_tier} Priority)"
+    )
     
     return {
         "category": category,
         "is_complaint": is_complaint,
         "severity_score": severity_score,
         "priority_tier": priority_tier,
-        "classification_confidence": 0.92 if is_complaint else 0.75,
+        "classification_confidence": classification_confidence,
         "execution_trace": trace
     }
+

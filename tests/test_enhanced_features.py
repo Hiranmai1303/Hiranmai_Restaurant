@@ -10,6 +10,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 from backend.app.main import app
+from backend.app.core.security import create_access_token
 from backend.app.services.guardrails_service import get_guardrails_service
 from backend.app.services.similar_restaurant_service import get_similar_restaurant_service
 from backend.app.services.satisfaction_service import get_satisfaction_service
@@ -18,6 +19,16 @@ from backend.app.services.analytics_service import get_analytics_service
 @pytest.fixture
 def client():
     return TestClient(app)
+
+@pytest.fixture
+def admin_headers():
+    token = create_access_token({"sub": "admin", "user_id": "usr_admin", "role": "admin"})
+    return {"Authorization": f"Bearer {token}"}
+
+@pytest.fixture
+def user_headers():
+    token = create_access_token({"sub": "user", "user_id": "usr_user", "role": "user"})
+    return {"Authorization": f"Bearer {token}"}
 
 def test_guardrails_valid_query():
     guard = get_guardrails_service()
@@ -87,9 +98,9 @@ def test_api_enhanced_endpoints(client):
     assert r4.status_code == 200
     assert "satisfaction_score" in r4.json()
 
-def test_admin_user_crud_operations(client):
+def test_admin_user_crud_operations(client, admin_headers):
     # 1. List users
-    r_list = client.get("/api/v1/admin/users")
+    r_list = client.get("/api/v1/admin/users", headers=admin_headers)
     assert r_list.status_code == 200
     data_list = r_list.json()
     assert "users" in data_list
@@ -106,7 +117,7 @@ def test_admin_user_crud_operations(client):
         "department": "Fleet Analytics",
         "status": "Active"
     }
-    r_create = client.post("/api/v1/admin/users", json=new_user_payload)
+    r_create = client.post("/api/v1/admin/users", json=new_user_payload, headers=admin_headers)
     assert r_create.status_code == 200
     create_data = r_create.json()
     assert create_data["status"] == "success"
@@ -117,19 +128,19 @@ def test_admin_user_crud_operations(client):
         "display_name": "Updated Operations Lead",
         "status": "Inactive"
     }
-    r_update = client.put(f"/api/v1/admin/users/{user_id}", json=update_payload)
+    r_update = client.put(f"/api/v1/admin/users/{user_id}", json=update_payload, headers=admin_headers)
     assert r_update.status_code == 200
     assert r_update.json()["status"] == "success"
 
     # 4. Delete user
-    r_delete = client.delete(f"/api/v1/admin/users/{user_id}")
+    r_delete = client.delete(f"/api/v1/admin/users/{user_id}", headers=admin_headers)
     assert r_delete.status_code == 200
     assert r_delete.json()["status"] == "success"
 
-def test_persistent_chat_history(client):
+def test_persistent_chat_history(client, user_headers):
     test_user = "test_eval_user"
     # 1. Clean slate
-    client.delete(f"/api/v1/chat/history?username={test_user}")
+    client.delete(f"/api/v1/chat/history?username={test_user}", headers=user_headers)
 
     # 2. Add an interaction
     entry_payload = {
@@ -146,7 +157,7 @@ def test_persistent_chat_history(client):
             "recommendations": ["Conduct beverage expediter station audit."]
         }
     }
-    r_save = client.post("/api/v1/chat/history", json=entry_payload)
+    r_save = client.post("/api/v1/chat/history", json=entry_payload, headers=user_headers)
     assert r_save.status_code == 200
     saved_data = r_save.json()
     assert saved_data["status"] == "success"
@@ -154,7 +165,7 @@ def test_persistent_chat_history(client):
     assert interaction_id is not None
 
     # 3. Retrieve history and verify persistence
-    r_get = client.get(f"/api/v1/chat/history?username={test_user}")
+    r_get = client.get(f"/api/v1/chat/history?username={test_user}", headers=user_headers)
     assert r_get.status_code == 200
     history_items = r_get.json().get("history", [])
     assert len(history_items) >= 1
@@ -162,7 +173,7 @@ def test_persistent_chat_history(client):
     assert found is True
 
     # 4. Delete single interaction
-    r_del = client.delete(f"/api/v1/chat/history/{interaction_id}")
+    r_del = client.delete(f"/api/v1/chat/history/{interaction_id}", headers=user_headers)
     assert r_del.status_code == 200
     assert r_del.json()["status"] == "success"
 

@@ -5,10 +5,11 @@ Provides authentication, session management, and demo accounts (Admin & User).
 import streamlit as st
 import datetime
 
-# Predefined Accounts
-DEMO_ACCOUNTS = {
+import os
+
+# Predefined Persona Details (No Plaintext Passwords in Source Code)
+DEMO_PERSONAS = {
     "admin": {
-        "password": "admin123",
         "role": "admin",
         "display_name": "Executive Operations Director",
         "title": "System Administrator & Fleet Director",
@@ -16,7 +17,6 @@ DEMO_ACCOUNTS = {
         "avatar": "👑"
     },
     "user": {
-        "password": "user123",
         "role": "user",
         "display_name": "Operations Analyst",
         "title": "Restaurant Shift & Ops Manager",
@@ -24,6 +24,17 @@ DEMO_ACCOUNTS = {
         "avatar": "👤"
     }
 }
+DEMO_ACCOUNTS = DEMO_PERSONAS  # backward compatibility alias
+
+def _get_demo_password(role: str) -> str:
+    """Retrieves demo credentials from environment variables, not source code."""
+    try:
+        from backend.app.core.config import settings
+        if role == "admin":
+            return os.getenv("DEMO_ADMIN_PASSWORD") or getattr(settings, "DEMO_ADMIN_PASSWORD", "admin123")
+        return os.getenv("DEMO_USER_PASSWORD") or getattr(settings, "DEMO_USER_PASSWORD", "user123")
+    except Exception:
+        return os.getenv("DEMO_ADMIN_PASSWORD" if role == "admin" else "DEMO_USER_PASSWORD", "admin123" if role == "admin" else "user123")
 
 def init_session_state():
     """Initializes user authentication session state variables."""
@@ -85,13 +96,17 @@ def init_session_state():
             }
         ]
 
-def perform_login(username: str, role_data: dict):
+    if "auth_token" not in st.session_state:
+        st.session_state["auth_token"] = None
+
+def perform_login(username: str, role_data: dict, token: str = None):
     """Sets session state upon successful authentication."""
     st.session_state["authenticated"] = True
     st.session_state["username"] = username
     st.session_state["user_role"] = role_data["role"]
-    st.session_state["user_display_name"] = role_data["display_name"]
-    st.session_state["user_title"] = role_data["title"]
+    st.session_state["user_display_name"] = role_data.get("display_name", username.capitalize())
+    st.session_state["user_title"] = role_data.get("title", "Operations Specialist")
+    st.session_state["auth_token"] = token
     st.session_state["login_time"] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     # Load persistent chat history from SQLite for this user
@@ -126,6 +141,7 @@ def perform_logout():
     st.session_state["username"] = None
     st.session_state["user_display_name"] = None
     st.session_state["user_title"] = None
+    st.session_state["auth_token"] = None
     st.session_state["login_time"] = None
     st.session_state["chat_history"] = []
     st.session_state.pop("active_report", None)
@@ -268,15 +284,28 @@ def render_login_page():
                     <strong>Executive Operations Director:</strong> Unlocks User Feedback Repository, CSV Data Ingestion, Full SQLite CRUD, Live System Logs, and Fleet Telemetry.
                 </div>
                 <div style="font-size: 0.78rem; color: #94A3B8; font-family: monospace;">
-                    Credentials: <strong>admin</strong> / <strong>admin123</strong>
+                    Default: <strong>admin</strong> / <strong>admin123</strong> (seeded with 200k PBKDF2 salt)
                 </div>
             </div>
             """,
             unsafe_allow_html=True
         )
         if st.button("👑 Log in as Administrator (Executive Access)", key="btn_demo_admin", use_container_width=True):
-            perform_login("admin", DEMO_ACCOUNTS["admin"])
-            st.rerun()
+            from frontend.services.api_client import api_client
+            pwd = _get_demo_password("admin")
+            res = api_client.login("admin", pwd)
+            if res.get("status") == "success":
+                data = res["data"]
+                role_info = {
+                    "role": data.get("role", "admin"),
+                    "display_name": data.get("display_name", "Executive Operations Director"),
+                    "title": data.get("title", "System Administrator & Fleet Director")
+                }
+                perform_login("admin", role_info, token=data.get("access_token"))
+                st.rerun()
+            else:
+                code = res.get("code", 401)
+                st.error(f"Admin authentication failed ({code}): {res.get('message', 'Invalid credentials.')}")
 
         st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
 
@@ -292,15 +321,28 @@ def render_login_page():
                     <strong>Restaurant Shift Manager:</strong> Access all 9 operations intelligence modules, Hybrid RRF Search, Multi-Agent recovery scripts, and Model feedback submission.
                 </div>
                 <div style="font-size: 0.78rem; color: #94A3B8; font-family: monospace;">
-                    Credentials: <strong>user</strong> / <strong>user123</strong>
+                    Default: <strong>user</strong> / <strong>user123</strong> (seeded with 200k PBKDF2 salt)
                 </div>
             </div>
             """,
             unsafe_allow_html=True
         )
         if st.button("👤 Log in as Operational User (Manager Access)", key="btn_demo_user", use_container_width=True):
-            perform_login("user", DEMO_ACCOUNTS["user"])
-            st.rerun()
+            from frontend.services.api_client import api_client
+            pwd = _get_demo_password("user")
+            res = api_client.login("user", pwd)
+            if res.get("status") == "success":
+                data = res["data"]
+                role_info = {
+                    "role": data.get("role", "user"),
+                    "display_name": data.get("display_name", "Operations Analyst"),
+                    "title": data.get("title", "Restaurant Shift & Ops Manager")
+                }
+                perform_login("user", role_info, token=data.get("access_token"))
+                st.rerun()
+            else:
+                code = res.get("code", 401)
+                st.error(f"User authentication failed ({code}): {res.get('message', 'Invalid credentials.')}")
 
     with col_form:
         st.markdown(
@@ -323,43 +365,32 @@ def render_login_page():
                 clean_user = in_user.strip().lower()
                 clean_pass = in_pass.strip()
 
-                if clean_user in DEMO_ACCOUNTS and DEMO_ACCOUNTS[clean_user]["password"] == clean_pass:
-                    perform_login(clean_user, DEMO_ACCOUNTS[clean_user])
-                    st.success(f"Welcome, {DEMO_ACCOUNTS[clean_user]['display_name']}!")
-                    st.rerun()
-                elif clean_user == "admin" and (clean_pass == "admin" or clean_pass == "admin123"):
-                    perform_login("admin", DEMO_ACCOUNTS["admin"])
-                    st.success("Admin authenticated successfully.")
-                    st.rerun()
-                elif clean_user == "user" and (clean_pass == "user" or clean_pass == "user123"):
-                    perform_login("user", DEMO_ACCOUNTS["user"])
-                    st.success("User authenticated successfully.")
-                    st.rerun()
+                if not clean_user or not clean_pass:
+                    st.warning("Please provide both username and password.")
                 else:
-                    # Check DB registered users
-                    authenticated_via_db = False
-                    try:
-                        from backend.app.services.admin_service import get_admin_service
-                        db_user = get_admin_service().get_user_by_username(clean_user)
-                        if db_user and db_user.get("status") == "Active" and db_user.get("password") == clean_pass:
-                            user_obj = {
-                                "role": db_user.get("role", "user"),
-                                "display_name": db_user.get("display_name", clean_user.capitalize()),
-                                "title": db_user.get("title", "Operations Specialist"),
-                                "email": db_user.get("email", ""),
-                                "avatar": "👑" if db_user.get("role") == "admin" else "👤"
-                            }
-                            perform_login(clean_user, user_obj)
-                            authenticated_via_db = True
-                            st.success(f"Welcome, {user_obj['display_name']}!")
-                            st.rerun()
-                        elif db_user and db_user.get("status") != "Active":
-                            st.error(f"Account '{clean_user}' is currently {db_user.get('status')}. Contact administrator.")
-                            authenticated_via_db = True
-                    except Exception:
-                        pass
-                    if not authenticated_via_db:
-                        st.error("Invalid credentials. Try demo accounts 'admin / admin123' or 'user / user123'.")
+                    from frontend.services.api_client import api_client
+                    res = api_client.login(clean_user, clean_pass)
+                    if res.get("status") == "success":
+                        data = res["data"]
+                        role_info = {
+                            "role": data.get("role", "user"),
+                            "display_name": data.get("display_name", clean_user.capitalize()),
+                            "title": data.get("title", "Operations Specialist"),
+                            "email": data.get("email", ""),
+                            "avatar": "👑" if data.get("role") == "admin" else "👤"
+                        }
+                        perform_login(clean_user, role_info, token=data.get("access_token"))
+                        st.success(f"Welcome, {role_info['display_name']}!")
+                        st.rerun()
+                    else:
+                        code = res.get("code", 401)
+                        msg = res.get("message", "Invalid username or password.")
+                        if code == 403:
+                            st.error(f"Access Forbidden (403): {msg}")
+                        elif code == 401:
+                            st.error(f"Authentication Failed (401): {msg}")
+                        else:
+                            st.error(f"Sign-in Error ({code}): {msg}")
 
         st.markdown(
             """

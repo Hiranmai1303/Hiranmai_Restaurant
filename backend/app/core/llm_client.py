@@ -17,20 +17,42 @@ class OpenRouterLLMClient:
         base_url: Optional[str] = None,
         default_model: Optional[str] = None
     ):
-        self.api_key = api_key or settings.OPENROUTER_API_KEY
-        self.base_url = base_url or settings.OPENROUTER_BASE_URL
-        self.default_model = default_model or settings.DEFAULT_LLM_MODEL
+        gemini_key = os.getenv("GEMINI_API_KEY") or getattr(settings, "GEMINI_API_KEY", "")
+        # Prioritize Google Gemini direct API
+        if gemini_key and gemini_key not in ("your_gemini_api_key_here", ""):
+            self.api_key = gemini_key
+            self.base_url = getattr(settings, "GEMINI_BASE_URL", "https://generativelanguage.googleapis.com/v1beta/openai/")
+            self.default_model = default_model or getattr(settings, "DEFAULT_LLM_MODEL", "gemini-3.1-flash-lite")
+            self.is_google_direct = True
+        else:
+            self.api_key = api_key or getattr(settings, "OPENROUTER_API_KEY", "")
+            self.base_url = base_url or getattr(settings, "OPENROUTER_BASE_URL", "https://openrouter.ai/api/v1")
+            self.default_model = default_model or getattr(settings, "DEFAULT_LLM_MODEL", "gemini-3.1-flash-lite")
+            self.is_google_direct = False
         
         self.client: Optional[OpenAI] = None
-        if self.api_key and self.api_key != "your_openrouter_api_key_here":
-            self.client = OpenAI(
-                base_url=self.base_url,
-                api_key=self.api_key,
-                default_headers={
+        if self.api_key and self.api_key not in ("your_openrouter_api_key_here", "your_gemini_api_key_here"):
+            headers = {}
+            if not self.is_google_direct:
+                headers = {
                     "HTTP-Referer": "https://restaurant-operations-assistant.local",
                     "X-Title": "AI Restaurant Operations Assistant",
                 }
+            self.client = OpenAI(
+                base_url=self.base_url,
+                api_key=self.api_key,
+                default_headers=headers
             )
+
+    def _resolve_model(self, model: Optional[str]) -> str:
+        selected = model or self.default_model
+        if selected.startswith("google/"):
+            selected = selected.replace("google/", "")
+        if selected in ("gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash", "gemini-flash", "gemini-3.8-flash"):
+            selected = "gemini-3.1-flash-lite"
+        elif selected in ("gemini-2.5-pro", "gemini-1.5-pro", "gemini-pro"):
+            selected = "gemini-3.1-flash-lite"
+        return selected
 
     def generate(
         self,
@@ -40,30 +62,77 @@ class OpenRouterLLMClient:
         temperature: float = 0.2,
         max_tokens: int = 1500
     ) -> str:
-        """Generate response using OpenRouter Gemini model with offline fallback."""
-        selected_model = model or self.default_model
+        """Generate response using Gemini model with offline fallback."""
+        selected_model = self._resolve_model(model)
 
         messages = []
         if system_prompt:
             messages.append({"role": "system", "content": system_prompt})
         messages.append({"role": "user", "content": prompt})
 
-        # If live API key is configured, call OpenRouter
+        # If live API key is configured, call API
         if self.client:
+            candidate_models = [selected_model, "gemini-3.1-flash-lite", "gemini-3.5-flash-lite"]
+            for m in dict.fromkeys(candidate_models):
+                try:
+                    response = self.client.chat.completions.create(
+                        model=m,
+                        messages=messages,
+                        temperature=temperature,
+                        max_tokens=max_tokens
+                    )
+                    if response and response.choices and response.choices[0].message.content:
+                        return response.choices[0].message.content.strip()
+                except Exception as e:
+                    if "429" in str(e) or "quota" in str(e).lower():
+                        continue
+                    provider = "Google Gemini" if self.is_google_direct else "OpenRouter"
+                    print(f"{provider} API call failed ({e}), using grounded heuristic generator.")
+                    break
+
+        # Grounded heuristic fallback for testing & local development
+        return self._generate_grounded_fallback(prompt, messages)
+
+    def call_chat_completion(
+        self,
+        messages: List[Dict[str, str]],
+        model: Optional[str] = None,
+        temperature: float = 0.1,
+        max_tokens: int = 1000
+    ) -> str:
+        """
+        Executes a real Gemini LLM call without heuristic fallback.
+        Raises RuntimeError on failure or if client is not configured.
+        """
+        if not self.client:
+            raise RuntimeError("Google Gemini LLM client is not initialized or API key is missing.")
+        
+        selected_model = self._resolve_model(model)
+        candidate_models = [selected_model, "gemini-3.1-flash-lite", "gemini-3.5-flash-lite"]
+
+        last_error = None
+        for m in dict.fromkeys(candidate_models):
             try:
                 response = self.client.chat.completions.create(
-                    model=selected_model,
+                    model=m,
                     messages=messages,
                     temperature=temperature,
                     max_tokens=max_tokens
                 )
-                if response and response.choices:
-                    return response.choices[0].message.content.strip()
+                if not response or not response.choices:
+                    continue
+                content = response.choices[0].message.content
+                if content:
+                    return content.strip()
             except Exception as e:
-                print(f"OpenRouter API call failed ({e}), using grounded heuristic generator.")
+                last_error = e
+                if "429" in str(e) or "quota" in str(e).lower():
+                    continue
+                provider = "Google Gemini" if self.is_google_direct else "OpenRouter"
+                raise RuntimeError(f"{provider} API call failed on {m}: {str(e)}") from e
 
-        # Grounded heuristic fallback for testing & local development
-        return self._generate_grounded_fallback(prompt, messages)
+        provider = "Google Gemini" if self.is_google_direct else "OpenRouter"
+        raise RuntimeError(f"{provider} API call failed: {str(last_error)}") from last_error
 
     def generate_general(
         self,
@@ -77,7 +146,7 @@ class OpenRouterLLMClient:
         Processes out-of-domain, vague, or general AI queries using the general LLM.
         Provides a comprehensive answer to whatever the user asked.
         """
-        selected_model = model or self.default_model
+        selected_model = self._resolve_model(model)
         sys_prompt = system_prompt or (
             "You are a helpful, versatile, and highly knowledgeable AI assistant. "
             "The user asked a general question or made an inquiry. Provide a direct, "

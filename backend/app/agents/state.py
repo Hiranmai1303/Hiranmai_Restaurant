@@ -39,7 +39,14 @@ class AgentState(TypedDict, total=False):
     overall_quality_score: float
     requires_human_review: bool
     review_reasons: List[str]
+    compliance_flags: List[str]
+    
+    # Conditional Loop-Back State
+    retry_count: int
+    judge_feedback: Optional[str]
+    attempt_scores: List[Dict[str, Any]]
     
     # Trace & Final Output
     execution_trace: List[str]
     final_summary: str
+

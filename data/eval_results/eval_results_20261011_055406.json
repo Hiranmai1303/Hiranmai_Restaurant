@@ -1,0 +1,1036 @@
+{
+  "evaluation_date": "2026-10-11T05:54:06.834131",
+  "model_used": "google/gemini-2.5-flash",
+  "total_benchmark_cases": 40,
+  "evaluated_cases": 0,
+  "not_evaluated_cases": 40,
+  "aggregate_deepeval_metrics": {
+    "faithfulness": null,
+    "answer_relevancy": null,
+    "contextual_precision": null,
+    "contextual_recall": null,
+    "recommendation_quality": null
+  },
+  "target_thresholds": {
+    "faithfulness": 0.85,
+    "answer_relevancy": 0.85,
+    "context_precision": 0.8,
+    "context_recall": 0.8,
+    "recommendation_quality": 0.8
+  },
+  "verdict_by_target": {
+    "faithfulness": {
+      "actual": null,
+      "target": 0.85,
+      "status": "not_evaluated"
+    },
+    "answer_relevancy": {
+      "actual": null,
+      "target": 0.85,
+      "status": "not_evaluated"
+    },
+    "context_precision": {
+      "actual": null,
+      "target": 0.8,
+      "status": "not_evaluated"
+    },
+    "context_recall": {
+      "actual": null,
+      "target": 0.8,
+      "status": "not_evaluated"
+    },
+    "recommendation_quality": {
+      "actual": null,
+      "target": 0.8,
+      "status": "not_evaluated"
+    }
+  },
+  "retrieval_benchmarks": {
+    "bm25": {
+      "precision_at_5": 0.0,
+      "recall_at_5": 0.0,
+      "mrr": 0.0,
+      "evaluated_queries": 38
+    },
+    "vector": {
+      "precision_at_5": 0.0,
+      "recall_at_5": 0.0,
+      "mrr": 0.0,
+      "evaluated_queries": 38
+    },
+    "hybrid": {
+      "precision_at_5": 0.0,
+      "recall_at_5": 0.0,
+      "mrr": 0.0,
+      "evaluated_queries": 38
+    }
+  },
+  "aggregate_heuristic_proxies": {
+    "mean_heuristic_faithfulness": 0.0,
+    "mean_heuristic_answer_relevancy": 0.1532,
+    "mean_heuristic_context_precision": 0.0,
+    "mean_heuristic_context_recall": 0.0
+  },
+  "case_results": [
+    {
+      "id": "TC_01",
+      "category": "Waiting Time",
+      "query": "What are the primary factors contributing to long customer wait times during peak dinner rushes?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Summary & Operational Diagnosis\n\nAnalysis of customer complaints in **Waiting Time** identifies peak-hour kitchen order queue backlogs and uncoordinated host seating intervals as the primary root causes.\n\n### Key Operational Findings:\n1. **Kitchen Order Queuing:** Ticket times exceed 30\u201340 minutes during peak rush periods when table waves overwhelm cook-line capacity.\n2. **Lobby Turnaround Latency:** Front-of-house seating pacing lags due to uncoordinated busser table clearing.\n\n### Recommended Action Plan:\n\u2022 **Immediate:** Deploy a dedicated Kitchen Expeditor with 15-minute digital ticket alerts.\n\u2022 **Host Pacing:** Implement 3-minute staggered host seating intervals to prevent cook-line surges.",
+      "expected_output": "Long wait times during peak dinner rushes stem from front-of-house host seating pacing bottlenecks, kitchen cook-line ticket backlogs, and delayed busser table turnaround.",
+      "latency_ms": 919.05,
+      "status": "not_evaluated",
+      "deepeval_scores": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "contextual_precision": null,
+        "contextual_recall": null,
+        "recommendation_quality": null
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.0,
+        "heuristic_answer_relevancy": 0.5,
+        "heuristic_context_precision": 0.0,
+        "heuristic_context_recall": 0.0
+      },
+      "error": "OpenRouter API call failed: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key is on the correct account or org, and if so, purchase more at https://openrouter.ai/settings/credits', 'code': 402, 'metadata': {'limit_source': 'openrouter_credits', 'remedy_hint': 'Add credits at https://openrouter.ai/settings/credits, or lower max_tokens / prompt size to fit your remaining balance.'}}}"
+    },
+    {
+      "id": "TC_02",
+      "category": "Waiting Time",
+      "query": "Why are guests experiencing severe delays when ordering drinks and waiting at the bar?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Summary & Operational Diagnosis\n\nAnalysis of customer sentiment under **Staff Behavior** indicates severe customer dissatisfaction driven by defensive employee reactions and supervisor communication friction during peak-stress periods.\n\n### Key Operational Findings:\n1. **Dispute Escalation:** Customer complaints reflect confrontational or unhelpful manager responses when resolving order or wait-time issues.\n2. **Hospitality Deficiencies:** Front-of-house staff exhibit communication gaps and lack of empathy when addressing guest concerns.\n\n### Recommended Action Plan:\n\u2022 **Immediate:** Conduct shift-lead hospitality de-escalation coaching.\n\u2022 **Empowerment Policy:** Establish a standardized guest recovery compensation protocol ($15\u2013$25 instant meal credits) to resolve friction instantly.",
+      "expected_output": "Bar delays are driven by single-bartender staffing during surge hours, glassware dishwashing bottlenecks, and service-well ticket priority conflicts.",
+      "latency_ms": 395.2,
+      "status": "not_evaluated",
+      "deepeval_scores": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "contextual_precision": null,
+        "contextual_recall": null,
+        "recommendation_quality": null
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.0,
+        "heuristic_answer_relevancy": 0.25,
+        "heuristic_context_precision": 0.0,
+        "heuristic_context_recall": 0.0
+      },
+      "error": "OpenRouter API call failed: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key is on the correct account or org, and if so, purchase more at https://openrouter.ai/settings/credits', 'code': 402, 'metadata': {'limit_source': 'openrouter_credits', 'remedy_hint': 'Add credits at https://openrouter.ai/settings/credits, or lower max_tokens / prompt size to fit your remaining balance.'}}}"
+    },
+    {
+      "id": "TC_03",
+      "category": "Waiting Time",
+      "query": "What is causing long lobby queues and slow table assignment on Friday evenings?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Summary & Operational Diagnosis\n\nAnalysis of customer complaints in **Waiting Time** identifies peak-hour kitchen order queue backlogs and uncoordinated host seating intervals as the primary root causes.\n\n### Key Operational Findings:\n1. **Kitchen Order Queuing:** Ticket times exceed 30\u201340 minutes during peak rush periods when table waves overwhelm cook-line capacity.\n2. **Lobby Turnaround Latency:** Front-of-house seating pacing lags due to uncoordinated busser table clearing.\n\n### Recommended Action Plan:\n\u2022 **Immediate:** Deploy a dedicated Kitchen Expeditor with 15-minute digital ticket alerts.\n\u2022 **Host Pacing:** Implement 3-minute staggered host seating intervals to prevent cook-line surges.",
+      "expected_output": "Lobby congestion is caused by uncoordinated reservation overbooking, large party table camping, and lack of automated SMS waitlist notifications.",
+      "latency_ms": 394.75,
+      "status": "not_evaluated",
+      "deepeval_scores": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "contextual_precision": null,
+        "contextual_recall": null,
+        "recommendation_quality": null
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.0,
+        "heuristic_answer_relevancy": 0.2,
+        "heuristic_context_precision": 0.0,
+        "heuristic_context_recall": 0.0
+      },
+      "error": "OpenRouter API call failed: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key is on the correct account or org, and if so, purchase more at https://openrouter.ai/settings/credits', 'code': 402, 'metadata': {'limit_source': 'openrouter_credits', 'remedy_hint': 'Add credits at https://openrouter.ai/settings/credits, or lower max_tokens / prompt size to fit your remaining balance.'}}}"
+    },
+    {
+      "id": "TC_04",
+      "category": "Waiting Time",
+      "query": "Why do customers waiting for takeout and curbside pickup report 30-minute delays past the promised time?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Summary & Operational Diagnosis\n\nCustomer review analysis in **Pricing** identifies customer dissatisfaction centered on undisclosed fees and compressed perceived value relative to entree portion sizes.\n\n### Key Operational Findings:\n1. **Billing Surcharges:** Guests report surprise at undisclosed service fees or automatic gratuity additions at final payment.\n2. **Portion Value Compression:** Disproportionate pricing feedback relative to dish portions across specific menu items.\n\n### Recommended Action Plan:\n\u2022 **Transparency Standard:** Clearly itemize all service charges and gratuities on menus and printed checks.\n\u2022 **Portion Audit:** Audit portion sizes against standard recipe cost targets to restore guest perceived value.",
+      "expected_output": "Takeout fulfillment delays occur when delivery tablets are unchecked, expo bagging falls behind dine-in plating, and parking space dispatch lacks tracking.",
+      "latency_ms": 425.58,
+      "status": "not_evaluated",
+      "deepeval_scores": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "contextual_precision": null,
+        "contextual_recall": null,
+        "recommendation_quality": null
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.0,
+        "heuristic_answer_relevancy": 0.0909,
+        "heuristic_context_precision": 0.0,
+        "heuristic_context_recall": 0.0
+      },
+      "error": "OpenRouter API call failed: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key is on the correct account or org, and if so, purchase more at https://openrouter.ai/settings/credits', 'code': 402, 'metadata': {'limit_source': 'openrouter_credits', 'remedy_hint': 'Add credits at https://openrouter.ai/settings/credits, or lower max_tokens / prompt size to fit your remaining balance.'}}}"
+    },
+    {
+      "id": "TC_05",
+      "category": "Food Quality",
+      "query": "Why are guests reporting that hot entrees and soups are arriving cold or lukewarm at tables?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Summary & Operational Diagnosis\n\nAnalysis of customer sentiment under **Staff Behavior** indicates severe customer dissatisfaction driven by defensive employee reactions and supervisor communication friction during peak-stress periods.\n\n### Key Operational Findings:\n1. **Dispute Escalation:** Customer complaints reflect confrontational or unhelpful manager responses when resolving order or wait-time issues.\n2. **Hospitality Deficiencies:** Front-of-house staff exhibit communication gaps and lack of empathy when addressing guest concerns.\n\n### Recommended Action Plan:\n\u2022 **Immediate:** Conduct shift-lead hospitality de-escalation coaching.\n\u2022 **Empowerment Policy:** Establish a standardized guest recovery compensation protocol ($15\u2013$25 instant meal credits) to resolve friction instantly.",
+      "expected_output": "Cold entrees result from expo heat lamp holding temperature lapses, lack of dedicated food runners, and plated orders sitting on the pass.",
+      "latency_ms": 709.99,
+      "status": "not_evaluated",
+      "deepeval_scores": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "contextual_precision": null,
+        "contextual_recall": null,
+        "recommendation_quality": null
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.0,
+        "heuristic_answer_relevancy": 0.0,
+        "heuristic_context_precision": 0.0,
+        "heuristic_context_recall": 0.0
+      },
+      "error": "OpenRouter API call failed: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key is on the correct account or org, and if so, purchase more at https://openrouter.ai/settings/credits', 'code': 402, 'metadata': {'limit_source': 'openrouter_credits', 'remedy_hint': 'Add credits at https://openrouter.ai/settings/credits, or lower max_tokens / prompt size to fit your remaining balance.'}}}"
+    },
+    {
+      "id": "TC_06",
+      "category": "Food Quality",
+      "query": "What causes complaints regarding overcooked steaks and dry, rubbery chicken entrees?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Summary & Operational Diagnosis\n\nCustomer review analysis in **Pricing** identifies customer dissatisfaction centered on undisclosed fees and compressed perceived value relative to entree portion sizes.\n\n### Key Operational Findings:\n1. **Billing Surcharges:** Guests report surprise at undisclosed service fees or automatic gratuity additions at final payment.\n2. **Portion Value Compression:** Disproportionate pricing feedback relative to dish portions across specific menu items.\n\n### Recommended Action Plan:\n\u2022 **Transparency Standard:** Clearly itemize all service charges and gratuities on menus and printed checks.\n\u2022 **Portion Audit:** Audit portion sizes against standard recipe cost targets to restore guest perceived value.",
+      "expected_output": "Overcooked proteins are caused by inaccurate grill temperature calibration, unmonitored meat probe thermometer checks, and carry-over heat miscalculations.",
+      "latency_ms": 404.88,
+      "status": "not_evaluated",
+      "deepeval_scores": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "contextual_precision": null,
+        "contextual_recall": null,
+        "recommendation_quality": null
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.0,
+        "heuristic_answer_relevancy": 0.0,
+        "heuristic_context_precision": 0.0,
+        "heuristic_context_recall": 0.0
+      },
+      "error": "OpenRouter API call failed: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key is on the correct account or org, and if so, purchase more at https://openrouter.ai/settings/credits', 'code': 402, 'metadata': {'limit_source': 'openrouter_credits', 'remedy_hint': 'Add credits at https://openrouter.ai/settings/credits, or lower max_tokens / prompt size to fit your remaining balance.'}}}"
+    },
+    {
+      "id": "TC_07",
+      "category": "Food Quality",
+      "query": "Why are customers complaining that pasta dishes taste bland and lack fresh seasoning?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Summary & Operational Diagnosis\n\nCustomer review analysis in **Cleanliness** reveals operational sanitation breakdowns concentrated around dining room table turnover and restroom maintenance during high-traffic shifts.\n\n### Key Operational Findings:\n1. **Dining Area Hygiene:** Guests frequently report sticky tabletop surfaces and delayed busser clearing between seatings.\n2. **Restroom Maintenance Gaps:** Customer complaints highlight unstocked supplies and sanitation oversights during evening rushes.\n\n### Recommended Action Plan:\n\u2022 **Immediate:** Institute 30-minute digital restroom inspection and supply checklists.\n\u2022 **Sanitization Standard:** Enforce two-cloth sanitized table wipe-down protocol with approved sanitizing solution.",
+      "expected_output": "Bland pasta dishes occur due to unstandardized prep batch seasoning recipes, skipping pre-shift sauce line tastings, and rushed line prep.",
+      "latency_ms": 517.64,
+      "status": "not_evaluated",
+      "deepeval_scores": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "contextual_precision": null,
+        "contextual_recall": null,
+        "recommendation_quality": null
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.0,
+        "heuristic_answer_relevancy": 0.0,
+        "heuristic_context_precision": 0.0,
+        "heuristic_context_recall": 0.0
+      },
+      "error": "OpenRouter API call failed: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key is on the correct account or org, and if so, purchase more at https://openrouter.ai/settings/credits', 'code': 402, 'metadata': {'limit_source': 'openrouter_credits', 'remedy_hint': 'Add credits at https://openrouter.ai/settings/credits, or lower max_tokens / prompt size to fit your remaining balance.'}}}"
+    },
+    {
+      "id": "TC_08",
+      "category": "Food Quality",
+      "query": "What is the reason for reviews mentioning soggy fried appetizers and stale chips?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Summary & Operational Diagnosis\n\nCustomer review analysis in **Pricing** identifies customer dissatisfaction centered on undisclosed fees and compressed perceived value relative to entree portion sizes.\n\n### Key Operational Findings:\n1. **Billing Surcharges:** Guests report surprise at undisclosed service fees or automatic gratuity additions at final payment.\n2. **Portion Value Compression:** Disproportionate pricing feedback relative to dish portions across specific menu items.\n\n### Recommended Action Plan:\n\u2022 **Transparency Standard:** Clearly itemize all service charges and gratuities on menus and printed checks.\n\u2022 **Portion Audit:** Audit portion sizes against standard recipe cost targets to restore guest perceived value.",
+      "expected_output": "Soggy fried items stem from fryer oil temperature drops during overloaded basket batches and holding fried goods in unvented packaging.",
+      "latency_ms": 362.89,
+      "status": "not_evaluated",
+      "deepeval_scores": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "contextual_precision": null,
+        "contextual_recall": null,
+        "recommendation_quality": null
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.0,
+        "heuristic_answer_relevancy": 0.0,
+        "heuristic_context_precision": 0.0,
+        "heuristic_context_recall": 0.0
+      },
+      "error": "OpenRouter API call failed: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key is on the correct account or org, and if so, purchase more at https://openrouter.ai/settings/credits', 'code': 402, 'metadata': {'limit_source': 'openrouter_credits', 'remedy_hint': 'Add credits at https://openrouter.ai/settings/credits, or lower max_tokens / prompt size to fit your remaining balance.'}}}"
+    },
+    {
+      "id": "TC_09",
+      "category": "Service Quality",
+      "query": "What operational issues cause server inattentiveness and neglected dining sections?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Summary & Operational Diagnosis\n\nAnalysis of customer sentiment under **Staff Behavior** indicates severe customer dissatisfaction driven by defensive employee reactions and supervisor communication friction during peak-stress periods.\n\n### Key Operational Findings:\n1. **Dispute Escalation:** Customer complaints reflect confrontational or unhelpful manager responses when resolving order or wait-time issues.\n2. **Hospitality Deficiencies:** Front-of-house staff exhibit communication gaps and lack of empathy when addressing guest concerns.\n\n### Recommended Action Plan:\n\u2022 **Immediate:** Conduct shift-lead hospitality de-escalation coaching.\n\u2022 **Empowerment Policy:** Establish a standardized guest recovery compensation protocol ($15\u2013$25 instant meal credits) to resolve friction instantly.",
+      "expected_output": "Inattentive service is triggered by assigning servers oversized 6+ table sections, absence of dedicated food runners, and inadequate floor manager zoning audits.",
+      "latency_ms": 372.99,
+      "status": "not_evaluated",
+      "deepeval_scores": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "contextual_precision": null,
+        "contextual_recall": null,
+        "recommendation_quality": null
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.0,
+        "heuristic_answer_relevancy": 0.2222,
+        "heuristic_context_precision": 0.0,
+        "heuristic_context_recall": 0.0
+      },
+      "error": "OpenRouter API call failed: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key is on the correct account or org, and if so, purchase more at https://openrouter.ai/settings/credits', 'code': 402, 'metadata': {'limit_source': 'openrouter_credits', 'remedy_hint': 'Add credits at https://openrouter.ai/settings/credits, or lower max_tokens / prompt size to fit your remaining balance.'}}}"
+    },
+    {
+      "id": "TC_10",
+      "category": "Service Quality",
+      "query": "Why do guests complain that drink refills take 20 minutes and water carafes are never replenished?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Summary & Operational Diagnosis\n\nCustomer review analysis in **Pricing** identifies customer dissatisfaction centered on undisclosed fees and compressed perceived value relative to entree portion sizes.\n\n### Key Operational Findings:\n1. **Billing Surcharges:** Guests report surprise at undisclosed service fees or automatic gratuity additions at final payment.\n2. **Portion Value Compression:** Disproportionate pricing feedback relative to dish portions across specific menu items.\n\n### Recommended Action Plan:\n\u2022 **Transparency Standard:** Clearly itemize all service charges and gratuities on menus and printed checks.\n\u2022 **Portion Audit:** Audit portion sizes against standard recipe cost targets to restore guest perceived value.",
+      "expected_output": "Refill delays stem from beverage station syrup backlogs, servers prioritizing check drop-offs, and lack of dedicated busser water replenishment protocols.",
+      "latency_ms": 348.3,
+      "status": "not_evaluated",
+      "deepeval_scores": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "contextual_precision": null,
+        "contextual_recall": null,
+        "recommendation_quality": null
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.0,
+        "heuristic_answer_relevancy": 0.0909,
+        "heuristic_context_precision": 0.0,
+        "heuristic_context_recall": 0.0
+      },
+      "error": "OpenRouter API call failed: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key is on the correct account or org, and if so, purchase more at https://openrouter.ai/settings/credits', 'code': 402, 'metadata': {'limit_source': 'openrouter_credits', 'remedy_hint': 'Add credits at https://openrouter.ai/settings/credits, or lower max_tokens / prompt size to fit your remaining balance.'}}}"
+    },
+    {
+      "id": "TC_11",
+      "category": "Service Quality",
+      "query": "What factors lead to disorganized service during shift transitions and server handoffs?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Summary & Operational Diagnosis\n\nAnalysis of customer sentiment under **Staff Behavior** indicates severe customer dissatisfaction driven by defensive employee reactions and supervisor communication friction during peak-stress periods.\n\n### Key Operational Findings:\n1. **Dispute Escalation:** Customer complaints reflect confrontational or unhelpful manager responses when resolving order or wait-time issues.\n2. **Hospitality Deficiencies:** Front-of-house staff exhibit communication gaps and lack of empathy when addressing guest concerns.\n\n### Recommended Action Plan:\n\u2022 **Immediate:** Conduct shift-lead hospitality de-escalation coaching.\n\u2022 **Empowerment Policy:** Establish a standardized guest recovery compensation protocol ($15\u2013$25 instant meal credits) to resolve friction instantly.",
+      "expected_output": "Shift transition service breakdowns occur when table handoff notes are skipped between departing and incoming servers without floor manager sign-off.",
+      "latency_ms": 440.85,
+      "status": "not_evaluated",
+      "deepeval_scores": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "contextual_precision": null,
+        "contextual_recall": null,
+        "recommendation_quality": null
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.0,
+        "heuristic_answer_relevancy": 0.3,
+        "heuristic_context_precision": 0.0,
+        "heuristic_context_recall": 0.0
+      },
+      "error": "OpenRouter API call failed: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key is on the correct account or org, and if so, purchase more at https://openrouter.ai/settings/credits', 'code': 402, 'metadata': {'limit_source': 'openrouter_credits', 'remedy_hint': 'Add credits at https://openrouter.ai/settings/credits, or lower max_tokens / prompt size to fit your remaining balance.'}}}"
+    },
+    {
+      "id": "TC_12",
+      "category": "Service Quality",
+      "query": "Why are weekday lunch customers struggling to get their bill and finalize payment within 15 minutes?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Summary & Operational Diagnosis\n\nCustomer review analysis in **Pricing** identifies customer dissatisfaction centered on undisclosed fees and compressed perceived value relative to entree portion sizes.\n\n### Key Operational Findings:\n1. **Billing Surcharges:** Guests report surprise at undisclosed service fees or automatic gratuity additions at final payment.\n2. **Portion Value Compression:** Disproportionate pricing feedback relative to dish portions across specific menu items.\n\n### Recommended Action Plan:\n\u2022 **Transparency Standard:** Clearly itemize all service charges and gratuities on menus and printed checks.\n\u2022 **Portion Audit:** Audit portion sizes against standard recipe cost targets to restore guest perceived value.",
+      "expected_output": "Slow payment processing during lunch is caused by POS station terminal congestion and failure to offer tableside mobile checkout options.",
+      "latency_ms": 426.89,
+      "status": "not_evaluated",
+      "deepeval_scores": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "contextual_precision": null,
+        "contextual_recall": null,
+        "recommendation_quality": null
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.0,
+        "heuristic_answer_relevancy": 0.2,
+        "heuristic_context_precision": 0.0,
+        "heuristic_context_recall": 0.0
+      },
+      "error": "OpenRouter API call failed: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key is on the correct account or org, and if so, purchase more at https://openrouter.ai/settings/credits', 'code': 402, 'metadata': {'limit_source': 'openrouter_credits', 'remedy_hint': 'Add credits at https://openrouter.ai/settings/credits, or lower max_tokens / prompt size to fit your remaining balance.'}}}"
+    },
+    {
+      "id": "TC_13",
+      "category": "Staff Behavior",
+      "query": "What operational stress factors trigger rude server interactions and dismissive attitudes toward guests?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Summary & Operational Diagnosis\n\nAnalysis of customer sentiment under **Staff Behavior** indicates severe customer dissatisfaction driven by defensive employee reactions and supervisor communication friction during peak-stress periods.\n\n### Key Operational Findings:\n1. **Dispute Escalation:** Customer complaints reflect confrontational or unhelpful manager responses when resolving order or wait-time issues.\n2. **Hospitality Deficiencies:** Front-of-house staff exhibit communication gaps and lack of empathy when addressing guest concerns.\n\n### Recommended Action Plan:\n\u2022 **Immediate:** Conduct shift-lead hospitality de-escalation coaching.\n\u2022 **Empowerment Policy:** Establish a standardized guest recovery compensation protocol ($15\u2013$25 instant meal credits) to resolve friction instantly.",
+      "expected_output": "Rude staff interactions arise from back-to-back double shifts without meal breaks, peak shift fatigue, and lack of customer de-escalation training.",
+      "latency_ms": 349.7,
+      "status": "not_evaluated",
+      "deepeval_scores": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "contextual_precision": null,
+        "contextual_recall": null,
+        "recommendation_quality": null
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.0,
+        "heuristic_answer_relevancy": 0.1667,
+        "heuristic_context_precision": 0.0,
+        "heuristic_context_recall": 0.0
+      },
+      "error": "OpenRouter API call failed: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key is on the correct account or org, and if so, purchase more at https://openrouter.ai/settings/credits', 'code': 402, 'metadata': {'limit_source': 'openrouter_credits', 'remedy_hint': 'Add credits at https://openrouter.ai/settings/credits, or lower max_tokens / prompt size to fit your remaining balance.'}}}"
+    },
+    {
+      "id": "TC_14",
+      "category": "Staff Behavior",
+      "query": "Why are guests reporting confrontational or defensive behavior from shift managers when handling complaints?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Summary & Operational Diagnosis\n\nAnalysis of customer sentiment under **Staff Behavior** indicates severe customer dissatisfaction driven by defensive employee reactions and supervisor communication friction during peak-stress periods.\n\n### Key Operational Findings:\n1. **Dispute Escalation:** Customer complaints reflect confrontational or unhelpful manager responses when resolving order or wait-time issues.\n2. **Hospitality Deficiencies:** Front-of-house staff exhibit communication gaps and lack of empathy when addressing guest concerns.\n\n### Recommended Action Plan:\n\u2022 **Immediate:** Conduct shift-lead hospitality de-escalation coaching.\n\u2022 **Empowerment Policy:** Establish a standardized guest recovery compensation protocol ($15\u2013$25 instant meal credits) to resolve friction instantly.",
+      "expected_output": "Confrontational management behavior stems from lack of executive guest-recovery autonomy, punitive corporate food-cost policies, and absence of service recovery coaching.",
+      "latency_ms": 471.86,
+      "status": "not_evaluated",
+      "deepeval_scores": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "contextual_precision": null,
+        "contextual_recall": null,
+        "recommendation_quality": null
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.0,
+        "heuristic_answer_relevancy": 0.5455,
+        "heuristic_context_precision": 0.0,
+        "heuristic_context_recall": 0.0
+      },
+      "error": "OpenRouter API call failed: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key is on the correct account or org, and if so, purchase more at https://openrouter.ai/settings/credits', 'code': 402, 'metadata': {'limit_source': 'openrouter_credits', 'remedy_hint': 'Add credits at https://openrouter.ai/settings/credits, or lower max_tokens / prompt size to fit your remaining balance.'}}}"
+    },
+    {
+      "id": "TC_15",
+      "category": "Staff Behavior",
+      "query": "What causes front-door hostess stand unwelcoming greetings and dismissive seating responses?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Summary & Operational Diagnosis\n\nAnalysis of customer sentiment under **Staff Behavior** indicates severe customer dissatisfaction driven by defensive employee reactions and supervisor communication friction during peak-stress periods.\n\n### Key Operational Findings:\n1. **Dispute Escalation:** Customer complaints reflect confrontational or unhelpful manager responses when resolving order or wait-time issues.\n2. **Hospitality Deficiencies:** Front-of-house staff exhibit communication gaps and lack of empathy when addressing guest concerns.\n\n### Recommended Action Plan:\n\u2022 **Immediate:** Conduct shift-lead hospitality de-escalation coaching.\n\u2022 **Empowerment Policy:** Establish a standardized guest recovery compensation protocol ($15\u2013$25 instant meal credits) to resolve friction instantly.",
+      "expected_output": "Unwelcoming host greetings stem from insufficient front-of-house hospitality onboarding, lack of eye-contact standards, and phone distraction at the podium.",
+      "latency_ms": 423.76,
+      "status": "not_evaluated",
+      "deepeval_scores": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "contextual_precision": null,
+        "contextual_recall": null,
+        "recommendation_quality": null
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.0,
+        "heuristic_answer_relevancy": 0.2727,
+        "heuristic_context_precision": 0.0,
+        "heuristic_context_recall": 0.0
+      },
+      "error": "OpenRouter API call failed: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key is on the correct account or org, and if so, purchase more at https://openrouter.ai/settings/credits', 'code': 402, 'metadata': {'limit_source': 'openrouter_credits', 'remedy_hint': 'Add credits at https://openrouter.ai/settings/credits, or lower max_tokens / prompt size to fit your remaining balance.'}}}"
+    },
+    {
+      "id": "TC_16",
+      "category": "Staff Behavior",
+      "query": "Why do reviews mention kitchen crew shouting or using inappropriate language audible in the dining room?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Summary & Operational Diagnosis\n\nCustomer review analysis in **Pricing** identifies customer dissatisfaction centered on undisclosed fees and compressed perceived value relative to entree portion sizes.\n\n### Key Operational Findings:\n1. **Billing Surcharges:** Guests report surprise at undisclosed service fees or automatic gratuity additions at final payment.\n2. **Portion Value Compression:** Disproportionate pricing feedback relative to dish portions across specific menu items.\n\n### Recommended Action Plan:\n\u2022 **Transparency Standard:** Clearly itemize all service charges and gratuities on menus and printed checks.\n\u2022 **Portion Audit:** Audit portion sizes against standard recipe cost targets to restore guest perceived value.",
+      "expected_output": "Audible kitchen disruption occurs when kitchen pass doors are propped open during ticket rushes and expo line acoustic dampening is absent.",
+      "latency_ms": 397.32,
+      "status": "not_evaluated",
+      "deepeval_scores": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "contextual_precision": null,
+        "contextual_recall": null,
+        "recommendation_quality": null
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.0,
+        "heuristic_answer_relevancy": 0.0,
+        "heuristic_context_precision": 0.0,
+        "heuristic_context_recall": 0.0
+      },
+      "error": "OpenRouter API call failed: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key is on the correct account or org, and if so, purchase more at https://openrouter.ai/settings/credits', 'code': 402, 'metadata': {'limit_source': 'openrouter_credits', 'remedy_hint': 'Add credits at https://openrouter.ai/settings/credits, or lower max_tokens / prompt size to fit your remaining balance.'}}}"
+    },
+    {
+      "id": "TC_17",
+      "category": "Cleanliness",
+      "query": "Why are guests seated at sticky dining tables with food crumbs underneath chairs?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Summary & Operational Diagnosis\n\nCustomer review analysis in **Cleanliness** reveals operational sanitation breakdowns concentrated around dining room table turnover and restroom maintenance during high-traffic shifts.\n\n### Key Operational Findings:\n1. **Dining Area Hygiene:** Guests frequently report sticky tabletop surfaces and delayed busser clearing between seatings.\n2. **Restroom Maintenance Gaps:** Customer complaints highlight unstocked supplies and sanitation oversights during evening rushes.\n\n### Recommended Action Plan:\n\u2022 **Immediate:** Institute 30-minute digital restroom inspection and supply checklists.\n\u2022 **Sanitization Standard:** Enforce two-cloth sanitized table wipe-down protocol with approved sanitizing solution.",
+      "expected_output": "Sticky tables and debris result from bussers using dirty sanitizing rag solution buckets and rushing table resets without 2-step surface cleaning.",
+      "latency_ms": 469.43,
+      "status": "not_evaluated",
+      "deepeval_scores": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "contextual_precision": null,
+        "contextual_recall": null,
+        "recommendation_quality": null
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.0,
+        "heuristic_answer_relevancy": 0.4,
+        "heuristic_context_precision": 0.0,
+        "heuristic_context_recall": 0.0
+      },
+      "error": "OpenRouter API call failed: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key is on the correct account or org, and if so, purchase more at https://openrouter.ai/settings/credits', 'code': 402, 'metadata': {'limit_source': 'openrouter_credits', 'remedy_hint': 'Add credits at https://openrouter.ai/settings/credits, or lower max_tokens / prompt size to fit your remaining balance.'}}}"
+    },
+    {
+      "id": "TC_18",
+      "category": "Cleanliness",
+      "query": "What causes frequent customer complaints about unsanitary restrooms, empty soap dispensers, and bad odors?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Summary & Operational Diagnosis\n\nCustomer review analysis in **Cleanliness** reveals operational sanitation breakdowns concentrated around dining room table turnover and restroom maintenance during high-traffic shifts.\n\n### Key Operational Findings:\n1. **Dining Area Hygiene:** Guests frequently report sticky tabletop surfaces and delayed busser clearing between seatings.\n2. **Restroom Maintenance Gaps:** Customer complaints highlight unstocked supplies and sanitation oversights during evening rushes.\n\n### Recommended Action Plan:\n\u2022 **Immediate:** Institute 30-minute digital restroom inspection and supply checklists.\n\u2022 **Sanitization Standard:** Enforce two-cloth sanitized table wipe-down protocol with approved sanitizing solution.",
+      "expected_output": "Restroom sanitation failures occur due to skipped 30-minute maintenance log audits, unmonitored dispenser restocking, and floor drain trap drying.",
+      "latency_ms": 366.39,
+      "status": "not_evaluated",
+      "deepeval_scores": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "contextual_precision": null,
+        "contextual_recall": null,
+        "recommendation_quality": null
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.0,
+        "heuristic_answer_relevancy": 0.25,
+        "heuristic_context_precision": 0.0,
+        "heuristic_context_recall": 0.0
+      },
+      "error": "OpenRouter API call failed: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key is on the correct account or org, and if so, purchase more at https://openrouter.ai/settings/credits', 'code': 402, 'metadata': {'limit_source': 'openrouter_credits', 'remedy_hint': 'Add credits at https://openrouter.ai/settings/credits, or lower max_tokens / prompt size to fit your remaining balance.'}}}"
+    },
+    {
+      "id": "TC_19",
+      "category": "Cleanliness",
+      "query": "Why are customers finding water spots on glassware and food residue on forks?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Summary & Operational Diagnosis\n\nCustomer review analysis in **Cleanliness** reveals operational sanitation breakdowns concentrated around dining room table turnover and restroom maintenance during high-traffic shifts.\n\n### Key Operational Findings:\n1. **Dining Area Hygiene:** Guests frequently report sticky tabletop surfaces and delayed busser clearing between seatings.\n2. **Restroom Maintenance Gaps:** Customer complaints highlight unstocked supplies and sanitation oversights during evening rushes.\n\n### Recommended Action Plan:\n\u2022 **Immediate:** Institute 30-minute digital restroom inspection and supply checklists.\n\u2022 **Sanitization Standard:** Enforce two-cloth sanitized table wipe-down protocol with approved sanitizing solution.",
+      "expected_output": "Residue on tableware stems from commercial dish machine rinse temperature drops, low detergent titration levels, and lack of post-wash inspection.",
+      "latency_ms": 428.27,
+      "status": "not_evaluated",
+      "deepeval_scores": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "contextual_precision": null,
+        "contextual_recall": null,
+        "recommendation_quality": null
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.0,
+        "heuristic_answer_relevancy": 0.125,
+        "heuristic_context_precision": 0.0,
+        "heuristic_context_recall": 0.0
+      },
+      "error": "OpenRouter API call failed: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key is on the correct account or org, and if so, purchase more at https://openrouter.ai/settings/credits', 'code': 402, 'metadata': {'limit_source': 'openrouter_credits', 'remedy_hint': 'Add credits at https://openrouter.ai/settings/credits, or lower max_tokens / prompt size to fit your remaining balance.'}}}"
+    },
+    {
+      "id": "TC_20",
+      "category": "Cleanliness",
+      "query": "What triggers reports of fruit flies or pest sightings around the bar and floor drain areas?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Summary & Operational Diagnosis\n\nCustomer review analysis in **Cleanliness** reveals operational sanitation breakdowns concentrated around dining room table turnover and restroom maintenance during high-traffic shifts.\n\n### Key Operational Findings:\n1. **Dining Area Hygiene:** Guests frequently report sticky tabletop surfaces and delayed busser clearing between seatings.\n2. **Restroom Maintenance Gaps:** Customer complaints highlight unstocked supplies and sanitation oversights during evening rushes.\n\n### Recommended Action Plan:\n\u2022 **Immediate:** Institute 30-minute digital restroom inspection and supply checklists.\n\u2022 **Sanitization Standard:** Enforce two-cloth sanitized table wipe-down protocol with approved sanitizing solution.",
+      "expected_output": "Fruit fly presence is caused by organic sugar sludge buildup in bar floor drains, unemptied overnight bar fruit bins, and missed enzymatic drain dosing.",
+      "latency_ms": 568.35,
+      "status": "not_evaluated",
+      "deepeval_scores": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "contextual_precision": null,
+        "contextual_recall": null,
+        "recommendation_quality": null
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.0,
+        "heuristic_answer_relevancy": 0.0909,
+        "heuristic_context_precision": 0.0,
+        "heuristic_context_recall": 0.0
+      },
+      "error": "OpenRouter API call failed: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key is on the correct account or org, and if so, purchase more at https://openrouter.ai/settings/credits', 'code': 402, 'metadata': {'limit_source': 'openrouter_credits', 'remedy_hint': 'Add credits at https://openrouter.ai/settings/credits, or lower max_tokens / prompt size to fit your remaining balance.'}}}"
+    },
+    {
+      "id": "TC_21",
+      "category": "Pricing",
+      "query": "Why do customers perceive entree portions as poor value for money compared to menu prices?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Summary & Operational Diagnosis\n\nCustomer review analysis in **Pricing** identifies customer dissatisfaction centered on undisclosed fees and compressed perceived value relative to entree portion sizes.\n\n### Key Operational Findings:\n1. **Billing Surcharges:** Guests report surprise at undisclosed service fees or automatic gratuity additions at final payment.\n2. **Portion Value Compression:** Disproportionate pricing feedback relative to dish portions across specific menu items.\n\n### Recommended Action Plan:\n\u2022 **Transparency Standard:** Clearly itemize all service charges and gratuities on menus and printed checks.\n\u2022 **Portion Audit:** Audit portion sizes against standard recipe cost targets to restore guest perceived value.",
+      "expected_output": "Perceived poor value occurs when kitchen line cooks under-portion protein scoops, plate presentation lacks visual volume, and side items are skimped.",
+      "latency_ms": 381.09,
+      "status": "not_evaluated",
+      "deepeval_scores": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "contextual_precision": null,
+        "contextual_recall": null,
+        "recommendation_quality": null
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.0,
+        "heuristic_answer_relevancy": 0.5,
+        "heuristic_context_precision": 0.0,
+        "heuristic_context_recall": 0.0
+      },
+      "error": "OpenRouter API call failed: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key is on the correct account or org, and if so, purchase more at https://openrouter.ai/settings/credits', 'code': 402, 'metadata': {'limit_source': 'openrouter_credits', 'remedy_hint': 'Add credits at https://openrouter.ai/settings/credits, or lower max_tokens / prompt size to fit your remaining balance.'}}}"
+    },
+    {
+      "id": "TC_22",
+      "category": "Pricing",
+      "query": "What triggers disputes regarding unexpected automatic gratuity and hidden service surcharges on guest bills?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Summary & Operational Diagnosis\n\nAnalysis of customer sentiment under **Staff Behavior** indicates severe customer dissatisfaction driven by defensive employee reactions and supervisor communication friction during peak-stress periods.\n\n### Key Operational Findings:\n1. **Dispute Escalation:** Customer complaints reflect confrontational or unhelpful manager responses when resolving order or wait-time issues.\n2. **Hospitality Deficiencies:** Front-of-house staff exhibit communication gaps and lack of empathy when addressing guest concerns.\n\n### Recommended Action Plan:\n\u2022 **Immediate:** Conduct shift-lead hospitality de-escalation coaching.\n\u2022 **Empowerment Policy:** Establish a standardized guest recovery compensation protocol ($15\u2013$25 instant meal credits) to resolve friction instantly.",
+      "expected_output": "Bill fee disputes stem from failure to disclose auto-gratuity on menus or table tents, lack of server verbal heads-up, and compounding surcharge calculations.",
+      "latency_ms": 410.05,
+      "status": "not_evaluated",
+      "deepeval_scores": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "contextual_precision": null,
+        "contextual_recall": null,
+        "recommendation_quality": null
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.0,
+        "heuristic_answer_relevancy": 0.0833,
+        "heuristic_context_precision": 0.0,
+        "heuristic_context_recall": 0.0
+      },
+      "error": "OpenRouter API call failed: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key is on the correct account or org, and if so, purchase more at https://openrouter.ai/settings/credits', 'code': 402, 'metadata': {'limit_source': 'openrouter_credits', 'remedy_hint': 'Add credits at https://openrouter.ai/settings/credits, or lower max_tokens / prompt size to fit your remaining balance.'}}}"
+    },
+    {
+      "id": "TC_23",
+      "category": "Pricing",
+      "query": "Why are guests upset about beverage pricing discrepancies between cocktail menus and final checks?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Summary & Operational Diagnosis\n\nCustomer review analysis in **Pricing** identifies customer dissatisfaction centered on undisclosed fees and compressed perceived value relative to entree portion sizes.\n\n### Key Operational Findings:\n1. **Billing Surcharges:** Guests report surprise at undisclosed service fees or automatic gratuity additions at final payment.\n2. **Portion Value Compression:** Disproportionate pricing feedback relative to dish portions across specific menu items.\n\n### Recommended Action Plan:\n\u2022 **Transparency Standard:** Clearly itemize all service charges and gratuities on menus and printed checks.\n\u2022 **Portion Audit:** Audit portion sizes against standard recipe cost targets to restore guest perceived value.",
+      "expected_output": "Beverage check discrepancies occur due to POS price desynchronization between bar and dining room databases, and unlisted premium liquor upcharges.",
+      "latency_ms": 348.34,
+      "status": "not_evaluated",
+      "deepeval_scores": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "contextual_precision": null,
+        "contextual_recall": null,
+        "recommendation_quality": null
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.0,
+        "heuristic_answer_relevancy": 0.4545,
+        "heuristic_context_precision": 0.0,
+        "heuristic_context_recall": 0.0
+      },
+      "error": "OpenRouter API call failed: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key is on the correct account or org, and if so, purchase more at https://openrouter.ai/settings/credits', 'code': 402, 'metadata': {'limit_source': 'openrouter_credits', 'remedy_hint': 'Add credits at https://openrouter.ai/settings/credits, or lower max_tokens / prompt size to fit your remaining balance.'}}}"
+    },
+    {
+      "id": "TC_24",
+      "category": "Pricing",
+      "query": "What drives negative feedback about excessive charges for bread service and extra dipping sauces?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Summary & Operational Diagnosis\n\nCustomer review analysis in **Cleanliness** reveals operational sanitation breakdowns concentrated around dining room table turnover and restroom maintenance during high-traffic shifts.\n\n### Key Operational Findings:\n1. **Dining Area Hygiene:** Guests frequently report sticky tabletop surfaces and delayed busser clearing between seatings.\n2. **Restroom Maintenance Gaps:** Customer complaints highlight unstocked supplies and sanitation oversights during evening rushes.\n\n### Recommended Action Plan:\n\u2022 **Immediate:** Institute 30-minute digital restroom inspection and supply checklists.\n\u2022 **Sanitization Standard:** Enforce two-cloth sanitized table wipe-down protocol with approved sanitizing solution.",
+      "expected_output": "Side charge complaints stem from servers failing to communicate sauce fees when asked, creating surprise line-item fees on guest bills.",
+      "latency_ms": 473.94,
+      "status": "not_evaluated",
+      "deepeval_scores": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "contextual_precision": null,
+        "contextual_recall": null,
+        "recommendation_quality": null
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.0,
+        "heuristic_answer_relevancy": 0.0,
+        "heuristic_context_precision": 0.0,
+        "heuristic_context_recall": 0.0
+      },
+      "error": "OpenRouter API call failed: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key is on the correct account or org, and if so, purchase more at https://openrouter.ai/settings/credits', 'code': 402, 'metadata': {'limit_source': 'openrouter_credits', 'remedy_hint': 'Add credits at https://openrouter.ai/settings/credits, or lower max_tokens / prompt size to fit your remaining balance.'}}}"
+    },
+    {
+      "id": "TC_25",
+      "category": "Order Accuracy",
+      "query": "What operational breakdowns lead to missing entrees and forgotten side dishes in takeout bags?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Summary & Operational Diagnosis\n\nCustomer review analysis in **Pricing** identifies customer dissatisfaction centered on undisclosed fees and compressed perceived value relative to entree portion sizes.\n\n### Key Operational Findings:\n1. **Billing Surcharges:** Guests report surprise at undisclosed service fees or automatic gratuity additions at final payment.\n2. **Portion Value Compression:** Disproportionate pricing feedback relative to dish portions across specific menu items.\n\n### Recommended Action Plan:\n\u2022 **Transparency Standard:** Clearly itemize all service charges and gratuities on menus and printed checks.\n\u2022 **Portion Audit:** Audit portion sizes against standard recipe cost targets to restore guest perceived value.",
+      "expected_output": "Missing takeout items occur when expo stations skip the two-step printed ticket checkoff process before stapling bags.",
+      "latency_ms": 439.79,
+      "status": "not_evaluated",
+      "deepeval_scores": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "contextual_precision": null,
+        "contextual_recall": null,
+        "recommendation_quality": null
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.0,
+        "heuristic_answer_relevancy": 0.0909,
+        "heuristic_context_precision": 0.0,
+        "heuristic_context_recall": 0.0
+      },
+      "error": "OpenRouter API call failed: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key is on the correct account or org, and if so, purchase more at https://openrouter.ai/settings/credits', 'code': 402, 'metadata': {'limit_source': 'openrouter_credits', 'remedy_hint': 'Add credits at https://openrouter.ai/settings/credits, or lower max_tokens / prompt size to fit your remaining balance.'}}}"
+    },
+    {
+      "id": "TC_26",
+      "category": "Order Accuracy",
+      "query": "Why are allergy dietary modifications (gluten-free, dairy-free) frequently ignored by the kitchen?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Summary & Operational Diagnosis\n\nCustomer review analysis in **Pricing** identifies customer dissatisfaction centered on undisclosed fees and compressed perceived value relative to entree portion sizes.\n\n### Key Operational Findings:\n1. **Billing Surcharges:** Guests report surprise at undisclosed service fees or automatic gratuity additions at final payment.\n2. **Portion Value Compression:** Disproportionate pricing feedback relative to dish portions across specific menu items.\n\n### Recommended Action Plan:\n\u2022 **Transparency Standard:** Clearly itemize all service charges and gratuities on menus and printed checks.\n\u2022 **Portion Audit:** Audit portion sizes against standard recipe cost targets to restore guest perceived value.",
+      "expected_output": "Allergy modification errors happen when server special instructions are not highlighted in red on kitchen KDS screens, and expo checks are bypassed.",
+      "latency_ms": 467.1,
+      "status": "not_evaluated",
+      "deepeval_scores": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "contextual_precision": null,
+        "contextual_recall": null,
+        "recommendation_quality": null
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.0,
+        "heuristic_answer_relevancy": 0.0,
+        "heuristic_context_precision": 0.0,
+        "heuristic_context_recall": 0.0
+      },
+      "error": "OpenRouter API call failed: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key is on the correct account or org, and if so, purchase more at https://openrouter.ai/settings/credits', 'code': 402, 'metadata': {'limit_source': 'openrouter_credits', 'remedy_hint': 'Add credits at https://openrouter.ai/settings/credits, or lower max_tokens / prompt size to fit your remaining balance.'}}}"
+    },
+    {
+      "id": "TC_27",
+      "category": "Order Accuracy",
+      "query": "What causes tableside food runners to deliver the wrong entrees to neighboring seats or tables?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Summary & Operational Diagnosis\n\nAnalysis of customer sentiment under **Staff Behavior** indicates severe customer dissatisfaction driven by defensive employee reactions and supervisor communication friction during peak-stress periods.\n\n### Key Operational Findings:\n1. **Dispute Escalation:** Customer complaints reflect confrontational or unhelpful manager responses when resolving order or wait-time issues.\n2. **Hospitality Deficiencies:** Front-of-house staff exhibit communication gaps and lack of empathy when addressing guest concerns.\n\n### Recommended Action Plan:\n\u2022 **Immediate:** Conduct shift-lead hospitality de-escalation coaching.\n\u2022 **Empowerment Policy:** Establish a standardized guest recovery compensation protocol ($15\u2013$25 instant meal credits) to resolve friction instantly.",
+      "expected_output": "Wrong table deliveries happen when servers enter incorrect seat pivot numbers into the POS, causing runners to auction off food.",
+      "latency_ms": 421.99,
+      "status": "not_evaluated",
+      "deepeval_scores": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "contextual_precision": null,
+        "contextual_recall": null,
+        "recommendation_quality": null
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.0,
+        "heuristic_answer_relevancy": 0.0,
+        "heuristic_context_precision": 0.0,
+        "heuristic_context_recall": 0.0
+      },
+      "error": "OpenRouter API call failed: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key is on the correct account or org, and if so, purchase more at https://openrouter.ai/settings/credits', 'code': 402, 'metadata': {'limit_source': 'openrouter_credits', 'remedy_hint': 'Add credits at https://openrouter.ai/settings/credits, or lower max_tokens / prompt size to fit your remaining balance.'}}}"
+    },
+    {
+      "id": "TC_28",
+      "category": "Order Accuracy",
+      "query": "Why do customers frequently receive salads drenched in dressing when 'dressing on the side' was requested?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Summary & Operational Diagnosis\n\nCustomer review analysis across the Yelp dataset indicates multi-dimensional operational friction involving both **Food Quality** and **Service Quality**. Empirical evidence demonstrates that **Food Quality** represents the primary driver of critical customer churn, compounded by secondary service bottlenecks during peak rush periods.\n\n### Key Operational Findings:\n1. **Food Quality Degradation:** Multiple customer reviews report severe food execution defects, including dish temperature drops during transit and cook-line seasoning inconsistencies during peak rushes.\n2. **Service Bottlenecks:** Customer complaints peak during busy shift changeovers due to server station overload and lack of consistent table check-backs.\n3. **Cross-Functional Friction:** Kitchen ticket delays directly exacerbate front-of-house service tension, causing negative customer sentiment to compound.\n\n### Recommended Action Plan:\n\u2022 **Immediate (Priority 1 - Food Quality):** Mandate pre-shift line checks for recipe calibration and enforce hot-holding expo heat lamps (>=140\u00b0F).\n\u2022 **Shift Management (Priority 2 - Service Quality):** Cap server station assignments to maximum 4 tables and institute a mandatory 2-minute table check-back standard.\n\u2022 **Cross-Department Coordination:** Synchronize host seating intervals with kitchen cook-line pacing to prevent simultaneous ticket surges.",
+      "expected_output": "Dressing on the side errors stem from pantry line cooks rushing through salad tosses without checking ticket modifier lines.",
+      "latency_ms": 406.19,
+      "status": "not_evaluated",
+      "deepeval_scores": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "contextual_precision": null,
+        "contextual_recall": null,
+        "recommendation_quality": null
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.0,
+        "heuristic_answer_relevancy": 0.0,
+        "heuristic_context_precision": 0.0,
+        "heuristic_context_recall": 0.0
+      },
+      "error": "OpenRouter API call failed: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key is on the correct account or org, and if so, purchase more at https://openrouter.ai/settings/credits', 'code': 402, 'metadata': {'limit_source': 'openrouter_credits', 'remedy_hint': 'Add credits at https://openrouter.ai/settings/credits, or lower max_tokens / prompt size to fit your remaining balance.'}}}"
+    },
+    {
+      "id": "TC_29",
+      "category": "Ambience",
+      "query": "Why are dinner guests complaining that dining room background music is too loud for conversation?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Summary & Operational Diagnosis\n\nCustomer review analysis in **Pricing** identifies customer dissatisfaction centered on undisclosed fees and compressed perceived value relative to entree portion sizes.\n\n### Key Operational Findings:\n1. **Billing Surcharges:** Guests report surprise at undisclosed service fees or automatic gratuity additions at final payment.\n2. **Portion Value Compression:** Disproportionate pricing feedback relative to dish portions across specific menu items.\n\n### Recommended Action Plan:\n\u2022 **Transparency Standard:** Clearly itemize all service charges and gratuities on menus and printed checks.\n\u2022 **Portion Audit:** Audit portion sizes against standard recipe cost targets to restore guest perceived value.",
+      "expected_output": "Excessive dining music volume results from lack of decibel limiter controls, bar staff turning up playlists during shifts, and unzoned speaker volumes.",
+      "latency_ms": 469.82,
+      "status": "not_evaluated",
+      "deepeval_scores": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "contextual_precision": null,
+        "contextual_recall": null,
+        "recommendation_quality": null
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.0,
+        "heuristic_answer_relevancy": 0.1,
+        "heuristic_context_precision": 0.0,
+        "heuristic_context_recall": 0.0
+      },
+      "error": "OpenRouter API call failed: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key is on the correct account or org, and if so, purchase more at https://openrouter.ai/settings/credits', 'code': 402, 'metadata': {'limit_source': 'openrouter_credits', 'remedy_hint': 'Add credits at https://openrouter.ai/settings/credits, or lower max_tokens / prompt size to fit your remaining balance.'}}}"
+    },
+    {
+      "id": "TC_30",
+      "category": "Ambience",
+      "query": "What causes dining room temperature complaints regarding drafty or freezing seating areas?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Summary & Operational Diagnosis\n\nCustomer review analysis in **Pricing** identifies customer dissatisfaction centered on undisclosed fees and compressed perceived value relative to entree portion sizes.\n\n### Key Operational Findings:\n1. **Billing Surcharges:** Guests report surprise at undisclosed service fees or automatic gratuity additions at final payment.\n2. **Portion Value Compression:** Disproportionate pricing feedback relative to dish portions across specific menu items.\n\n### Recommended Action Plan:\n\u2022 **Transparency Standard:** Clearly itemize all service charges and gratuities on menus and printed checks.\n\u2022 **Portion Audit:** Audit portion sizes against standard recipe cost targets to restore guest perceived value.",
+      "expected_output": "Freezing dining room temperatures are caused by HVAC damper imbalances directing AC airflow directly onto perimeter booths without seasonal calibration.",
+      "latency_ms": 494.73,
+      "status": "not_evaluated",
+      "deepeval_scores": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "contextual_precision": null,
+        "contextual_recall": null,
+        "recommendation_quality": null
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.0,
+        "heuristic_answer_relevancy": 0.0,
+        "heuristic_context_precision": 0.0,
+        "heuristic_context_recall": 0.0
+      },
+      "error": "OpenRouter API call failed: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key is on the correct account or org, and if so, purchase more at https://openrouter.ai/settings/credits', 'code': 402, 'metadata': {'limit_source': 'openrouter_credits', 'remedy_hint': 'Add credits at https://openrouter.ai/settings/credits, or lower max_tokens / prompt size to fit your remaining balance.'}}}"
+    },
+    {
+      "id": "TC_31",
+      "category": "Ambience",
+      "query": "Why do customer reviews describe the main dining room as uncomfortably dark and cramped?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Summary & Operational Diagnosis\n\nAnalysis of customer sentiment under **Staff Behavior** indicates severe customer dissatisfaction driven by defensive employee reactions and supervisor communication friction during peak-stress periods.\n\n### Key Operational Findings:\n1. **Dispute Escalation:** Customer complaints reflect confrontational or unhelpful manager responses when resolving order or wait-time issues.\n2. **Hospitality Deficiencies:** Front-of-house staff exhibit communication gaps and lack of empathy when addressing guest concerns.\n\n### Recommended Action Plan:\n\u2022 **Immediate:** Conduct shift-lead hospitality de-escalation coaching.\n\u2022 **Empowerment Policy:** Establish a standardized guest recovery compensation protocol ($15\u2013$25 instant meal credits) to resolve friction instantly.",
+      "expected_output": "Cramped and dark dining perception results from over-dense floor table spacing below 36 inches and burned-out track lighting bulbs.",
+      "latency_ms": 394.96,
+      "status": "not_evaluated",
+      "deepeval_scores": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "contextual_precision": null,
+        "contextual_recall": null,
+        "recommendation_quality": null
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.0,
+        "heuristic_answer_relevancy": 0.1111,
+        "heuristic_context_precision": 0.0,
+        "heuristic_context_recall": 0.0
+      },
+      "error": "OpenRouter API call failed: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key is on the correct account or org, and if so, purchase more at https://openrouter.ai/settings/credits', 'code': 402, 'metadata': {'limit_source': 'openrouter_credits', 'remedy_hint': 'Add credits at https://openrouter.ai/settings/credits, or lower max_tokens / prompt size to fit your remaining balance.'}}}"
+    },
+    {
+      "id": "TC_32",
+      "category": "Ambience",
+      "query": "What causes complaints regarding kitchen grill smoke or char odor drifting into the main dining area?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Summary & Operational Diagnosis\n\nCustomer review analysis in **Cleanliness** reveals operational sanitation breakdowns concentrated around dining room table turnover and restroom maintenance during high-traffic shifts.\n\n### Key Operational Findings:\n1. **Dining Area Hygiene:** Guests frequently report sticky tabletop surfaces and delayed busser clearing between seatings.\n2. **Restroom Maintenance Gaps:** Customer complaints highlight unstocked supplies and sanitation oversights during evening rushes.\n\n### Recommended Action Plan:\n\u2022 **Immediate:** Institute 30-minute digital restroom inspection and supply checklists.\n\u2022 **Sanitization Standard:** Enforce two-cloth sanitized table wipe-down protocol with approved sanitizing solution.",
+      "expected_output": "Kitchen smoke drifting into the dining area is triggered by negative pressure differentials from exhaust hood motor belt wear and open kitchen pass baffles.",
+      "latency_ms": 697.08,
+      "status": "not_evaluated",
+      "deepeval_scores": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "contextual_precision": null,
+        "contextual_recall": null,
+        "recommendation_quality": null
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.0,
+        "heuristic_answer_relevancy": 0.2857,
+        "heuristic_context_precision": 0.0,
+        "heuristic_context_recall": 0.0
+      },
+      "error": "OpenRouter API call failed: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key is on the correct account or org, and if so, purchase more at https://openrouter.ai/settings/credits', 'code': 402, 'metadata': {'limit_source': 'openrouter_credits', 'remedy_hint': 'Add credits at https://openrouter.ai/settings/credits, or lower max_tokens / prompt size to fit your remaining balance.'}}}"
+    },
+    {
+      "id": "TC_33",
+      "category": "Multi-Restaurant",
+      "query": "How do customer wait times and kitchen turnaround compare across our Italian dining concepts versus casual cafes?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Summary & Operational Diagnosis\n\nAnalysis of customer sentiment under **Staff Behavior** indicates severe customer dissatisfaction driven by defensive employee reactions and supervisor communication friction during peak-stress periods.\n\n### Key Operational Findings:\n1. **Dispute Escalation:** Customer complaints reflect confrontational or unhelpful manager responses when resolving order or wait-time issues.\n2. **Hospitality Deficiencies:** Front-of-house staff exhibit communication gaps and lack of empathy when addressing guest concerns.\n\n### Recommended Action Plan:\n\u2022 **Immediate:** Conduct shift-lead hospitality de-escalation coaching.\n\u2022 **Empowerment Policy:** Establish a standardized guest recovery compensation protocol ($15\u2013$25 instant meal credits) to resolve friction instantly.",
+      "expected_output": "Italian dinner concepts show higher weekend table camping and 12-minute longer ticket latency compared to rapid lunch turnover in casual cafes.",
+      "latency_ms": 374.97,
+      "status": "not_evaluated",
+      "deepeval_scores": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "contextual_precision": null,
+        "contextual_recall": null,
+        "recommendation_quality": null
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.0,
+        "heuristic_answer_relevancy": 0.1538,
+        "heuristic_context_precision": 0.0,
+        "heuristic_context_recall": 0.0
+      },
+      "error": "OpenRouter API call failed: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key is on the correct account or org, and if so, purchase more at https://openrouter.ai/settings/credits', 'code': 402, 'metadata': {'limit_source': 'openrouter_credits', 'remedy_hint': 'Add credits at https://openrouter.ai/settings/credits, or lower max_tokens / prompt size to fit your remaining balance.'}}}"
+    },
+    {
+      "id": "TC_34",
+      "category": "Multi-Restaurant",
+      "query": "Which locations experience higher rates of food temperature and undercooking complaints?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Summary & Operational Diagnosis\n\nCustomer review analysis across the Yelp dataset indicates multi-dimensional operational friction involving both **Food Quality** and **Service Quality**. Empirical evidence demonstrates that **Food Quality** represents the primary driver of critical customer churn, compounded by secondary service bottlenecks during peak rush periods.\n\n### Key Operational Findings:\n1. **Food Quality Degradation:** Multiple customer reviews report severe food execution defects, including dish temperature drops during transit and cook-line seasoning inconsistencies during peak rushes.\n2. **Service Bottlenecks:** Customer complaints peak during busy shift changeovers due to server station overload and lack of consistent table check-backs.\n3. **Cross-Functional Friction:** Kitchen ticket delays directly exacerbate front-of-house service tension, causing negative customer sentiment to compound.\n\n### Recommended Action Plan:\n\u2022 **Immediate (Priority 1 - Food Quality):** Mandate pre-shift line checks for recipe calibration and enforce hot-holding expo heat lamps (>=140\u00b0F).\n\u2022 **Shift Management (Priority 2 - Service Quality):** Cap server station assignments to maximum 4 tables and institute a mandatory 2-minute table check-back standard.\n\u2022 **Cross-Department Coordination:** Synchronize host seating intervals with kitchen cook-line pacing to prevent simultaneous ticket surges.",
+      "expected_output": "High-volume downtown locations with distant kitchen expo passes report a 14% higher rate of food temperature complaints compared to suburban open-kitchen units.",
+      "latency_ms": 413.16,
+      "status": "not_evaluated",
+      "deepeval_scores": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "contextual_precision": null,
+        "contextual_recall": null,
+        "recommendation_quality": null
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.0,
+        "heuristic_answer_relevancy": 0.4444,
+        "heuristic_context_precision": 0.0,
+        "heuristic_context_recall": 0.0
+      },
+      "error": "OpenRouter API call failed: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key is on the correct account or org, and if so, purchase more at https://openrouter.ai/settings/credits', 'code': 402, 'metadata': {'limit_source': 'openrouter_credits', 'remedy_hint': 'Add credits at https://openrouter.ai/settings/credits, or lower max_tokens / prompt size to fit your remaining balance.'}}}"
+    },
+    {
+      "id": "TC_35",
+      "category": "Multi-Restaurant",
+      "query": "Compare staff behavior ratings and service attentiveness across different regional branches.",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Summary & Operational Diagnosis\n\nAnalysis of customer sentiment under **Staff Behavior** indicates severe customer dissatisfaction driven by defensive employee reactions and supervisor communication friction during peak-stress periods.\n\n### Key Operational Findings:\n1. **Dispute Escalation:** Customer complaints reflect confrontational or unhelpful manager responses when resolving order or wait-time issues.\n2. **Hospitality Deficiencies:** Front-of-house staff exhibit communication gaps and lack of empathy when addressing guest concerns.\n\n### Recommended Action Plan:\n\u2022 **Immediate:** Conduct shift-lead hospitality de-escalation coaching.\n\u2022 **Empowerment Policy:** Establish a standardized guest recovery compensation protocol ($15\u2013$25 instant meal credits) to resolve friction instantly.",
+      "expected_output": "Branches with seasoned floor managers maintain significantly lower staff friction scores, whereas rapidly onboarded locations experience elevated server attitude complaints.",
+      "latency_ms": 404.81,
+      "status": "not_evaluated",
+      "deepeval_scores": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "contextual_precision": null,
+        "contextual_recall": null,
+        "recommendation_quality": null
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.0,
+        "heuristic_answer_relevancy": 0.2,
+        "heuristic_context_precision": 0.0,
+        "heuristic_context_recall": 0.0
+      },
+      "error": "OpenRouter API call failed: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key is on the correct account or org, and if so, purchase more at https://openrouter.ai/settings/credits', 'code': 402, 'metadata': {'limit_source': 'openrouter_credits', 'remedy_hint': 'Add credits at https://openrouter.ai/settings/credits, or lower max_tokens / prompt size to fit your remaining balance.'}}}"
+    },
+    {
+      "id": "TC_36",
+      "category": "Ambiguous",
+      "query": "Everything went wrong during our visit yesterday and it was completely terrible.",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Summary & Operational Diagnosis\n\nCustomer review analysis in **Pricing** identifies customer dissatisfaction centered on undisclosed fees and compressed perceived value relative to entree portion sizes.\n\n### Key Operational Findings:\n1. **Billing Surcharges:** Guests report surprise at undisclosed service fees or automatic gratuity additions at final payment.\n2. **Portion Value Compression:** Disproportionate pricing feedback relative to dish portions across specific menu items.\n\n### Recommended Action Plan:\n\u2022 **Transparency Standard:** Clearly itemize all service charges and gratuities on menus and printed checks.\n\u2022 **Portion Audit:** Audit portion sizes against standard recipe cost targets to restore guest perceived value.",
+      "expected_output": "When broad multi-aspect dissatisfaction is reported, the system triages across slow service, order errors, and manager handling to isolate primary root causes.",
+      "latency_ms": 479.91,
+      "status": "not_evaluated",
+      "deepeval_scores": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "contextual_precision": null,
+        "contextual_recall": null,
+        "recommendation_quality": null
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.0,
+        "heuristic_answer_relevancy": 0.0,
+        "heuristic_context_precision": 0.0,
+        "heuristic_context_recall": 0.0
+      },
+      "error": "OpenRouter API call failed: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key is on the correct account or org, and if so, purchase more at https://openrouter.ai/settings/credits', 'code': 402, 'metadata': {'limit_source': 'openrouter_credits', 'remedy_hint': 'Add credits at https://openrouter.ai/settings/credits, or lower max_tokens / prompt size to fit your remaining balance.'}}}"
+    },
+    {
+      "id": "TC_37",
+      "category": "Ambiguous",
+      "query": "I am deeply disappointed with the overall experience and will not be returning.",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Summary & Operational Diagnosis\n\nAnalysis of customer sentiment under **Staff Behavior** indicates severe customer dissatisfaction driven by defensive employee reactions and supervisor communication friction during peak-stress periods.\n\n### Key Operational Findings:\n1. **Dispute Escalation:** Customer complaints reflect confrontational or unhelpful manager responses when resolving order or wait-time issues.\n2. **Hospitality Deficiencies:** Front-of-house staff exhibit communication gaps and lack of empathy when addressing guest concerns.\n\n### Recommended Action Plan:\n\u2022 **Immediate:** Conduct shift-lead hospitality de-escalation coaching.\n\u2022 **Empowerment Policy:** Establish a standardized guest recovery compensation protocol ($15\u2013$25 instant meal credits) to resolve friction instantly.",
+      "expected_output": "General churn risk reviews are analyzed by extracting underlying negative sentiment keywords to pinpoint whether failure originated in kitchen timing or server interaction.",
+      "latency_ms": 426.82,
+      "status": "not_evaluated",
+      "deepeval_scores": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "contextual_precision": null,
+        "contextual_recall": null,
+        "recommendation_quality": null
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.0,
+        "heuristic_answer_relevancy": 0.0,
+        "heuristic_context_precision": 0.0,
+        "heuristic_context_recall": 0.0
+      },
+      "error": "OpenRouter API call failed: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key is on the correct account or org, and if so, purchase more at https://openrouter.ai/settings/credits', 'code': 402, 'metadata': {'limit_source': 'openrouter_credits', 'remedy_hint': 'Add credits at https://openrouter.ai/settings/credits, or lower max_tokens / prompt size to fit your remaining balance.'}}}"
+    },
+    {
+      "id": "TC_38",
+      "category": "Ambiguous",
+      "query": "The place did not live up to expectations given its high star rating.",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Summary & Operational Diagnosis\n\nCustomer review analysis in **Pricing** identifies customer dissatisfaction centered on undisclosed fees and compressed perceived value relative to entree portion sizes.\n\n### Key Operational Findings:\n1. **Billing Surcharges:** Guests report surprise at undisclosed service fees or automatic gratuity additions at final payment.\n2. **Portion Value Compression:** Disproportionate pricing feedback relative to dish portions across specific menu items.\n\n### Recommended Action Plan:\n\u2022 **Transparency Standard:** Clearly itemize all service charges and gratuities on menus and printed checks.\n\u2022 **Portion Audit:** Audit portion sizes against standard recipe cost targets to restore guest perceived value.",
+      "expected_output": "Expectation gap complaints reflect discrepancies between premium pricing expectations and standard operational delivery, frequently linked to portion sizing or noisy ambience.",
+      "latency_ms": 358.49,
+      "status": "not_evaluated",
+      "deepeval_scores": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "contextual_precision": null,
+        "contextual_recall": null,
+        "recommendation_quality": null
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.0,
+        "heuristic_answer_relevancy": 0.0,
+        "heuristic_context_precision": 0.0,
+        "heuristic_context_recall": 0.0
+      },
+      "error": "OpenRouter API call failed: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key is on the correct account or org, and if so, purchase more at https://openrouter.ai/settings/credits', 'code': 402, 'metadata': {'limit_source': 'openrouter_credits', 'remedy_hint': 'Add credits at https://openrouter.ai/settings/credits, or lower max_tokens / prompt size to fit your remaining balance.'}}}"
+    },
+    {
+      "id": "TC_39",
+      "category": "Out-of-Scope",
+      "query": "What is the capital of France and what are its famous monuments?",
+      "is_out_of_scope": true,
+      "actual_output": "### Executive Summary & Operational Diagnosis\n\nCustomer review analysis in **Cleanliness** reveals operational sanitation breakdowns concentrated around dining room table turnover and restroom maintenance during high-traffic shifts.\n\n### Key Operational Findings:\n1. **Dining Area Hygiene:** Guests frequently report sticky tabletop surfaces and delayed busser clearing between seatings.\n2. **Restroom Maintenance Gaps:** Customer complaints highlight unstocked supplies and sanitation oversights during evening rushes.\n\n### Recommended Action Plan:\n\u2022 **Immediate:** Institute 30-minute digital restroom inspection and supply checklists.\n\u2022 **Sanitization Standard:** Enforce two-cloth sanitized table wipe-down protocol with approved sanitizing solution.",
+      "expected_output": "The capital of France is Paris, famous for monuments such as the Eiffel Tower, Notre-Dame, and the Louvre. (Handled gracefully via general assistant fallback).",
+      "latency_ms": 376.49,
+      "status": "not_evaluated",
+      "deepeval_scores": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "contextual_precision": null,
+        "contextual_recall": null,
+        "recommendation_quality": null
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.0,
+        "heuristic_answer_relevancy": 0.0,
+        "heuristic_context_precision": 0.0,
+        "heuristic_context_recall": 0.0
+      },
+      "error": "OpenRouter API call failed: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key is on the correct account or org, and if so, purchase more at https://openrouter.ai/settings/credits', 'code': 402, 'metadata': {'limit_source': 'openrouter_credits', 'remedy_hint': 'Add credits at https://openrouter.ai/settings/credits, or lower max_tokens / prompt size to fit your remaining balance.'}}}"
+    },
+    {
+      "id": "TC_40",
+      "category": "Out-of-Scope",
+      "query": "Write a Python script to calculate prime numbers using the Sieve of Eratosthenes.",
+      "is_out_of_scope": true,
+      "actual_output": "### Executive Summary & Operational Diagnosis\n\nAnalysis of customer sentiment under **Staff Behavior** indicates severe customer dissatisfaction driven by defensive employee reactions and supervisor communication friction during peak-stress periods.\n\n### Key Operational Findings:\n1. **Dispute Escalation:** Customer complaints reflect confrontational or unhelpful manager responses when resolving order or wait-time issues.\n2. **Hospitality Deficiencies:** Front-of-house staff exhibit communication gaps and lack of empathy when addressing guest concerns.\n\n### Recommended Action Plan:\n\u2022 **Immediate:** Conduct shift-lead hospitality de-escalation coaching.\n\u2022 **Empowerment Policy:** Establish a standardized guest recovery compensation protocol ($15\u2013$25 instant meal credits) to resolve friction instantly.",
+      "expected_output": "Python implementation of Sieve of Eratosthenes to compute prime numbers up to n. (Handled gracefully via general assistant fallback).",
+      "latency_ms": 728.68,
+      "status": "not_evaluated",
+      "deepeval_scores": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "contextual_precision": null,
+        "contextual_recall": null,
+        "recommendation_quality": null
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.0,
+        "heuristic_answer_relevancy": 0.0,
+        "heuristic_context_precision": 0.0,
+        "heuristic_context_recall": 0.0
+      },
+      "error": "OpenRouter API call failed: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key is on the correct account or org, and if so, purchase more at https://openrouter.ai/settings/credits', 'code': 402, 'metadata': {'limit_source': 'openrouter_credits', 'remedy_hint': 'Add credits at https://openrouter.ai/settings/credits, or lower max_tokens / prompt size to fit your remaining balance.'}}}"
+    }
+  ]
+}

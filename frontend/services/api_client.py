@@ -23,6 +23,58 @@ class FrontendAPIClient:
         except Exception:
             return False
 
+    def _get_auth_headers(self) -> Dict[str, str]:
+        headers = {}
+        try:
+            import streamlit as st
+            token = st.session_state.get("auth_token")
+            if token:
+                headers["Authorization"] = f"Bearer {token}"
+        except Exception:
+            pass
+        return headers
+
+    def login(self, username: str, password: str) -> Dict[str, Any]:
+        """Authenticates with POST /api/v1/auth/login and returns token + user profile."""
+        if self._is_backend_live():
+            try:
+                r = requests.post(
+                    f"{self.base_url}/api/v1/auth/login",
+                    json={"username": username, "password": password},
+                    timeout=5.0
+                )
+                if r.status_code == 200:
+                    return {"status": "success", "data": r.json()}
+                elif r.status_code in (401, 403):
+                    detail = r.json().get("detail", "Invalid username or password.")
+                    return {"status": "error", "message": detail, "code": r.status_code}
+            except Exception:
+                pass
+        
+        # Local direct verification fallback
+        try:
+            from backend.app.services.admin_service import get_admin_service
+            from backend.app.core.security import verify_password, create_access_token
+            u = get_admin_service().get_user_by_username(username)
+            if u and verify_password(password, u.get("password", "")):
+                if u.get("status") != "Active":
+                    return {"status": "error", "message": f"Account is {u.get('status')}.", "code": 403}
+                tok = create_access_token({"sub": u["username"], "user_id": u["user_id"], "role": u["role"]})
+                return {
+                    "status": "success",
+                    "data": {
+                        "access_token": tok,
+                        "token_type": "bearer",
+                        "username": u["username"],
+                        "role": u["role"],
+                        "display_name": u.get("display_name", username.capitalize()),
+                        "title": u.get("title")
+                    }
+                }
+            return {"status": "error", "message": "Invalid username or password.", "code": 401}
+        except Exception as e:
+            return {"status": "error", "message": str(e), "code": 500}
+
     def get_health(self) -> Dict[str, Any]:
         if self._is_backend_live():
             try:
@@ -211,7 +263,7 @@ class FrontendAPIClient:
         if self._is_backend_live():
             try:
                 payload = {"complaint_text": complaint_text, "restaurant_name": restaurant_name}
-                r = requests.post(f"{self.base_url}/api/v1/agent/workflow", json=payload, timeout=30.0)
+                r = requests.post(f"{self.base_url}/api/v1/agent/workflow", json=payload, timeout=120.0)
                 if r.status_code == 200:
                     return r.json()
             except Exception:
@@ -231,7 +283,10 @@ class FrontendAPIClient:
             "revenue_risk_pct": res.get("revenue_risk_pct", 10.0),
             "operational_urgency": res.get("operational_urgency", "P2 - Shift Manager Action"),
             "judge_verdict": judge_eval.get("verdict", "APPROVED"),
-            "overall_quality_score": res.get("overall_quality_score", 0.90),
+            "overall_quality_score": res.get("overall_quality_score") or res.get("composite_quality_score"),
+            "judge_mode": judge_eval.get("judge_mode", "unavailable"),
+            "compliance_flags": res.get("compliance_flags", []),
+            "retry_count": res.get("retry_count", 0),
             "requires_human_review": res.get("requires_human_review", False),
             "review_reasons": res.get("review_reasons", []),
             "execution_trace": res.get("execution_trace", []),
@@ -287,7 +342,7 @@ class FrontendAPIClient:
                     params["status"] = status
                 if feedback_type and feedback_type != "All":
                     params["feedback_type"] = feedback_type
-                r = requests.get(f"{self.base_url}/api/v1/feedback", params=params, timeout=3.0)
+                r = requests.get(f"{self.base_url}/api/v1/feedback", params=params, headers=self._get_auth_headers(), timeout=3.0)
                 if r.status_code == 200:
                     return r.json().get("feedbacks", [])
             except Exception:
@@ -301,6 +356,7 @@ class FrontendAPIClient:
                 r = requests.patch(
                     f"{self.base_url}/api/v1/admin/feedback/{feedback_id}/status",
                     json={"status": new_status},
+                    headers=self._get_auth_headers(),
                     timeout=3.0
                 )
                 if r.status_code == 200:
@@ -313,7 +369,7 @@ class FrontendAPIClient:
     def delete_feedback(self, feedback_id: str) -> bool:
         if self._is_backend_live():
             try:
-                r = requests.delete(f"{self.base_url}/api/v1/admin/feedback/{feedback_id}", timeout=3.0)
+                r = requests.delete(f"{self.base_url}/api/v1/admin/feedback/{feedback_id}", headers=self._get_auth_headers(), timeout=3.0)
                 if r.status_code == 200:
                     return True
             except Exception:
@@ -329,7 +385,7 @@ class FrontendAPIClient:
         if self._is_backend_live():
             try:
                 params = {"search": search, "category": category, "limit": limit, "offset": offset}
-                r = requests.get(f"{self.base_url}/api/v1/admin/reviews", params=params, timeout=3.0)
+                r = requests.get(f"{self.base_url}/api/v1/admin/reviews", params=params, headers=self._get_auth_headers(), timeout=3.0)
                 if r.status_code == 200:
                     return r.json()
             except Exception:
@@ -340,7 +396,7 @@ class FrontendAPIClient:
     def create_admin_review(self, data: Dict[str, Any], admin_user: str = "admin") -> Dict[str, Any]:
         if self._is_backend_live():
             try:
-                r = requests.post(f"{self.base_url}/api/v1/admin/reviews", json=data, timeout=3.0)
+                r = requests.post(f"{self.base_url}/api/v1/admin/reviews", json=data, headers=self._get_auth_headers(), timeout=3.0)
                 if r.status_code == 200:
                     return r.json()
             except Exception:
@@ -351,7 +407,7 @@ class FrontendAPIClient:
     def update_admin_review(self, review_id: str, data: Dict[str, Any], admin_user: str = "admin") -> Dict[str, Any]:
         if self._is_backend_live():
             try:
-                r = requests.put(f"{self.base_url}/api/v1/admin/reviews/{review_id}", json=data, timeout=3.0)
+                r = requests.put(f"{self.base_url}/api/v1/admin/reviews/{review_id}", json=data, headers=self._get_auth_headers(), timeout=3.0)
                 if r.status_code == 200:
                     return r.json()
             except Exception:
@@ -362,7 +418,7 @@ class FrontendAPIClient:
     def delete_admin_review(self, review_id: str, admin_user: str = "admin") -> Dict[str, Any]:
         if self._is_backend_live():
             try:
-                r = requests.delete(f"{self.base_url}/api/v1/admin/reviews/{review_id}", timeout=3.0)
+                r = requests.delete(f"{self.base_url}/api/v1/admin/reviews/{review_id}", headers=self._get_auth_headers(), timeout=3.0)
                 if r.status_code == 200:
                     return r.json()
             except Exception:
@@ -378,7 +434,7 @@ class FrontendAPIClient:
                     params["level"] = level
                 if search:
                     params["search"] = search
-                r = requests.get(f"{self.base_url}/api/v1/admin/logs", params=params, timeout=3.0)
+                r = requests.get(f"{self.base_url}/api/v1/admin/logs", params=params, headers=self._get_auth_headers(), timeout=3.0)
                 if r.status_code == 200:
                     return r.json().get("logs", [])
             except Exception:
@@ -389,7 +445,7 @@ class FrontendAPIClient:
     def get_admin_metrics(self) -> Dict[str, Any]:
         if self._is_backend_live():
             try:
-                r = requests.get(f"{self.base_url}/api/v1/admin/metrics", timeout=3.0)
+                r = requests.get(f"{self.base_url}/api/v1/admin/metrics", headers=self._get_auth_headers(), timeout=3.0)
                 if r.status_code == 200:
                     return r.json()
             except Exception:

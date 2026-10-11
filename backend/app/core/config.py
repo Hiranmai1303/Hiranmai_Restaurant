@@ -13,13 +13,15 @@ class Settings(BaseSettings):
     VERSION: str = "1.0.0"
     API_V1_STR: str = "/api/v1"
     
-    # API Keys
+    # API Keys & Endpoints (Google Gemini AI Studio Direct)
+    GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY", "")
+    GEMINI_BASE_URL: str = os.getenv("GEMINI_BASE_URL", "https://generativelanguage.googleapis.com/v1beta/openai/")
     OPENROUTER_API_KEY: str = os.getenv("OPENROUTER_API_KEY", "")
     OPENROUTER_BASE_URL: str = os.getenv("OPENROUTER_BASE_URL", "https://openrouter.ai/api/v1")
     
     # Models
-    DEFAULT_LLM_MODEL: str = os.getenv("DEFAULT_LLM_MODEL", "google/gemini-2.5-flash")
-    ADVANCED_LLM_MODEL: str = os.getenv("ADVANCED_LLM_MODEL", "google/gemini-2.5-pro")
+    DEFAULT_LLM_MODEL: str = os.getenv("DEFAULT_LLM_MODEL", "gemini-3.1-flash-lite")
+    ADVANCED_LLM_MODEL: str = os.getenv("ADVANCED_LLM_MODEL", "gemini-3.1-flash-lite")
     EMBEDDING_MODEL_NAME: str = os.getenv("EMBEDDING_MODEL_NAME", "sentence-transformers/all-MiniLM-L6-v2")
     
     # Base paths
@@ -32,6 +34,13 @@ class Settings(BaseSettings):
     # Storage Paths
     SQLITE_DB_PATH: str = str(PROCESSED_DATA_DIR / "restaurant_operations.db")
     CHROMA_PERSIST_DIR: str = str(PROCESSED_DATA_DIR / "chroma_db")
+    
+    # Security & Authentication
+    ADMIN_TOKEN_SECRET: str = os.getenv("ADMIN_TOKEN_SECRET", "restaurant-ops-admin-token-secret-2026")
+    ADMIN_TOKEN_TTL_SECONDS: int = int(os.getenv("ADMIN_TOKEN_TTL_SECONDS", "86400"))
+    STREAMLIT_ORIGIN: str = os.getenv("STREAMLIT_ORIGIN", "http://localhost:8501")
+    DEMO_ADMIN_PASSWORD: str = os.getenv("DEMO_ADMIN_PASSWORD", "admin123")
+    DEMO_USER_PASSWORD: str = os.getenv("DEMO_USER_PASSWORD", "user123")
     
     model_config = SettingsConfigDict(
         env_file=str(_ENV_FILE),

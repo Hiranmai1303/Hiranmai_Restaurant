@@ -1587,17 +1587,28 @@ elif nav_selection == "⚡ Multi-Agent Orchestrator":
         st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
         c1, c2, c3, c4 = st.columns(4)
         with c1:
-            render_metric_card("Classified Category", str(agent_res.get("category", "N/A")), f"Severity: {agent_res.get('severity_score', 0):.1f}/5.0", "#14B8A6", "🏷️")
+            sev = agent_res.get("severity_score")
+            sev_sub = f"Severity: {float(sev):.1f}/5.0" if sev is not None else "Severity: 3.0/5.0"
+            render_metric_card("Classified Category", str(agent_res.get("category", "N/A")), sev_sub, "#14B8A6", "🏷️")
         with c2:
             render_metric_card("Root Cause", str(agent_res.get("top_root_cause", "N/A")), "Domain Taxonomy", "#38BDF8", "🔍")
         with c3:
-            churn_risk = agent_res.get("churn_risk_level", "Moderate")
+            churn_risk = str(agent_res.get("churn_risk_level", "Moderate"))
             churn_col = "#EF4444" if churn_risk == "Critical" else ("#F59E0B" if churn_risk == "Elevated" else "#14B8A6")
-            render_metric_card("Churn Risk", churn_risk, f"{agent_res.get('revenue_risk_pct', 0)}% Rev Exposure", churn_col, "📉")
+            rev = agent_res.get("revenue_risk_pct")
+            rev_sub = f"{rev}% Rev Exposure" if rev is not None else "0% Rev Exposure"
+            render_metric_card("Churn Risk", churn_risk, rev_sub, churn_col, "📉")
         with c4:
-            judge_verdict = agent_res.get("judge_verdict", "APPROVED")
-            judge_col = "#14B8A6" if "APPROVED" in judge_verdict else "#F59E0B"
-            render_metric_card("Judge Verdict", judge_verdict, f"Quality: {agent_res.get('overall_quality_score', 0)*100:.0f}%", judge_col, "⚖️")
+            judge_verdict = str(agent_res.get("judge_verdict", "APPROVED"))
+            judge_col = "#14B8A6" if "APPROVED" in judge_verdict else ("#EF4444" if "REJECTED" in judge_verdict else "#F59E0B")
+            raw_q = agent_res.get("overall_quality_score")
+            if raw_q is not None:
+                q_text = f"Quality: {float(raw_q)*100:.0f}%"
+            elif agent_res.get("judge_mode") == "unavailable":
+                q_text = "Rule-based Audit"
+            else:
+                q_text = "Audited"
+            render_metric_card("Judge Verdict", judge_verdict, q_text, judge_col, "⚖️")
 
         # Operational SOPs & Recommendations
         recs = agent_res.get("recommendations", [])

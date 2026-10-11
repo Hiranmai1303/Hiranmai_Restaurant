@@ -19,10 +19,18 @@ app = FastAPI(
     redoc_url="/redoc"
 )
 
-# Enable CORS for Streamlit and external frontend consumers
+# Restrict CORS to configured Streamlit origin and local developer instances
+allowed_origins = list(set([
+    settings.STREAMLIT_ORIGIN,
+    "http://localhost:8501",
+    "http://127.0.0.1:8501",
+    "http://localhost:8502",
+    "http://127.0.0.1:8502"
+]))
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -33,13 +41,33 @@ app.include_router(api_v1_router, prefix="/api/v1")
 
 @app.get("/health", tags=["Health"])
 def root_health_check():
-    """Service health check endpoint"""
+    """Real-time service health check querying SQLite and ChromaDB."""
+    db_ok = False
+    try:
+        from backend.app.database.db import SessionLocal
+        from sqlalchemy import text
+        with SessionLocal() as db:
+            db.execute(text("SELECT 1"))
+        db_ok = True
+    except Exception:
+        db_ok = False
+
+    vec_ok = False
+    try:
+        from backend.app.vectorstore.chroma_store import get_vector_store
+        vec_store = get_vector_store()
+        vec_store.collection.count()
+        vec_ok = True
+    except Exception:
+        vec_ok = False
+
+    overall_healthy = db_ok and vec_ok
     return {
-        "status": "healthy",
+        "status": "healthy" if overall_healthy else "degraded",
         "service": settings.PROJECT_NAME,
         "version": settings.VERSION,
-        "database_connected": True,
-        "vectorstore_connected": True
+        "database_connected": db_ok,
+        "vectorstore_connected": vec_ok
     }
 
 @app.get("/", tags=["Root"])

@@ -13,7 +13,8 @@ Categorizes reviews into 8 operational categories:
 Generates sentiment, aspect, severity_score (1-5), and priority_score (1-100).
 """
 import re
-from typing import Dict, List, Tuple
+from typing import Dict, List, Tuple, Any
+
 
 class ComplaintEnrichmentService:
     CATEGORIES = [
@@ -90,14 +91,14 @@ class ComplaintEnrichmentService:
         else:
             return "Positive"
 
-    def classify_complaint(self, text: str) -> Tuple[str, str]:
+    def classify_complaint_with_confidence(self, text: str) -> Dict[str, Any]:
         """
-        Classifies review into primary operational category and specific aspect.
-        Returns (complaint_category, aspect).
+        Classifies review into operational category with dynamically computed confidence
+        derived from keyword-match margin between the top two candidate categories.
         """
         lower = text.lower()
-        scores = {}
-        aspect_matches = {}
+        scores: Dict[str, int] = {}
+        aspect_matches: Dict[str, str] = {}
 
         for cat, keywords in self.KEYWORD_TAXONOMY.items():
             matched_kws = [kw for kw in keywords if re.search(r'\b' + re.escape(kw) + r'\b', lower)]
@@ -106,12 +107,42 @@ class ComplaintEnrichmentService:
                 aspect_matches[cat] = matched_kws[0]
 
         if not scores:
-            return ("General Operational", "general feedback")
+            return {
+                "category": "General Operational",
+                "aspect": "general feedback",
+                "confidence": 0.35,
+                "top_count": 0,
+                "second_count": 0,
+                "matched_categories": {}
+            }
 
-        # Pick category with highest matched keyword frequency
-        best_cat = max(scores, key=scores.get)
+        sorted_scores = sorted(scores.items(), key=lambda x: x[1], reverse=True)
+        best_cat, top_count = sorted_scores[0]
+        second_count = sorted_scores[1][1] if len(sorted_scores) > 1 else 0
+        total_matches = sum(scores.values())
+
+        margin = (top_count - second_count) / max(1, top_count)
+        share = top_count / max(1, total_matches)
+        confidence = round(0.50 + 0.48 * (0.6 * margin + 0.4 * share), 2)
+        confidence = max(0.50, min(0.98, confidence))
+
         aspect = aspect_matches.get(best_cat, "general " + best_cat.lower())
-        return (best_cat, aspect)
+        return {
+            "category": best_cat,
+            "aspect": aspect,
+            "confidence": confidence,
+            "top_count": top_count,
+            "second_count": second_count,
+            "matched_categories": scores
+        }
+
+    def classify_complaint(self, text: str) -> Tuple[str, str]:
+        """
+        Classifies review into primary operational category and specific aspect.
+        Returns (complaint_category, aspect).
+        """
+        res = self.classify_complaint_with_confidence(text)
+        return (res["category"], res["aspect"])
 
     def calculate_severity_score(self, text: str, stars: float) -> int:
         """Calculate severity score on a 1-5 integer scale."""

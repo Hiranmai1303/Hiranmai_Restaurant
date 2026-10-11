@@ -18,24 +18,31 @@ def recommendation_generator_node(state: AgentState) -> Dict[str, Any]:
     recommendations: List[Dict[str, Any]] = []
     action_items: List[str] = []
     
+    judge_feedback = state.get("judge_feedback")
+
     # Generate structured recommendation objects
     for idx, cause_item in enumerate(root_causes[:3], start=1):
         cause_name = cause_item.get("cause_name", "Operational Issue")
         rec_action = cause_item.get("recommended_action", "Conduct supervisor shift review and update floor workflow.")
         
+        steps = [
+            f"Immediate Shift Action: {rec_action}",
+            "Process Control: Implement checklist verification during pre-shift line-up.",
+            "Monitoring SLA: Track turnaround and customer satisfaction metric daily for 14 days."
+        ]
+        if judge_feedback:
+            steps.append(f"Judge Auditor Remediation: {judge_feedback[:100]}")
+
         rec_obj = {
             "priority_rank": idx,
             "target_issue": cause_name,
             "sop_title": f"SOP-{category[:3].upper()}-{idx:02d}: {cause_name} Remediation",
-            "actionable_steps": [
-                f"Immediate Shift Action: {rec_action}",
-                "Process Control: Implement checklist verification during pre-shift line-up.",
-                "Monitoring SLA: Track turnaround and customer satisfaction metric daily for 14 days."
-            ],
+            "actionable_steps": steps,
             "timeline": "Immediate (within 24 hours)" if idx == 1 else "1 to 2 weeks"
         }
         recommendations.append(rec_obj)
         action_items.append(f"{rec_obj['sop_title']} -> {rec_action}")
+
         
     if not recommendations:
         default_rec = {

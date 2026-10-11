@@ -6,7 +6,8 @@ Guardrails Validation, Feedback Collection, and the Central Operations Analyst R
 """
 import uuid
 from typing import Any, Dict, List, Optional
-from fastapi import APIRouter, HTTPException, Query, status
+from fastapi import APIRouter, HTTPException, Query, status, Depends
+from sqlalchemy import text
 
 from backend.app.api.schemas import (
     HealthResponse,
@@ -34,7 +35,15 @@ from backend.app.api.schemas import (
     SatisfactionResponse,
     DashboardStatsResponse,
     FeedbackRequest,
-    FeedbackResponse
+    FeedbackResponse,
+    LoginRequest,
+    LoginResponse
+)
+from backend.app.core.security import (
+    get_current_user,
+    require_admin,
+    verify_password,
+    create_access_token
 )
 from backend.app.retrieval.hybrid_search import get_hybrid_retriever
 from backend.app.retrieval.rag_service import get_rag_service
@@ -54,6 +63,57 @@ router = APIRouter()
 # In-memory feedback storage for demonstration
 _feedback_store: List[Dict[str, Any]] = []
 
+# =============================================================================
+# AUTHENTICATION ENDPOINTS
+# =============================================================================
+@router.post(
+    "/auth/login",
+    response_model=LoginResponse,
+    summary="User Authentication Login",
+    tags=["Authentication"]
+)
+def auth_login(payload: LoginRequest):
+    """
+    Verifies user credentials against PBKDF2 hashed storage and returns a signed access token.
+    """
+    from backend.app.services.admin_service import get_admin_service
+    admin_svc = get_admin_service()
+    username = payload.username.strip().lower()
+    user = admin_svc.get_user_by_username(username)
+    
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid username or password."
+        )
+        
+    if not verify_password(payload.password, user.get("password", "")):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid username or password."
+        )
+        
+    if user.get("status") != "Active":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail=f"Account is {user.get('status', 'Inactive')}. Contact administrator."
+        )
+        
+    token = create_access_token({
+        "sub": user["username"],
+        "user_id": user["user_id"],
+        "role": user["role"]
+    })
+    
+    return LoginResponse(
+        access_token=token,
+        token_type="bearer",
+        username=user["username"],
+        role=user["role"],
+        display_name=user.get("display_name", username.capitalize()),
+        title=user.get("title")
+    )
+
 @router.get(
     "/health",
     response_model=HealthResponse,
@@ -62,13 +122,32 @@ _feedback_store: List[Dict[str, Any]] = []
 )
 def health_check():
     """
-    Returns the real-time operational status of the backend, database, vectorstore, and LLM configuration.
+    Returns real-time operational status with actual SQLite and ChromaDB checks.
     """
+    db_ok = False
+    try:
+        from backend.app.database.db import SessionLocal
+        with SessionLocal() as db:
+            db.execute(text("SELECT 1"))
+        db_ok = True
+    except Exception:
+        db_ok = False
+
+    vec_ok = False
+    try:
+        from backend.app.vectorstore.chroma_store import get_vector_store
+        vec_store = get_vector_store()
+        vec_store.collection.count()
+        vec_ok = True
+    except Exception:
+        vec_ok = False
+
+    overall_healthy = db_ok and vec_ok
     return HealthResponse(
-        status="healthy",
+        status="healthy" if overall_healthy else "degraded",
         version=settings.VERSION,
-        database_connected=True,
-        vectorstore_connected=True,
+        database_connected=db_ok,
+        vectorstore_connected=vec_ok,
         llm_configured=bool(settings.OPENROUTER_API_KEY)
     )
 
@@ -284,7 +363,10 @@ def execute_agent_workflow(payload: MultiAgentRequest):
         revenue_risk_pct=result.get("revenue_risk_pct", 10.0),
         operational_urgency=result.get("operational_urgency", "P2 - Shift Manager Action"),
         judge_verdict=judge_eval.get("verdict", "APPROVED"),
-        overall_quality_score=result.get("overall_quality_score", 0.90),
+        overall_quality_score=result.get("overall_quality_score") or result.get("composite_quality_score"),
+        judge_mode=judge_eval.get("judge_mode", "unavailable"),
+        compliance_flags=result.get("compliance_flags", []),
+        retry_count=result.get("retry_count", 0),
         requires_human_review=result.get("requires_human_review", False),
         review_reasons=result.get("review_reasons", []),
         execution_trace=result.get("execution_trace", []),
@@ -404,9 +486,13 @@ def analyze_customer_satisfaction(payload: SatisfactionRequest):
     summary="Submit User Feedback",
     tags=["Feedback"]
 )
-def submit_feedback(payload: FeedbackRequest):
+def submit_feedback(
+    payload: FeedbackRequest,
+    current_user: Dict[str, Any] = Depends(get_current_user)
+):
     """
     Logs user feedback and quality ratings to SQLite and supports continuous model evaluation.
+    Authenticated operational users only.
     """
     from backend.app.services.admin_service import get_admin_service
     admin_svc = get_admin_service()
@@ -428,13 +514,19 @@ def submit_feedback(payload: FeedbackRequest):
 @router.get(
     "/feedback",
     summary="List User Feedbacks",
-    tags=["Feedback", "Admin"]
+    tags=["Feedback"]
+)
+@router.get(
+    "/admin/feedback",
+    summary="List User Feedbacks (Admin)",
+    tags=["Admin", "Feedback"]
 )
 def list_feedbacks(
     status: Optional[str] = Query(None, description="Filter by status (Pending, Resolved, Actioned)"),
-    feedback_type: Optional[str] = Query(None, description="Filter by feedback category")
+    feedback_type: Optional[str] = Query(None, description="Filter by feedback category"),
+    current_user: Dict[str, Any] = Depends(require_admin)
 ):
-    """Retrieves all feedback records submitted by operational users."""
+    """Retrieves all feedback records submitted by operational users. Requires admin role."""
     from backend.app.services.admin_service import get_admin_service
     admin_svc = get_admin_service()
     records = admin_svc.get_feedbacks(status_filter=status, type_filter=feedback_type)
@@ -445,7 +537,11 @@ def list_feedbacks(
     summary="Update Feedback Status",
     tags=["Admin"]
 )
-def update_feedback_status(feedback_id: str, payload: Dict[str, Any]):
+def update_feedback_status(
+    feedback_id: str,
+    payload: Dict[str, Any],
+    current_user: Dict[str, Any] = Depends(require_admin)
+):
     from backend.app.services.admin_service import get_admin_service
     admin_svc = get_admin_service()
     new_status = payload.get("status", "Resolved")
@@ -459,7 +555,10 @@ def update_feedback_status(feedback_id: str, payload: Dict[str, Any]):
     summary="Delete Feedback",
     tags=["Admin"]
 )
-def delete_feedback(feedback_id: str):
+def delete_feedback(
+    feedback_id: str,
+    current_user: Dict[str, Any] = Depends(require_admin)
+):
     from backend.app.services.admin_service import get_admin_service
     admin_svc = get_admin_service()
     success = admin_svc.delete_feedback(feedback_id)
@@ -476,7 +575,8 @@ def admin_list_reviews(
     search: str = Query("", description="Search text in reviews or restaurants"),
     category: str = Query("All", description="Operational category filter"),
     limit: int = Query(15, ge=1, le=100),
-    offset: int = Query(0, ge=0)
+    offset: int = Query(0, ge=0),
+    current_user: Dict[str, Any] = Depends(require_admin)
 ):
     from backend.app.services.admin_service import get_admin_service
     admin_svc = get_admin_service()
@@ -487,7 +587,10 @@ def admin_list_reviews(
     summary="CRUD: Create Review",
     tags=["Admin"]
 )
-def admin_create_review(payload: Dict[str, Any]):
+def admin_create_review(
+    payload: Dict[str, Any],
+    current_user: Dict[str, Any] = Depends(require_admin)
+):
     from backend.app.services.admin_service import get_admin_service
     admin_svc = get_admin_service()
     return admin_svc.create_review(payload)
@@ -497,7 +600,11 @@ def admin_create_review(payload: Dict[str, Any]):
     summary="CRUD: Update Review",
     tags=["Admin"]
 )
-def admin_update_review(review_id: str, payload: Dict[str, Any]):
+def admin_update_review(
+    review_id: str,
+    payload: Dict[str, Any],
+    current_user: Dict[str, Any] = Depends(require_admin)
+):
     from backend.app.services.admin_service import get_admin_service
     admin_svc = get_admin_service()
     return admin_svc.update_review(review_id, payload)
@@ -507,7 +614,10 @@ def admin_update_review(review_id: str, payload: Dict[str, Any]):
     summary="CRUD: Delete Review",
     tags=["Admin"]
 )
-def admin_delete_review(review_id: str):
+def admin_delete_review(
+    review_id: str,
+    current_user: Dict[str, Any] = Depends(require_admin)
+):
     from backend.app.services.admin_service import get_admin_service
     admin_svc = get_admin_service()
     return admin_svc.delete_review(review_id)
@@ -520,7 +630,8 @@ def admin_delete_review(review_id: str):
 def admin_get_logs(
     level: Optional[str] = Query(None, description="Log level filter: INFO, WARNING, ERROR, AUDIT"),
     search: Optional[str] = Query(None, description="Search query"),
-    limit: int = Query(100, ge=1, le=500)
+    limit: int = Query(100, ge=1, le=500),
+    current_user: Dict[str, Any] = Depends(require_admin)
 ):
     from backend.app.services.admin_service import get_admin_service
     admin_svc = get_admin_service()
@@ -532,7 +643,9 @@ def admin_get_logs(
     summary="Get System Telemetry & Metrics",
     tags=["Admin"]
 )
-def admin_get_metrics():
+def admin_get_metrics(
+    current_user: Dict[str, Any] = Depends(require_admin)
+):
     from backend.app.services.admin_service import get_admin_service
     admin_svc = get_admin_service()
     return admin_svc.get_system_telemetry()
@@ -550,7 +663,8 @@ def admin_list_users(
     role: str = Query("All", description="Role filter (admin, operations_analyst, store_manager, user)"),
     status: str = Query("All", description="Status filter (Active, Inactive, Suspended)"),
     limit: int = Query(50, ge=1, le=200),
-    offset: int = Query(0, ge=0)
+    offset: int = Query(0, ge=0),
+    current_user: Dict[str, Any] = Depends(require_admin)
 ):
     """Retrieves operational users with optional role, status, and text search filters."""
     from backend.app.services.admin_service import get_admin_service
@@ -562,7 +676,10 @@ def admin_list_users(
     summary="CRUD: Create User",
     tags=["Admin", "Users"]
 )
-def admin_create_user(payload: Dict[str, Any]):
+def admin_create_user(
+    payload: Dict[str, Any],
+    current_user: Dict[str, Any] = Depends(require_admin)
+):
     """Registers a new user record in the database."""
     from backend.app.services.admin_service import get_admin_service
     admin_svc = get_admin_service()
@@ -576,7 +693,11 @@ def admin_create_user(payload: Dict[str, Any]):
     summary="CRUD: Update User",
     tags=["Admin", "Users"]
 )
-def admin_update_user(user_id: str, payload: Dict[str, Any]):
+def admin_update_user(
+    user_id: str,
+    payload: Dict[str, Any],
+    current_user: Dict[str, Any] = Depends(require_admin)
+):
     """Updates profile attributes, role, or credentials for an existing user."""
     from backend.app.services.admin_service import get_admin_service
     admin_svc = get_admin_service()
@@ -590,7 +711,10 @@ def admin_update_user(user_id: str, payload: Dict[str, Any]):
     summary="CRUD: Delete User",
     tags=["Admin", "Users"]
 )
-def admin_delete_user(user_id: str):
+def admin_delete_user(
+    user_id: str,
+    current_user: Dict[str, Any] = Depends(require_admin)
+):
     """Deletes an operational user from the system."""
     from backend.app.services.admin_service import get_admin_service
     admin_svc = get_admin_service()
@@ -598,6 +722,37 @@ def admin_delete_user(user_id: str):
     if res.get("status") == "error":
         raise HTTPException(status_code=400, detail=res.get("message", "Failed to delete user"))
     return res
+
+@router.get(
+    "/admin/evaluation/latest",
+    summary="Get Latest Evaluation Benchmark Results",
+    tags=["Admin", "Evaluation"]
+)
+def get_latest_evaluation_results(
+    current_user: Dict[str, Any] = Depends(require_admin)
+):
+    """Returns the latest empirically computed evaluation and benchmark results JSON."""
+    from pathlib import Path
+    import json
+    
+    candidates = [
+        Path("data/eval_results/latest.json"),
+        Path(__file__).resolve().parent.parent.parent.parent / "data" / "eval_results" / "latest.json"
+    ]
+    latest_file = None
+    for cand in candidates:
+        if cand.exists():
+            latest_file = cand
+            break
+            
+    if not latest_file:
+        raise HTTPException(
+            status_code=404,
+            detail="No evaluation results found. Please run backend/scripts/run_evaluation.py first."
+        )
+        
+    with open(latest_file, "r", encoding="utf-8") as f:
+        return json.load(f)
 
 # =============================================================================
 # CHAT HISTORY PERSISTENCE ENDPOINTS
@@ -622,15 +777,18 @@ def get_chat_history(
     summary="Save User Chat Interaction",
     tags=["Chat History"]
 )
-def save_chat_interaction(payload: Dict[str, Any]):
+def save_chat_interaction(
+    payload: Dict[str, Any],
+    current_user: Dict[str, Any] = Depends(get_current_user)
+):
     """Persists a new user inquiry and AI diagnostic report into SQLite."""
     from backend.app.services.chat_history_service import get_chat_history_service
     svc = get_chat_history_service()
     query = payload.get("query", "")
     report = payload.get("report", {})
-    username = payload.get("username", "user")
-    user_name = payload.get("user_name", "Operations Analyst")
-    user_role = payload.get("user_role", "user")
+    username = payload.get("username") or current_user.get("username", "user")
+    user_name = payload.get("user_name") or current_user.get("display_name", "Operations Analyst")
+    user_role = payload.get("user_role") or current_user.get("role", "user")
     category = payload.get("category")
     page_source = payload.get("page_source", "Central Operations Analyst")
 
@@ -656,12 +814,13 @@ def save_chat_interaction(payload: Dict[str, Any]):
     tags=["Chat History"]
 )
 def clear_chat_history(
-    username: Optional[str] = Query(None, description="Username whose history to clear")
+    username: Optional[str] = Query(None, description="Username whose history to clear"),
+    current_user: Dict[str, Any] = Depends(get_current_user)
 ):
     """Clears persistent chat history for the specified user."""
     from backend.app.services.chat_history_service import get_chat_history_service
     svc = get_chat_history_service()
-    success = svc.clear_history(username=username)
+    success = svc.clear_history(username=username or current_user.get("username"))
     return {"status": "success", "cleared": success}
 
 @router.delete(
@@ -669,7 +828,10 @@ def clear_chat_history(
     summary="Delete Single Chat Interaction",
     tags=["Chat History"]
 )
-def delete_single_chat_interaction(interaction_id: str):
+def delete_single_chat_interaction(
+    interaction_id: str,
+    current_user: Dict[str, Any] = Depends(get_current_user)
+):
     """Removes a single chat interaction from SQLite."""
     from backend.app.services.chat_history_service import get_chat_history_service
     svc = get_chat_history_service()

@@ -750,12 +750,14 @@ class AdminService:
             if existing:
                 return {"status": "error", "message": f"Username '{username}' already exists."}
             
+            from backend.app.core.security import hash_password
             user_id = f"usr_{uuid.uuid4().hex[:8]}"
             now_str = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            raw_pwd = payload.get("password") or "temp123"
             new_user = UserORM(
                 user_id=user_id,
                 username=username,
-                password=payload.get("password", "temp123"),
+                password=hash_password(raw_pwd),
                 role=payload.get("role", "user"),
                 display_name=payload.get("display_name", username.capitalize()),
                 title=payload.get("title", "Operations Specialist"),
@@ -782,6 +784,7 @@ class AdminService:
 
     def update_user(self, user_id: str, payload: Dict[str, Any], admin_user: str = "admin") -> Dict[str, Any]:
         """Updates an existing user's attributes."""
+        from backend.app.core.security import hash_password
         db: Session = SessionLocal()
         try:
             user = db.query(UserORM).filter(UserORM.user_id == user_id).first()
@@ -801,7 +804,7 @@ class AdminService:
             if "status" in payload:
                 user.status = payload["status"]
             if "password" in payload and payload["password"]:
-                user.password = payload["password"]
+                user.password = hash_password(payload["password"])
             
             db.commit()
             log_system_event("AUDIT", "UserManagement", f"User '{user.username}' [{user_id}] updated by admin '{admin_user}'.")

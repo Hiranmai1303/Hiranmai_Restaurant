@@ -298,63 +298,72 @@ class RestaurantAgentState(TypedDict):
 ### 5.2 Agent Roles & Workflow
 
 ```mermaid
-flowchart LR
+flowchart TD
     Start([Customer Incident]) --> A1[1. Classifier Agent]
     A1 --> A2[2. Root Cause Agent]
     A2 --> A3[3. Operational SOP Agent]
     A3 --> A4[4. Business Impact Agent]
     A4 --> A5[5. LLM Quality Judge]
-    A5 --> Decision{Verdict?}
-    Decision -->|APPROVED| Done([Resolved Response])
-    Decision -->|REVISE| A3
+    A5 --> Decision{Score >= 0.70 or retries == 2?}
+    Decision -->|Yes / Max Retries| Done([Approved Response & Execution Trace])
+    Decision -->|No: Score < 0.70 & retries < 2| LoopBack[Add Judge Feedback & Increment retry_count]
+    LoopBack --> A2
 ```
 
 1. **Agent 1: Classifier & Severity Agent (`classifier_agent.py`):**
-   - Analyzes complaint semantics and maps them into the 8-domain operational taxonomy.
+   - Maps complaints into the 8-domain operational taxonomy using a rule-based keyword taxonomy.
+   - Computes dynamic classification confidence from the margin between top two matched categories ($0.50 + 0.48 \times \text{margin}$).
    - Computes an explainable **Severity Score ($1.0 - 5.0$)** based on linguistic escalation indicators.
 2. **Agent 2: Root Cause Diagnostic Agent (`root_cause_agent.py`):**
    - Executes hybrid retrieval to gather historical review evidence.
-   - Matches observed symptoms against the domain taxonomy (e.g., `holding_temperature_lapse`, `bussing_turnaround_lapse`, `kitchen_printer_misread`).
+   - Matches observed symptoms against the domain taxonomy (e.g., `holding_temperature_lapse`, `bussing_turnaround_lapse`).
+   - Integrates `judge_feedback` when re-diagnosing during loop-back iterations.
 3. **Agent 3: Operational SOP & Recovery Agent (`recommendation_agent.py`):**
    - Synthesizes 3 actionable, prioritized Standard Operating Procedures (SOPs).
-   - Generates an empathetic, formal **Guest Recovery Script** for table supervisors.
+   - Generates an empathetic, formal **Guest Recovery Script** for table supervisors, incorporating judge critiques on retries.
 4. **Agent 4: Business Impact & Revenue Agent (`impact_agent.py`):**
    - Computes **Churn Risk Tier** (*Low*, *Elevated*, *Critical*).
    - Calculates annual guest Lifetime Value (LTV) exposure and Yelp star drag estimation.
 5. **Agent 5: LLM Quality Judge & Safety Critic (`judge_agent.py`):**
-   - Evaluates the combined response across 4 criteria: (1) Operational Feasibility, (2) Evidence Grounding, (3) Tone & Empathy, (4) Legal/Safety Compliance.
-   - Assigns a composite Quality Score ($0-100\%$) and issues a verdict (`APPROVED` or `REVISE`).
+   - Evaluates the combined response via a strict JSON rubric prompt across 4 dimensions (1-5 each): *Clarity, Feasibility, Groundedness, Completeness*, with one-sentence justifications.
+   - Computes `composite_quality_score` as $\frac{\text{mean of 4 scores}}{5}$.
+   - Evaluates separate rule-based `compliance_flags` (food poisoning, pests, physical safety, legal).
+   - **Conditional Loop-Back:** If `composite_quality_score < 0.70` and `retry_count < 2`, loops back to `root_cause` with feedback. Otherwise terminates to `END`.
 
 ---
 
-## 6. Evaluation Strategy & Benchmarks
+## 6. Evaluation Strategy & Empirical Benchmarks
 
-To guarantee production reliability and eliminate LLM hallucinations, the platform incorporates a dual evaluation framework utilizing **DeepEval** and **Ragas**.
+To guarantee production reliability and eliminate fabricated metrics, all evaluation scores are dynamically read from `data/eval_results/latest.json`.
 
-### 6.1 Evaluation Benchmark Dataset (`BENCHMARK_TEST_CASES`)
-Testing utilizes a standardized ground-truth benchmark suite covering all 8 operational categories:
+### 6.1 Benchmark Suite (`BENCHMARK_TEST_CASES`)
+The benchmark consists of **40 empirically constructed test cases** with labeled ground-truth relevant review IDs in `data/processed/restaurant_operations.db` covering all 8 operational friction categories, multi-restaurant comparative queries, ambiguous queries, and adversarial prompt injection guardrail tests.
 
-| Test ID | Category | Benchmark Query | Ground Truth Reference Summary |
-| :--- | :--- | :--- | :--- |
-| **`TC_EVAL_01`** | Waiting Time | Long wait times during dinner rush | FOH understaffing, kitchen ticket bottlenecks, expo delays |
-| **`TC_EVAL_02`** | Food Quality | Hot entrees arriving cold/lukewarm | Holding temperature lapses, lack of runners, plating delays |
-| **`TC_EVAL_03`** | Service Quality | Inattentive servers and slow drink refills | Table section zoning imbalances, beverage station backlogs |
-| **`TC_EVAL_04`** | Staff Behavior | Rude staff interactions and conflicts | Shift stress/burnout, lack of de-escalation training |
-| **`TC_EVAL_05`** | Cleanliness | Dirty tables and restroom conditions | Bussing turnover lapses, missed 30-min sanitization audits |
-| **`TC_EVAL_06`** | Pricing | Dissatisfaction with pricing & value | Portion yield discrepancies, unexpected automatic gratuity |
-| **`TC_EVAL_07`** | Order Accuracy | Incorrect orders and missing takeout items | Kitchen printer display misreads, allergy mod omissions |
-| **`TC_EVAL_08`** | Ambience | Excessive dining noise & room temperatures | Missing acoustic baffles, uncalibrated HVAC thermostats |
+### 6.2 Empirical Retrieval Benchmarks (Cranfield Gold-Standard)
+Evaluated across all operational benchmark queries over 48,288 reviews:
 
-### 6.2 Quantitative Metrics & Production Results
+| Retrieval Architecture | Recall@5 | Precision@5 | MRR (Mean Reciprocal Rank) | Latency SLA |
+| :--- | :---: | :---: | :---: | :---: |
+| **BM25 Lexical Keyword Only** | **0.5175** | **0.4105** | **1.0000** | < 25ms (PASSED) |
+| **Dense Vector Only (`all-MiniLM-L6-v2`)** | **0.5044** | **0.4000** | **1.0000** | < 15ms (PASSED) |
+| **Hybrid RRF ($k=60$)** | **0.9803** | **0.7789** | **0.8421** | < 45ms (PASSED) |
 
-| Metric | Target SLA | Production Score | Evaluation Methodology |
-| :--- | :---: | :---: | :--- |
-| **Faithfulness (G-Eval)** | &ge; 0.90 | **0.94 (94%)** | Evaluates adherence of agent recommendations to retrieved Yelp reviews. |
-| **Answer Relevancy** | &ge; 0.85 | **0.91 (91%)** | Measures semantic alignment between user question and generated SOPs. |
-| **Context Precision** | &ge; 0.85 | **0.89 (89%)** | Verifies that top retrieved reviews directly relate to the target bottleneck. |
-| **Context Recall** | &ge; 0.85 | **0.92 (92%)** | Confirms all necessary operational factors are captured in the context window. |
-| **Hallucination Rate** | &le; 0.05 | **0.03 (3%)** | Assesses frequency of unsupported operational claims. |
-| **Hybrid Retrieval Latency** | &lt; 50 ms | **18.4 ms** | End-to-end RRF search latency over 48,288 reviews. |
+### 6.3 DeepEval LLM-as-Judge Telemetry
+| Metric | Target SLA | Measured Score | Verdict / Status | Note |
+| :--- | :---: | :---: | :---: | :--- |
+| **Faithfulness (G-Eval)** | &ge; 0.85 | N/A | `NOT EVALUATED` | OpenRouter API returned 402 Insufficient Credits |
+| **Answer Relevancy** | &ge; 0.80 | N/A | `NOT EVALUATED` | OpenRouter API returned 402 Insufficient Credits |
+| **Contextual Precision** | &ge; 0.75 | N/A | `NOT EVALUATED` | OpenRouter API returned 402 Insufficient Credits |
+| **Contextual Recall** | &ge; 0.75 | N/A | `NOT EVALUATED` | OpenRouter API returned 402 Insufficient Credits |
+| **Recommendation Quality** | &ge; 0.80 | N/A | `NOT EVALUATED` | OpenRouter API returned 402 Insufficient Credits |
+
+*Governance Policy: No scores or verdicts are hardcoded or fabricated. Remote endpoint failures report `NOT EVALUATED` honestly.*
+
+### 6.4 Facebook Prophet Forecast Backtest
+Backtested across a held-out 12-week test horizon on historical weekly complaint counts:
+- **MAE:** 46.02 complaints / week
+- **RMSE:** 64.38 complaints / week
+- **MAPE:** 329.16% (reflects low-volume tail buckets in historical restaurant review counts)
 
 ---
 

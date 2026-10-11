@@ -16,8 +16,13 @@ def root_cause_analysis_node(state: AgentState) -> Dict[str, Any]:
     business_id = state.get("business_id")
     
     rc_service = get_root_cause_service()
+    judge_feedback = state.get("judge_feedback")
+    symptom_query = text
+    if judge_feedback:
+        symptom_query = f"{text} (Refining based on auditor feedback: {judge_feedback})"
+
     rc_result = rc_service.analyze_root_cause(
-        symptom_query=text,
+        symptom_query=symptom_query,
         k=5,
         category=category,
         business_id=business_id
@@ -33,7 +38,10 @@ def root_cause_analysis_node(state: AgentState) -> Dict[str, Any]:
             evidence_snippets.append(ev)
             
     trace = list(state.get("execution_trace", []))
-    trace.append(f"[Agent 2: Root Cause] Diagnosed primary root cause: '{top_cause}' backed by {len(evidence_snippets)} evidence citations.")
+    if judge_feedback:
+        trace.append(f"[Agent 2: Root Cause] Refined analysis incorporating Judge feedback (retry {state.get('retry_count', 0)}): '{top_cause}'")
+    else:
+        trace.append(f"[Agent 2: Root Cause] Diagnosed primary root cause: '{top_cause}' backed by {len(evidence_snippets)} evidence citations.")
     
     return {
         "root_causes": root_causes,
@@ -41,3 +49,4 @@ def root_cause_analysis_node(state: AgentState) -> Dict[str, Any]:
         "evidence_snippets": evidence_snippets,
         "execution_trace": trace
     }
+

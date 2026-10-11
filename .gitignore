@@ -40,11 +40,15 @@ ENV
 *.swo
 
 # Project Data & Vector Stores (except samples/schema)
+data/processed/processed_reviews.csv
 data/processed/*.db
+*.db
 data/processed/chroma_db/
+chroma_db/
 data/raw/*.json
 datasets/*.json
 !datasets/.gitkeep
+!data/sample_data/processed_reviews_sample.csv
 
 # Pytest / Coverage
 .pytest_cache/

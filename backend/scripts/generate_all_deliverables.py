@@ -293,7 +293,7 @@ def build_architecture_diagram(output_path: str = "architecture/Architecture_Dia
         [
             Paragraph("• Yelp Academic Dataset (5.34 GB)<br/>• Restaurant Category Filtering<br/>• Text Normalization & Cleaning<br/>• 8-Category Taxonomy Tagging<br/>• Multi-Factor Priority Scoring<br/>• SQLite Database (48,288 Records)", box_desc),
             Paragraph("• ChromaDB Vector Store (MiniLM-L6-v2)<br/>• BM25 Lexical Inverted Index<br/>• Reciprocal Rank Fusion (k=60)<br/>• Metadata Attribute Filtering<br/>• Sub-50ms Candidate Retrieval", box_desc),
-            Paragraph("• RAG Engine (Gemini 2.5 Flash/Pro)<br/>• Agent 1: Classifier & Severity<br/>• Agent 2: Root Cause Diagnostics<br/>• Agent 3: Actionable SOP Generator<br/>• Agent 4: Business Impact Evaluator<br/>• Agent 5: LLM Critic & Safety Judge", box_desc)
+            Paragraph("• RAG Engine (Gemini 2.5 Flash/Pro)<br/>• Agent 1: Classifier & Severity<br/>• Agent 2: Root Cause Diagnostics<br/>• Agent 3: Actionable SOP Generator<br/>• Agent 4: Business Impact Evaluator<br/>• Agent 5: LLM Critic (Loop-back to Agent 2 if score < 0.70)", box_desc)
         ]
     ]
     t_tier = Table(tier_data, colWidths=[165, 165, 170])

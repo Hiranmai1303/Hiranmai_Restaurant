@@ -138,7 +138,10 @@ class MultiAgentResponse(BaseModel):
     revenue_risk_pct: float
     operational_urgency: str
     judge_verdict: str
-    overall_quality_score: float
+    overall_quality_score: Optional[float] = None
+    judge_mode: Optional[str] = "unavailable"
+    compliance_flags: Optional[List[str]] = Field(default_factory=list)
+    retry_count: Optional[int] = 0
     requires_human_review: bool
     review_reasons: List[str]
     execution_trace: List[str]
@@ -246,3 +249,18 @@ class FeedbackResponse(BaseModel):
     rating: int
     feedback_type: str
     message: str = "Feedback logged successfully."
+
+# -------------------------------------------------------------
+# Authentication Schemas
+# -------------------------------------------------------------
+class LoginRequest(BaseModel):
+    username: str = Field(..., min_length=1, description="Username for authentication")
+    password: str = Field(..., min_length=1, description="Account password")
+
+class LoginResponse(BaseModel):
+    access_token: str
+    token_type: str = "bearer"
+    username: str
+    role: str
+    display_name: str
+    title: Optional[str] = None
