@@ -1,0 +1,47 @@
+# Core & Web Framework
+fastapi>=0.110.0
+uvicorn[standard]>=0.28.0
+pydantic>=2.6.0
+pydantic-settings>=2.2.0
+python-dotenv>=1.0.1
+requests>=2.31.0
+httpx>=0.27.0
+
+# Frontend
+streamlit>=1.32.0
+streamlit-extras>=0.4.0
+plotly>=5.20.0
+altair>=5.2.0
+
+# LLM & Multi-Agent Frameworks
+langchain>=0.1.16
+langchain-community>=0.0.34
+langchain-core>=0.1.45
+langgraph>=0.0.39
+openai>=1.23.0
+
+# Vector Store & Search & Embeddings
+chromadb>=0.4.24
+sentence-transformers>=2.6.1
+rank-bm25>=0.2.2
+tiktoken>=0.6.0
+
+# Forecasting & Data Processing
+pandas>=2.2.0
+numpy>=1.26.0
+scipy>=1.12.0
+prophet>=1.1.5
+sqlalchemy>=2.0.29
+aiosqlite>=0.20.0
+
+# Evaluation
+ragas>=0.1.7
+deepeval>=0.21.30
+
+# Testing & Utilities
+pytest>=8.1.1
+pytest-asyncio>=0.23.6
+tqdm>=4.66.2
+reportlab>=4.1.0
+python-pptx>=0.6.23
+rich>=13.7.1
