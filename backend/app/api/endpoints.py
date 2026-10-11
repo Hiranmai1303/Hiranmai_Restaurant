@@ -754,6 +754,24 @@ def get_latest_evaluation_results(
     with open(latest_file, "r", encoding="utf-8") as f:
         return json.load(f)
 
+@router.get(
+    "/evaluation/user/{username}",
+    summary="Dynamic Evaluation of User's Past SQLite Queries",
+    tags=["Evaluation"]
+)
+def evaluate_user_past_queries(
+    username: str,
+    limit: int = Query(10, ge=1, le=50, description="Max past queries to evaluate")
+):
+    """
+    Dynamically loads past queries executed by this user from SQLite chat_history,
+    evaluates Faithfulness, Answer Relevancy, Context Precision/Recall, and RAGAS Triad score.
+    """
+    from backend.app.evaluation.evaluator import get_rag_evaluator
+    ev = get_rag_evaluator()
+    res = ev.evaluate_user_history(username=username, limit=limit)
+    return res
+
 # =============================================================================
 # CHAT HISTORY PERSISTENCE ENDPOINTS
 # =============================================================================
