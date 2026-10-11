@@ -1,14 +1,5 @@
 # AI-Powered Restaurant Operations & Review Assistant
 
-[![Python Version](https://img.shields.io/badge/python-3.10%20%7C%203.11-blue.svg)](https://www.python.org/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.109.0-009688.svg?logo=fastapi)](https://fastapi.tiangolo.com/)
-[![Streamlit](https://img.shields.io/badge/Streamlit-1.31.0-FF4B4B.svg?logo=streamlit)](https://streamlit.io/)
-[![ChromaDB](https://img.shields.io/badge/ChromaDB-0.4.22-orange.svg)](https://www.trychroma.com/)
-[![LangGraph](https://img.shields.io/badge/LangGraph-Multi--Agent-purple.svg)](https://www.langchain.com/)
-[![Prophet](https://img.shields.io/badge/Prophet-Forecasting-red.svg)](https://facebook.github.io/prophet/)
-[![DeepEval](https://img.shields.io/badge/DeepEval-RAG%20Metrics-green.svg)](https://confident-ai.com/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-
 An enterprise-grade, end-to-end intelligent restaurant operations analytics and review intelligence platform. The system leverages **Hybrid RAG (BM25 + ChromaDB Vector Search with Reciprocal Rank Fusion)**, **LangGraph Multi-Agent Orchestration**, **Facebook Prophet Time-Series Forecasting**, and **DeepEval LLM Evaluation Frameworks** to transform unstructured customer reviews into actionable operational intelligence for restaurant general managers, culinary directors, and franchise executives.
 
 ---
@@ -75,6 +66,8 @@ The platform delivers an end-to-end multi-tier architecture:
 - **Persistent Auditability:** Retains every managerial inquiry in SQLite, enabling cross-session history review across logins and browser refreshes.
 
 ---
+## Dataset
+- https://www.kaggle.com/datasets/yelp-dataset/yelp-dataset\
 
 ## Technology Stack
 
