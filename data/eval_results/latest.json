@@ -1,15 +1,15 @@
 {
-  "evaluation_date": "2026-10-11T09:07:05.126064",
+  "evaluation_date": "2026-10-13T02:33:21.277525",
   "model_used": "google/gemini-2.5-flash",
-  "total_benchmark_cases": 2,
-  "evaluated_cases": 2,
+  "total_benchmark_cases": 20,
+  "evaluated_cases": 20,
   "not_evaluated_cases": 0,
   "aggregate_deepeval_metrics": {
-    "faithfulness": 0.9,
-    "answer_relevancy": 0.7631,
-    "contextual_precision": 0.1666,
-    "contextual_recall": 1.0,
-    "recommendation_quality": 0.7
+    "faithfulness": 0.7025,
+    "answer_relevancy": 0.91,
+    "contextual_precision": 0.675,
+    "contextual_recall": 0.235,
+    "recommendation_quality": 0.8925
   },
   "target_thresholds": {
     "faithfulness": 0.85,
@@ -20,14 +20,14 @@
   },
   "verdict_by_target": {
     "faithfulness": {
-      "actual": 0.9,
-      "target": 0.85,
-      "passed": true
-    },
-    "answer_relevancy": {
-      "actual": 0.7631,
+      "actual": 0.7025,
       "target": 0.85,
       "passed": false
+    },
+    "answer_relevancy": {
+      "actual": 0.91,
+      "target": 0.85,
+      "passed": true
     },
     "context_precision": {
       "actual": null,
@@ -40,36 +40,36 @@
       "status": "not_evaluated"
     },
     "recommendation_quality": {
-      "actual": 0.7,
+      "actual": 0.8925,
       "target": 0.8,
-      "passed": false
+      "passed": true
     }
   },
   "retrieval_benchmarks": {
     "bm25": {
-      "precision_at_5": 0.4,
-      "recall_at_5": 0.5,
+      "precision_at_5": 0.41,
+      "recall_at_5": 0.5125,
       "mrr": 1.0,
-      "evaluated_queries": 2
+      "evaluated_queries": 20
     },
     "vector": {
       "precision_at_5": 0.4,
       "recall_at_5": 0.5,
       "mrr": 1.0,
-      "evaluated_queries": 2
+      "evaluated_queries": 20
     },
     "hybrid": {
-      "precision_at_5": 0.8,
-      "recall_at_5": 1.0,
-      "mrr": 1.0,
-      "evaluated_queries": 2
+      "precision_at_5": 0.77,
+      "recall_at_5": 0.9625,
+      "mrr": 0.825,
+      "evaluated_queries": 20
     }
   },
   "aggregate_heuristic_proxies": {
-    "mean_heuristic_faithfulness": 0.2486,
-    "mean_heuristic_answer_relevancy": 0.5416,
-    "mean_heuristic_context_precision": 0.9,
-    "mean_heuristic_context_recall": 0.3229
+    "mean_heuristic_faithfulness": 0.2635,
+    "mean_heuristic_answer_relevancy": 0.8259,
+    "mean_heuristic_context_precision": 0.94,
+    "mean_heuristic_context_recall": 0.2735
   },
   "case_results": [
     {
@@ -77,22 +77,29 @@
       "category": "Waiting Time",
       "query": "What are the primary factors contributing to long customer wait times during peak dinner rushes?",
       "is_out_of_scope": false,
-      "actual_output": "### Executive Diagnosis & Problem Classification\nThe primary factors contributing to long wait times and customer dissatisfaction are categorized into three operational failures: **Front-of-House (FOH) Management Inefficiency**, **Staffing/Training Deficiencies**, and **Lack of Transparency**. \n\nThe data indicates that wait times are not merely a result of high volume, but a failure in the systems designed to manage that volume. Customers are experiencing \"invisible\" delays where communication breaks down, leading to a perception of unfairness and neglect.\n\n---\n\n### Root-Cause Evidence Breakdown\n\n*   **Communication & Transparency Failures:**\n    *   **Inaccurate Quoting:** Guests are quoted specific wait times that are not honored, leading to frustration [Source #3].\n    *   **Lack of Proactive Updates:** Guests are not informed of delays at the start of their visit, preventing them from making an informed choice to stay or leave [Source #1].\n    *   **Systemic Failures:** Automated notification systems (e.g., text alerts) are failing to trigger, leaving guests waiting indefinitely [Source #3].\n\n*   **Staffing & Competency Issues:**\n    *   **Inadequate Floor Coverage:** Servers are unable to manage more than one table effectively, or are \"nowhere to be found,\" forcing guests to flag down other staff members [Source #1].\n    *   **Under-equipped Teams:** Staff appear either new or inadequately trained to handle high-volume periods, particularly with large groups [Source #4].\n    *   **Prioritization Bias:** Guests perceive unfairness when parties are seated out of order or when \"moderate celebrities\" are given preferential treatment over guests who have been waiting longer [Source #3, Source #5].\n\n*   **Operational Bottlenecks:**\n    *   **Service Latency:** Total wait time is compounded by a \"triple-threat\" delay: waiting to be seated, waiting for a server to acknowledge the table, and waiting for the food itself [Source #1].\n\n---\n\n### Actionable Managerial Recommendations\n\n#### Immediate Actions (Short-Term)\n1.  **Implement \"Honest Wait\" Protocols:** Instruct host staff to provide realistic wait time estimates and proactively update guests if those times shift. If a delay exceeds the quoted time, the host must communicate this immediately [Source #1].\n2.  **Standardize Seating Procedures:** Enforce a strict \"first-come, first-served\" policy to eliminate the perception of favoritism or unfair seating practices [Source #3].\n3.  **Service Recovery Protocol:** Empower staff to offer meaningful compensation (e.g., a significant discount or comped items) when wait times become excessive, rather than relying on small, insufficient discounts [Source #1].\n\n#### Long-Term Strategic Actions\n1.  **Staff Training & Capacity Planning:** Conduct a skills audit of the waitstaff. Implement a \"buddy system\" or section-management training to ensure servers can handle multiple tables without service degradation [Source #1, Source #4].\n2.  **Technology Audit:** Review the reliability of the waitlist/text-alert system. If the system is unreliable, revert to manual, high-touch management until the technology is fixed [Source #3].\n3.  **Operational Workflow Review:** Analyze the \"time-to-first-contact\" metric. If it takes 20 minutes for a server to greet a seated table, the floor plan or staffing levels must be adjusted to ensure immediate acknowledgment upon seating [Source #1].\n\n---\n\n### Risk & Business Impact Analysis\n*   **Customer Churn:** The reviews consistently highlight a \"won't return\" sentiment. The combination of long waits and poor service is a primary driver for permanent loss of clientele [Source #2, Source #3, Source #4].\n*   **Brand Reputation:** When guests feel ignored or unfairly treated (e.g., being bumped for celebrities), the negative impact on the restaurant's reputation is severe and long-lasting [Source #3, Source #5].\n*   **Revenue Leakage:** Inefficient service leads to lower table turnover and lower tips for staff, creating a cycle of poor performance and low morale [Source #1].",
+      "actual_output": "### Executive Diagnosis & Problem Classification\nThe primary factors contributing to long wait times and customer dissatisfaction are categorized into three operational failures: **Front-of-House (FOH) Management Inefficiency**, **Staffing/Training Deficiencies**, and **Lack of Transparency**. \n\nThe data indicates that wait times are not merely a result of high volume, but a failure of the systems designed to manage that volume. Customers are experiencing \"invisible\" delays where communication breaks down, leading to a perception of unfairness and neglect.\n\n---\n\n### Root-Cause Evidence Breakdown\n\n*   **Communication & Transparency Failures:**\n    *   **Inaccurate Quoting:** Guests are quoted specific wait times that are not honored, leading to frustration [Source #3].\n    *   **Lack of Proactive Updates:** Guests are not informed of delays upfront, preventing them from making informed decisions about their time [Source #1].\n    *   **Systemic Failures:** Automated notification systems (e.g., text alerts) are failing to trigger, leaving guests waiting indefinitely [Source #3].\n\n*   **Staffing & Competency Issues:**\n    *   **Inadequate Floor Coverage:** Servers are unable to manage more than one table effectively, or are \"nowhere to be found,\" forcing guests to flag down other staff members [Source #1].\n    *   **Under-equipped Teams:** Staffing levels are insufficient for peak periods, particularly for large groups [Source #4].\n    *   **Prioritization Bias:** Operational integrity is compromised by \"ushering in\" specific guests (e.g., celebrities) ahead of others, which erodes trust in the waitlist system [Source #5].\n\n*   **Process & Workflow Inefficiencies:**\n    *   **Seating Irregularities:** Guests are being skipped in the queue without clear justification, violating the \"first-come, first-served\" expectation [Source #3].\n    *   **Order Processing Delays:** Significant delays occur between seating and initial service, and between ordering and food delivery [Source #1, #4].\n\n---\n\n### Actionable Managerial Recommendations\n\n#### Immediate (Short-Term)\n1.  **Standardize Waitlist Protocol:** Implement a strict, transparent \"first-come, first-served\" policy. If a guest is skipped, the hostess must provide a clear, documented reason to the manager on duty.\n2.  **Communication Buffer:** Instruct hosts to add a 10\u201315 minute \"buffer\" to quoted wait times during peak hours to manage expectations.\n3.  **Service Recovery Protocol:** Empower staff to offer meaningful compensation (e.g., a significant discount or comped item) immediately when wait times exceed the quoted window by more than 15 minutes [Source #1].\n\n#### Long-Term (Strategic)\n1.  **Staff Training & Tiering:** Implement a \"buddy system\" or mentorship program where high-performing servers (who can handle 4+ tables) train those struggling with multi-tasking [Source #1].\n2.  **Audit Technology:** Review the reliability of the current waitlist/texting software. If the system is failing to notify guests, it must be replaced or manually verified by a dedicated host.\n3.  **Capacity Planning:** Analyze the correlation between group size and service speed. If large groups consistently cause delays, adjust floor plans or staffing ratios specifically for those sections [Source #4].\n\n---\n\n### Risk & Business Impact Analysis\n*   **Customer Churn:** The reviews consistently mention that despite liking the food or wanting to support the business, the service experience is the primary driver for \"not coming back\" [Source #1, #2, #3, #4].\n*   **Reputational Damage:** Perceptions of unfairness (e.g., skipping guests for celebrities) create a \"toxic\" brand image that discourages new patrons [Source #5].\n*   **Revenue Loss:** Inefficient service leads to lower table turnover and reduced tips for staff, creating a cycle of poor morale and further service degradation [Source #1].",
       "expected_output": "Long wait times during peak dinner rushes stem from front-of-house host seating pacing bottlenecks, kitchen cook-line ticket backlogs, and delayed busser table turnaround.",
-      "latency_ms": 7694.15,
+      "latency_ms": 6576.71,
       "status": "evaluated",
       "deepeval_scores": {
-        "faithfulness": 1.0,
-        "answer_relevancy": 0.5263,
-        "contextual_precision": 0.0,
-        "contextual_recall": 0.0,
-        "recommendation_quality": 1.0
+        "faithfulness": 0.6,
+        "answer_relevancy": 0.9,
+        "contextual_precision": 0.8,
+        "contextual_recall": 0.2,
+        "recommendation_quality": 0.9
       },
       "heuristic_proxies": {
-        "heuristic_faithfulness": 0.2355,
-        "heuristic_answer_relevancy": 0.5833,
+        "heuristic_faithfulness": 0.2268,
+        "heuristic_answer_relevancy": 0.75,
         "heuristic_context_precision": 1.0,
         "heuristic_context_recall": 0.4583
+      },
+      "reasons": {
+        "faithfulness": "The response hallucinates a 'Source #5' regarding celebrity favoritism which does not exist in the provided context.",
+        "answer_relevancy": "The response provides a highly structured and comprehensive analysis that directly addresses the user's query about wait time factors.",
+        "contextual_precision": "The model correctly identifies and utilizes the most relevant evidence from the provided chunks to support its claims.",
+        "contextual_recall": "The retrieved context fails to mention kitchen cook-line backlogs or busser turnaround times, which were key factors in the reference output.",
+        "recommendation_quality": "The recommendations are highly actionable, professional, and logically derived from the identified operational pain points."
       },
       "error": null
     },
@@ -101,22 +108,587 @@
       "category": "Waiting Time",
       "query": "Why are guests experiencing severe delays when ordering drinks and waiting at the bar?",
       "is_out_of_scope": false,
-      "actual_output": "Based on the provided reviews, the delays in drink service and bar wait times are not isolated incidents but symptoms of systemic operational failures. Below is the diagnosis and recommended course of action.\n\n### Executive Diagnosis & Problem Classification\nThe issues regarding bar and drink delays fall into three distinct categories:\n1.  **Inventory & Resource Management:** Failure to maintain basic stock (glassware, wine inventory) leads to service bottlenecks [Source #3].\n2.  **Staff Competency & Training:** Bartenders and waitstaff lack basic product knowledge and professional service standards [Source #3].\n3.  **Service Culture & Prioritization:** A breakdown in service equity, where staff prioritize \"regulars\" or personal interactions over general guest needs, leading to neglect of the broader customer base [Source #4].\n\n### Root-Cause Evidence Breakdown\n*   **Inventory Stock-outs:** At *Salsa*, guests experienced significant delays and confusion because the bar was out of 10 out of 14 wines and lacked standard glassware, forcing the use of inappropriate substitutes [Source #3].\n*   **Staff Negligence & Bias:** At *Double D Lounge*, bartenders actively ignored non-regular guests to focus on socializing with regulars. When confronted, staff were dismissive and rude, citing that the guest was \"not the only person here\" [Source #4].\n*   **Lack of Urgency/Training:** At *Salsa*, the waiter was not only slow (taking 10 minutes to deliver drinks) but also displayed an \"annoyed\" attitude when prompted for service [Source #3]. Similarly, at *Fox & Hound*, staff were perceived as unfriendly and treated guests as an \"inconvenience\" [Source #5].\n\n### Actionable Managerial Recommendations\n\n#### Immediate (Next 48 Hours)\n*   **Inventory Audit:** Conduct an immediate physical count of all bar stock and glassware. If items are unavailable, update the menu or POS system immediately to prevent staff from taking orders they cannot fulfill.\n*   **Standardized Service Scripting:** Implement a \"First-In, First-Out\" (FIFO) service protocol for the bar. Staff must be retrained to acknowledge every guest within 60 seconds of arrival, regardless of their status as a \"regular.\"\n*   **Staff Briefing:** Hold a mandatory pre-shift meeting to address the \"annoyance\" reported by guests. Clearly communicate that dismissive body language (e.g., throwing hands in the air) is grounds for immediate disciplinary action.\n\n#### Long-Term (Next 30 Days)\n*   **Product Knowledge Training:** Implement a mandatory menu-knowledge test for all bartenders and servers. Staff must be able to describe flavor profiles (e.g., \"dry\" vs. \"sweet\") to avoid the confusion reported in [Source #3].\n*   **Service Equity Policy:** Establish a formal policy that prohibits preferential treatment. Monitor bar performance during peak hours to ensure that service is distributed equitably among all patrons, not just regulars.\n*   **Operational Pacing Oversight:** Review the \"pacing\" of the kitchen and bar. If staff are overwhelmed, evaluate if the issue is staffing levels or a lack of coordination between the bar and the floor.\n\n### Risk & Business Impact Analysis\n*   **Revenue Loss:** The current environment is driving away customers who feel neglected or ignored [Source #4].\n*   **Brand Erosion:** The combination of rude staff, lack of basic supplies, and poor service quality is leading to 1-star reviews that explicitly state guests \"will not be back\" [Source #3, #5].\n*   **Operational Inefficiency:** When staff are unknowledgeable or lack supplies, they spend more time explaining errors or apologizing for delays, which further slows down service for all other guests, creating a \"death spiral\" of poor performance.",
+      "actual_output": "Based on the provided reviews, the delays at the bar and in drink service are not isolated incidents but symptoms of systemic operational failures. Below is the diagnosis and recommended action plan.\n\n### Executive Diagnosis & Problem Classification\nThe delays in drink service are classified into three distinct operational failures:\n1.  **Inventory & Resource Management:** Lack of basic supplies (glassware) and stock (wine) creates bottlenecks [Source #3].\n2.  **Staff Competency & Training:** Bartenders and waitstaff lack product knowledge and professional service standards [Source #3].\n3.  **Cultural/Service Bias:** Staff are prioritizing \"regulars\" over new guests, leading to intentional neglect of non-regular patrons [Source #4].\n\n### Root-Cause Evidence Breakdown\n*   **Supply Chain & Prep Failure:** At *Salsa*, the bar was out of 10 of 14 wines and, critically, out of standard wine glasses, forcing the use of inappropriate vessels (champagne flutes/highballs) [Source #3]. This indicates a failure in par-level management and dishwashing/restocking protocols.\n*   **Staff Negligence & Attitude:** Bartenders at *Double D Lounge* are actively ignoring non-regular guests to socialize, and when confronted, respond with hostility (\"I'm not the only person here\") [Source #4]. Similarly, at *Salsa*, the waiter was openly annoyed when asked for a second round of drinks, taking 10 minutes to fulfill the request [Source #3].\n*   **Lack of Product Knowledge:** Bartenders are unable to describe basic menu items (e.g., wine profiles), which slows down the ordering process as guests struggle to make decisions without guidance [Source #3].\n\n### Actionable Managerial Recommendations\n\n**Immediate (Next 48 Hours):**\n*   **Inventory Audit:** Conduct an immediate par-level check of all glassware and high-velocity bar items. If stock is low, implement an emergency procurement plan.\n*   **Service Standards Reset:** Hold a mandatory pre-shift meeting to explicitly ban \"regular-only\" service bias. Establish a \"First-In, First-Out\" (FIFO) service policy for all guests, regardless of status.\n*   **Scripting for Delays:** Provide staff with professional, apologetic scripts for when items are out of stock. \"I apologize, we are currently out of [item]; may I suggest [alternative]?\" is a necessary replacement for the current \"confused\" or \"annoyed\" responses [Source #3].\n\n**Long-Term (Next 30 Days):**\n*   **Training Program:** Implement a mandatory menu-knowledge test for all bar and floor staff. Staff must be able to describe wine profiles and menu items to prevent service friction [Source #3].\n*   **Performance Accountability:** Monitor staff interaction with non-regulars. Use \"secret shoppers\" or direct manager floor-time to ensure that service is equitable and that staff are not displaying the \"disgust\" or \"annoyance\" reported in previous reviews [Source #3, #4].\n*   **Workflow Optimization:** Evaluate the communication loop between the bar and the floor. If waiters are taking 10 minutes to retrieve drinks, investigate if the bottleneck is at the POS system, the bar preparation, or the server\u2019s prioritization [Source #3].\n\n### Risk & Business Impact Analysis\n*   **Customer Churn:** The current service culture is actively driving away new business. Guests are explicitly stating they \"will not be back\" due to feeling like an \"inconvenience\" or being ignored in favor of regulars [Source #4, #5].\n*   **Brand Reputation:** The combination of poor service, lack of basic supplies, and rude staff is creating a \"comical\" and unprofessional reputation that will deter future guests [Source #3].\n*   **Revenue Loss:** Inefficient drink service directly impacts check averages. When guests are not asked for second rounds or are ignored at the bar, the restaurant loses significant high-margin revenue [Source #3].",
       "expected_output": "Bar delays are driven by single-bartender staffing during surge hours, glassware dishwashing bottlenecks, and service-well ticket priority conflicts.",
-      "latency_ms": 6397.21,
+      "latency_ms": 6615.18,
+      "status": "evaluated",
+      "deepeval_scores": {
+        "faithfulness": 0.8,
+        "answer_relevancy": 0.9,
+        "contextual_precision": 0.7,
+        "contextual_recall": 0.2,
+        "recommendation_quality": 0.9
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.25,
+        "heuristic_answer_relevancy": 0.625,
+        "heuristic_context_precision": 0.8,
+        "heuristic_context_recall": 0.1875
+      },
+      "reasons": {
+        "faithfulness": "The response mostly adheres to the context, though it hallucinates specific restaurant names ('Salsa', 'Double D Lounge') not present in the provided text.",
+        "answer_relevancy": "The response directly addresses the user's query by categorizing the causes of bar delays and providing a structured operational plan.",
+        "contextual_precision": "The retriever provided relevant reviews, but the top-ranked evidence (Evidence 1) was about hostess issues rather than the bar delays requested.",
+        "contextual_recall": "The retrieved context completely failed to mention the specific operational causes listed in the reference output, such as single-bartender staffing or ticket priority conflicts.",
+        "recommendation_quality": "The recommendations are highly professional, actionable, and logically derived from the identified service failures in the context."
+      },
+      "error": null
+    },
+    {
+      "id": "TC_03",
+      "category": "Waiting Time",
+      "query": "What is causing long lobby queues and slow table assignment on Friday evenings?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Diagnosis & Problem Classification\nThe long lobby queues and slow table assignment on Friday evenings are primarily driven by **systemic failures in front-of-house (FOH) management and host-stand protocols.** The issues are classified into three core operational failures:\n1.  **Ineffective Seating Strategy:** Tables are remaining empty while guests wait, indicating a disconnect between floor availability and host-stand management [Source #1].\n2.  **Hostess Competency & Accountability:** Front-of-house staff are exhibiting poor communication, lack of professionalism, and potential bias or negligence in managing the waitlist [Source #3, #5].\n3.  **Physical/Environmental Constraints:** Inefficient lobby design and the misuse of limited space by staff (e.g., training during peak hours) are exacerbating congestion [Source #2].\n\n---\n\n### Root-Cause Evidence Breakdown\n*   **Failure to Seat Available Inventory:** Guests report observing open tables that are not being utilized, suggesting that the \"seating strategy\" is either overly rigid or poorly executed [Source #1].\n*   **Host-Stand Negligence:** \n    *   **Reservation Errors:** Hostesses have failed to locate confirmed reservations, leading to unnecessary friction and delays [Source #3].\n    *   **Waitlist Mismanagement:** There is evidence of \"bumping\" parties out of order and failing to utilize automated notification systems (e.g., text alerts) [Source #5].\n    *   **Attitude/Professionalism:** Reports of eye-rolling, arguing, and general disinterest from the host stand are creating a hostile first impression [Source #3].\n*   **Staffing & Training Mismanagement:** During peak times, staff are observed \"goofing around\" or conducting training sessions that occupy limited lobby seating, further restricting the flow of incoming guests [Source #2].\n\n---\n\n### Actionable Managerial Recommendations\n\n#### Immediate (Next 48 Hours)\n*   **Implement a \"Floor-to-Host\" Communication Protocol:** Require the floor manager to perform a 15-minute \"table sweep\" to communicate exact availability to the host stand. This prevents the \"open table but long wait\" phenomenon [Source #1].\n*   **Audit Reservation Logs:** Ensure the host stand has a physical backup or a secondary digital verification process for all reservations to prevent the \"I don't see your reservation\" error [Source #3].\n*   **Clear the Lobby:** Prohibit staff training or non-essential congregating in the lobby area during peak Friday hours to maximize space for waiting guests [Source #2].\n\n#### Long-Term (Strategic)\n*   **Host Stand Training & Scripting:** Implement mandatory customer service training for the front-of-house team. Standardize responses to waitlist inquiries to ensure consistency and eliminate perceived favoritism [Source #5].\n*   **Waitlist Accountability:** Audit the digital waitlist system. If text alerts are not being sent, troubleshoot the software or retrain staff on its usage to ensure guests are notified promptly [Source #5].\n*   **Lobby Optimization:** Evaluate the physical layout. If the lobby is \"super small\" or \"impractical,\" consider removing non-essential furniture or decor that hinders guest flow [Source #2].\n\n---\n\n### Risk & Business Impact Analysis\n*   **Revenue Loss:** The current operational friction is causing walk-outs (e.g., the party that waited 45+ minutes and left) [Source #5].\n*   **Reputational Damage:** The combination of poor service and long waits is driving negative sentiment that explicitly discourages future business, particularly for high-value segments like \"business dinners\" [Source #3].\n*   **Competitive Vulnerability:** Guests are explicitly comparing the experience to competitors (e.g., Five Guys) and concluding that the restaurant is not worth the effort, creating a high risk of permanent customer churn [Source #2].",
+      "expected_output": "Lobby congestion is caused by uncoordinated reservation overbooking, large party table camping, and lack of automated SMS waitlist notifications.",
+      "latency_ms": 6701.42,
+      "status": "evaluated",
+      "deepeval_scores": {
+        "faithfulness": 0.6,
+        "answer_relevancy": 0.9,
+        "contextual_precision": 0.8,
+        "contextual_recall": 0.2,
+        "recommendation_quality": 0.9
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.236,
+        "heuristic_answer_relevancy": 0.9,
+        "heuristic_context_precision": 1.0,
+        "heuristic_context_recall": 0.3571
+      },
+      "reasons": {
+        "faithfulness": "The response hallucinates references to 'Source #5' and specific operational details like 'automated notification systems' and 'bumping parties' which are not present in the provided context.",
+        "answer_relevancy": "The response provides a highly structured and professional diagnosis that directly addresses the user's query about lobby queues and table assignment.",
+        "contextual_precision": "The top-ranked evidence chunks effectively highlight the core issues of poor management, seating strategy, and lobby design.",
+        "contextual_recall": "The retrieved context completely fails to mention the reference output's key points regarding reservation overbooking, table camping, or SMS notifications.",
+        "recommendation_quality": "The recommendations are highly actionable, logical, and directly address the operational failures identified in the retrieved evidence."
+      },
+      "error": null
+    },
+    {
+      "id": "TC_04",
+      "category": "Waiting Time",
+      "query": "Why do customers waiting for takeout and curbside pickup report 30-minute delays past the promised time?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Diagnosis & Problem Classification\nThe reported 30-minute delays for takeout and curbside pickup are symptomatic of **systemic operational breakdown** rather than isolated incidents. Based on the provided reviews, the core issues are classified as:\n*   **Kitchen-Front-of-House (FOH) Disconnect:** A failure in communication between the kitchen display system (KDS) and the staff responsible for order fulfillment [Source #2].\n*   **Resource Mismanagement:** Inadequate staffing levels where employees are forced to multitask between cooking and order management, leading to significant bottlenecks [Source #1].\n*   **Management Apathy:** A lack of active floor leadership, resulting in managers who are either unavailable or dismissive when service failures occur [Source #2].\n\n---\n\n### Root-Cause Evidence Breakdown\n*   **Communication Silos:** In [Source #2], the kitchen staff was aware of the order status via the screen, yet failed to act, and the manager remained disengaged despite repeated alerts from the server. This indicates that the \"promised time\" is not being treated as a hard deadline by the kitchen.\n*   **Operational Overload:** [Source #1] highlights a critical failure where the same staff members are responsible for both cooking and taking orders. This dual-role requirement inevitably leads to delays, as the kitchen cannot maintain production speed while managing customer interactions.\n*   **Lack of Accountability:** Managers are failing to intervene during service spikes. In [Source #2], the manager acted \"exasperated\" rather than solving the problem, and in [Source #1], the owner\u2019s response to a delay was to escalate the conflict rather than resolve the service failure.\n\n---\n\n### Actionable Managerial Recommendations\n\n#### Immediate (Next 48 Hours)\n1.  **Implement \"Expeditor\" Protocol:** Designate one staff member during peak hours whose sole responsibility is monitoring the KDS and managing the hand-off of takeout/curbside orders. They must act as the bridge between the kitchen and the customer.\n2.  **Managerial Floor Presence:** Managers must conduct \"pulse checks\" every 15 minutes during peak shifts to identify orders approaching the \"promised time\" threshold. If an order is nearing the limit, the manager must intervene immediately to prioritize it.\n3.  **Standardize Communication:** Ensure that if a delay is inevitable, the customer is notified *before* the promised time expires. Proactive communication is the only way to mitigate the frustration caused by long waits [Source #2].\n\n#### Long-Term (Strategic)\n1.  **Staffing Optimization:** Review labor allocation to ensure that kitchen staff are not distracted by FOH duties. If the kitchen is understaffed, the \"promised time\" must be dynamically adjusted in the POS system to reflect realistic output capacity.\n2.  **KDS Accountability Training:** Train kitchen staff to treat the KDS timer as a critical performance metric. Implement a \"red-flag\" system where orders exceeding a certain time trigger an automatic alert to the manager on duty.\n3.  **Service Recovery Framework:** Empower staff to offer immediate, tangible solutions (e.g., discounts, complimentary items) when delays exceed 15 minutes, rather than offering empty apologies [Source #2].\n\n---\n\n### Risk & Business Impact Analysis\n*   **Revenue Loss:** As noted in [Source #2], the inability to turn tables or fulfill orders efficiently is \"bleeding money.\" Every minute of delay increases the likelihood of customer churn.\n*   **Brand Erosion:** The reviews indicate that customers are not just leaving; they are actively sharing their negative experiences with friends and family [Source #3]. This creates a \"reputation debt\" that is significantly more expensive to fix than the cost of additional labor.\n*   **Operational Collapse:** If the current trend continues, the restaurant risks a total loss of repeat business, as customers have \"too many options\" to tolerate consistent service failures [Source #2].",
+      "expected_output": "Takeout fulfillment delays occur when delivery tablets are unchecked, expo bagging falls behind dine-in plating, and parking space dispatch lacks tracking.",
+      "latency_ms": 6202.38,
+      "status": "evaluated",
+      "deepeval_scores": {
+        "faithfulness": 0.9,
+        "answer_relevancy": 0.95,
+        "contextual_precision": 0.8,
+        "contextual_recall": 0.2,
+        "recommendation_quality": 0.9
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.2857,
+        "heuristic_answer_relevancy": 0.8182,
+        "heuristic_context_precision": 1.0,
+        "heuristic_context_recall": 0.1579
+      },
+      "reasons": {
+        "faithfulness": "The response is highly grounded in the provided evidence, though it slightly generalizes the 'owner' and 'manager' roles based on the text.",
+        "answer_relevancy": "The response directly addresses the operational delays by synthesizing the provided reviews into a structured diagnostic framework.",
+        "contextual_precision": "The most relevant evidence regarding kitchen delays and management failures was ranked highly, though Evidence 3 was irrelevant noise.",
+        "contextual_recall": "The retrieved context completely failed to mention the specific operational factors cited in the reference output, such as delivery tablets and parking space dispatch.",
+        "recommendation_quality": "The recommendations are highly actionable, professional, and directly address the root causes identified in the analysis."
+      },
+      "error": null
+    },
+    {
+      "id": "TC_05",
+      "category": "Food Quality",
+      "query": "Why are guests reporting that hot entrees and soups are arriving cold or lukewarm at tables?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Diagnosis & Problem Classification\nThe reports of cold or lukewarm entrees and soups indicate a **systemic breakdown in kitchen-to-table coordination and food holding protocols.** Based on the provided reviews, this issue is not an isolated incident but a symptom of poor operational flow, specifically regarding the timing of food delivery and the lack of synchronization between the kitchen and service staff.\n\n**Problem Classification:**\n*   **Operational Inefficiency:** Poor pacing between courses (apps arriving too early or drinks arriving too late).\n*   **Service Execution Failure:** Lack of urgency in food running and table management.\n*   **Quality Control Deficiency:** Failure to maintain food temperature standards during the \"last mile\" of service.\n\n---\n\n### Root-Cause Evidence Breakdown\nThe following evidence highlights the specific operational failures contributing to temperature issues:\n\n*   **Poor Pacing & Synchronization:** At *Dmitri's*, entrees were \"rushed out before we had finished our apps\" [Source #2], suggesting that the kitchen is firing orders without regard for the guest's actual pace. This creates a bottleneck where food sits under heat lamps or on counters while guests are still consuming appetizers.\n*   **Service Negligence in Delivery:** At *Mint Modern Vietnamese Bistro & Bar*, staff were observed \"sliding\" food onto tables without confirming orders [Source #5]. This lack of attention to detail suggests that food is not being prioritized for immediate delivery upon leaving the kitchen pass.\n*   **General Service Decline:** *Catrina's* explicitly notes that while food was once \"always hot,\" it now arrives \"lukewarm or cold\" [Source #4]. This indicates a degradation in standard operating procedures (SOPs) regarding food running and communication between the kitchen and the floor.\n*   **Environmental Factors:** At *Arner's Restaurant*, the building temperature was noted as \"not ideal\" [Source #3], which can accelerate the cooling of food once it reaches the table.\n\n---\n\n### Actionable Managerial Recommendations\n\n#### Immediate (Next 48 Hours)\n1.  **Implement \"Table-Ready\" Firing Protocols:** Instruct the kitchen to hold entree tickets until the server confirms the appetizer course is cleared. Stop the practice of \"rushing\" food to tables to clear seats.\n2.  **Enforce \"Hot Food First\" Priority:** Mandate that food runners prioritize the delivery of hot entrees over all other tasks (e.g., refilling waters or clearing empty plates).\n3.  **Temperature Audit:** Verify that heat lamps at the pass are functional and set to the correct temperature. Ensure that plates are not being stored in cold areas before service.\n\n#### Long-Term (Next 30 Days)\n1.  **Retrain on \"Table Awareness\":** Implement a training module for service staff on \"Table Awareness,\" emphasizing that food must be delivered immediately upon being called by the kitchen.\n2.  **Standardize Communication:** Establish a clear signal system between the kitchen pass and the floor staff to ensure that hot food is never left sitting on the pass.\n3.  **Review Pacing SOPs:** Audit the POS system and kitchen display system (KDS) settings to ensure that course timing is programmed correctly to prevent entrees from being fired prematurely.\n\n---\n\n### Risk & Business Impact Analysis\n*   **Customer Retention:** The reviews indicate a clear pattern of \"once-loyal\" customers avoiding restaurants due to declining standards [Source #4, Source #1]. Cold food is a primary driver for negative word-of-mouth and loss of repeat business.\n*   **Financial Impact:** As seen at *Dmitri's*, guests are paying premium prices ($160 for a meal) for subpar experiences [Source #2]. This creates a high risk of chargebacks, negative online sentiment, and a permanent loss of high-value customers.\n*   **Brand Reputation:** The shift from \"unbeatable service\" to \"avoiding the place\" [Source #4] suggests that the brand equity is actively eroding. If not addressed, the restaurant risks becoming a \"last resort\" option rather than a destination, leading to decreased revenue and potential closure.",
+      "expected_output": "Cold entrees result from expo heat lamp holding temperature lapses, lack of dedicated food runners, and plated orders sitting on the pass.",
+      "latency_ms": 6434.63,
+      "status": "evaluated",
+      "deepeval_scores": {
+        "faithfulness": 0.4,
+        "answer_relevancy": 0.9,
+        "contextual_precision": 0.8,
+        "contextual_recall": 0.6,
+        "recommendation_quality": 0.9
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.2873,
+        "heuristic_answer_relevancy": 0.8889,
+        "heuristic_context_precision": 1.0,
+        "heuristic_context_recall": 0.3889
+      },
+      "reasons": {
+        "faithfulness": "The response hallucinates specific restaurant names (Dmitri's, Mint, Catrina's, Arner's) and evidence sources (#5) that are not present in the provided context.",
+        "answer_relevancy": "The response directly addresses the user's query by categorizing the operational failures and providing a structured plan to resolve the temperature issues.",
+        "contextual_precision": "The retrieved context contains relevant reviews, though the model failed to stick strictly to the provided text, inventing external data points.",
+        "contextual_recall": "The context provided sufficient information to identify pacing and service issues, but the model missed the specific mention of heat lamp lapses and dedicated food runner needs found in the reference output.",
+        "recommendation_quality": "The recommendations are highly actionable, professional, and directly target the operational root causes of cold food delivery."
+      },
+      "error": null
+    },
+    {
+      "id": "TC_06",
+      "category": "Food Quality",
+      "query": "What causes complaints regarding overcooked steaks and dry, rubbery chicken entrees?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Diagnosis & Problem Classification\nThe complaints regarding overcooked, dry, and rubbery proteins stem from two primary operational failures: **improper holding/batch-cooking practices** and **inconsistent execution of cook-to-order standards.** \n\nThe issues are classified as follows:\n*   **Holding & Temperature Abuse:** Pre-cooking proteins and holding them in a \"danger zone\" or for extended periods, leading to texture degradation and safety risks [Source #1, Source #2].\n*   **Execution & Quality Control:** Failure to monitor internal temperatures and plate temperatures, resulting in proteins that are either overcooked/burnt or served on cold plates [Source #4, Source #5].\n\n---\n\n### Root-Cause Evidence Breakdown\n\n1.  **Improper Holding Practices:**\n    *   **Batch Cooking:** At Opry Backstage Grill, the speed of service (under 10 minutes) suggests chicken is being cooked in advance and held, resulting in \"off-putting flavor and texture\" and lukewarm temperatures [Source #1].\n    *   **Extended Holding:** At Ichiban Buffet, sushi ingredients became \"rubbery\" and rice \"dry\" specifically because the items had \"sat out too long\" [Source #2].\n\n2.  **Inconsistent Cooking & Plate Management:**\n    *   **Overcooking/Burnt Proteins:** BBQ BBQ reported wings that were \"overcooked and dry\" and appeared \"burnt\" [Source #4].\n    *   **Plate Temperature Neglect:** Charro Steak & Del Rey served a high-end ribeye on a \"cold plate,\" which negatively impacts the heat retention and quality of the protein [Source #5].\n    *   **Inconsistent Doneness:** At Charro Steak, a filet ordered medium-rare arrived \"slightly above rare,\" while a rare steak was described as a \"soggy sponge,\" indicating a lack of standardized temperature control [Source #5].\n\n---\n\n### Actionable Managerial Recommendations\n\n#### Immediate (Operational Fixes)\n*   **Implement \"Cook-to-Order\" Protocols:** Transition away from batch-cooking proteins. If batching is necessary for high-volume items, implement strict \"Time-as-a-Public-Health-Control\" (TPHC) logs to ensure items are discarded before they become dry or rubbery [Source #1, #2].\n*   **Plate Warming Station:** Ensure all plates for hot entrees are stored in a plate warmer. Serving hot proteins on cold plates causes immediate temperature loss, which guests perceive as poor quality [Source #5].\n*   **Standardized Doneness Checks:** Require kitchen staff to use calibrated digital thermometers for every steak and chicken entree before it leaves the pass to ensure internal temperatures meet the requested doneness [Source #5].\n\n#### Long-Term (Systemic Improvements)\n*   **Menu Engineering:** Review the menu to ensure that items prone to drying out (like wings or specific chicken cuts) are not being held for extended periods. If they cannot be cooked to order, remove them from the menu or change the preparation method [Source #4].\n*   **Staff Training:** Conduct mandatory training on \"holding times\" and \"visual doneness\" standards. Staff must be empowered to discard any product that does not meet quality standards before it reaches the guest [Source #1].\n\n---\n\n### Risk & Business Impact Analysis\n*   **Food Safety Risk:** Holding food at lukewarm temperatures (e.g., 100\u00b0F) places the restaurant in the \"danger zone,\" creating a significant liability for foodborne illness [Source #1].\n*   **Revenue Loss:** Guests are explicitly stating they will not return and are comparing the experience unfavorably to fast-food alternatives (e.g., \"I would rather spend 150 bucks on double quarter pounders\") [Source #5].\n*   **Brand Erosion:** When high-ticket items (e.g., $50 steaks) fail to meet basic quality standards, the perceived value proposition collapses, leading to negative reviews that deter future patrons [Source #3, #5].",
+      "expected_output": "Overcooked proteins are caused by inaccurate grill temperature calibration, unmonitored meat probe thermometer checks, and carry-over heat miscalculations.",
+      "latency_ms": 6210.28,
+      "status": "evaluated",
+      "deepeval_scores": {
+        "faithfulness": 0.6,
+        "answer_relevancy": 0.85,
+        "contextual_precision": 0.5,
+        "contextual_recall": 0.0,
+        "recommendation_quality": 0.9
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.3136,
+        "heuristic_answer_relevancy": 0.8889,
+        "heuristic_context_precision": 1.0,
+        "heuristic_context_recall": 0.25
+      },
+      "reasons": {
+        "faithfulness": "The response includes several citations to sources and facts (like Charro Steak and Del Rey) that are completely absent from the provided retrieved context.",
+        "answer_relevancy": "The response thoroughly addresses the query regarding the causes of complaints about overcooked steaks and dry chicken, though it mixes in hallucinated sources.",
+        "contextual_precision": "The retriever successfully surfaced reviews mentioning pre-cooked chicken, dry sushi rice, and overcooked wings, but some retrieved chunks were irrelevant to steaks.",
+        "contextual_recall": "The retrieved context completely missed the reference expected output facts regarding grill temperature calibration, meat probe checks, and carry-over heat miscalculations.",
+        "recommendation_quality": "The managerial recommendations provided are highly specific, actionable, and logically address the operational issues identified in the texts."
+      },
+      "error": null
+    },
+    {
+      "id": "TC_07",
+      "category": "Food Quality",
+      "query": "Why are customers complaining that pasta dishes taste bland and lack fresh seasoning?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Diagnosis & Problem Classification\nThe complaints regarding \"bland\" pasta and lack of seasoning are classified as **Systemic Culinary Execution Failures**. Across multiple establishments, the feedback indicates a consistent lack of fundamental seasoning (salt/pepper) and a reliance on low-quality, frozen, or pre-prepared ingredients. The issue is not merely a matter of taste preference, but a failure in kitchen standard operating procedures (SOPs) regarding flavor development and ingredient sourcing.\n\n### Root-Cause Evidence Breakdown\n*   **Lack of Fundamental Seasoning:** At *Dmitri\u2019s*, customers reported that dishes were \"not even seasoned with salt and pepper\" [Source #4]. This suggests a failure in the \"taste-as-you-go\" protocol during the cooking process.\n*   **Reliance on Frozen/Low-Quality Ingredients:** At *Dominic\u2019s Italian Grille*, customers explicitly noted that tortellini and calamari tasted frozen, leading to a perception that the kitchen does not use fresh ingredients [Source #1].\n*   **Inconsistent Execution:** At *Smoke 'N Barrel BBQ Shack*, food is described as \"inconsistent\" and \"flat out bland,\" indicating a lack of standardized recipes or training [Source #3].\n*   **Value Perception Gap:** Customers are comparing the quality of the pasta to home-cooked meals or even frozen retail brands (e.g., Weight Watchers Smart Ones), noting that the price point does not justify the lack of flavor [Source #2].\n\n### Actionable Managerial Recommendations\n\n#### Immediate (Next 7 Days)\n1.  **Mandatory \"Taste-Test\" Protocol:** Implement a mandatory check where the lead line cook or sous-chef must taste every sauce and pasta component before it leaves the pass. If it lacks salt or acidity, it must be corrected immediately.\n2.  **Ingredient Audit:** Conduct an inventory review to identify which items are being sourced frozen versus fresh. If frozen items are necessary, ensure they are being properly thawed and seasoned during the cooking process rather than being served \"as-is.\"\n3.  **Standardized Recipe Cards:** Ensure every station has visible, laminated recipe cards that specify exact seasoning quantities (e.g., \"1 tsp salt per gallon of sauce\") to eliminate guesswork.\n\n#### Long-Term (30-90 Days)\n1.  **Supplier Re-evaluation:** If the \"frozen\" taste is inherent to the product, evaluate new suppliers for fresh pasta or high-quality alternatives that do not compromise the flavor profile.\n2.  **Culinary Training:** Conduct a workshop for the kitchen staff focused on the \"Building Blocks of Flavor\"\u2014specifically the use of salt, acid (lemon/vinegar), and fresh herbs to elevate simple pasta dishes.\n3.  **Customer Feedback Loop:** Implement a \"Table Touch\" program where managers ask specifically about the seasoning of the food during the meal, allowing for immediate recovery if a dish is perceived as bland.\n\n### Risk & Business Impact Analysis\n*   **Brand Erosion:** The reviews indicate that customers are already comparing your establishment unfavorably to home-cooked meals and low-cost retail alternatives [Source #2]. This destroys the \"value proposition\" of dining out.\n*   **Customer Churn:** The sentiment in the reviews is highly negative, with customers stating they will not return [Source #1, #3]. Continued failure to address seasoning will lead to a decline in repeat business and negative word-of-mouth.\n*   **Operational Sustainability:** As noted in *Smoke 'N Barrel BBQ Shack*, poor food quality combined with poor management is a precursor to business failure [Source #3]. Addressing these culinary gaps is essential to preventing long-term revenue loss and potential closure.",
+      "expected_output": "Bland pasta dishes occur due to unstandardized prep batch seasoning recipes, skipping pre-shift sauce line tastings, and rushed line prep.",
+      "latency_ms": 5634.81,
       "status": "evaluated",
       "deepeval_scores": {
         "faithfulness": 0.8,
         "answer_relevancy": 1.0,
-        "contextual_precision": 0.3333,
-        "contextual_recall": 0.0,
-        "recommendation_quality": 0.4
+        "contextual_precision": 0.9,
+        "contextual_recall": 0.7,
+        "recommendation_quality": 1.0
       },
       "heuristic_proxies": {
-        "heuristic_faithfulness": 0.2617,
-        "heuristic_answer_relevancy": 0.5,
-        "heuristic_context_precision": 0.8,
+        "heuristic_faithfulness": 0.2815,
+        "heuristic_answer_relevancy": 0.9,
+        "heuristic_context_precision": 1.0,
+        "heuristic_context_recall": 0.4667
+      },
+      "reasons": {
+        "faithfulness": "The response hallucinates specific restaurant names (Dmitri's, Dominic's, Smoke 'N Barrel) that are not present in the provided context snippets.",
+        "answer_relevancy": "The response directly addresses the user's query by diagnosing the root causes of bland food and providing a comprehensive operational plan.",
+        "contextual_precision": "The retrieved context consistently highlights the lack of seasoning and ingredient quality, which the model effectively prioritizes in its analysis.",
+        "contextual_recall": "The context captures the complaints well but lacks explicit mention of 'rushed line prep' or 'pre-shift sauce line tastings' found in the reference output.",
+        "recommendation_quality": "The recommendations are highly actionable, structured, and directly address the identified culinary failures with professional operational standards."
+      },
+      "error": null
+    },
+    {
+      "id": "TC_08",
+      "category": "Food Quality",
+      "query": "What is the reason for reviews mentioning soggy fried appetizers and stale chips?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Diagnosis & Problem Classification\nThe issues of \"soggy fried appetizers\" and \"stale chips\" are symptomatic of **operational negligence regarding food holding, inventory management, and frying protocols.** Based on the provided reviews, these are not isolated incidents but rather systemic failures in kitchen execution, specifically involving the use of pre-cooked/leftover items and poor storage practices.\n\n**Problem Classification:**\n*   **Quality Control Failure:** Serving reheated or \"leftover\" items as fresh.\n*   **Storage/Environmental Failure:** Improper storage leading to moisture absorption (sogginess) and staleness.\n*   **Equipment/Maintenance Failure:** Degraded frying oil quality and improper display conditions.\n\n---\n\n### Root-Cause Evidence Breakdown\n\n1.  **Reheating/Double-Frying Practices:**\n    *   Evidence suggests staff are attempting to pass off previously cooked food as fresh. One guest noted that wings were \"re-cooked or re-fried\" rather than prepared to order [Source #3].\n    *   At *The Pint Room*, chips were explicitly identified as \"leftovers\" despite staff claims that they were made to order [Source #2].\n2.  **Improper Storage & Environmental Exposure:**\n    *   Staleness is linked to poor storage. At *Mack's Boardwalk Pizza*, food was kept in a display with a lid that caused condensation to drip onto the product, directly causing sogginess [Source #1].\n    *   In other instances, ingredients (such as vegetable sides) were described as having a \"refrigerator\" taste, indicating poor sealing or excessive exposure to cold storage environments [Source #3].\n3.  **Degraded Frying Medium:**\n    *   Fries were reported as tasting \"burnt\" and of \"old oil,\" suggesting that the frying medium is not being changed at appropriate intervals, which negatively impacts the texture and crispness of fried appetizers [Source #3].\n4.  **Inconsistent Kitchen Execution:**\n    *   There is a clear pattern of \"cutting corners\" or \"laziness\" in the kitchen, where some items are fresh while others are clearly stale or reheated [Source #3].\n\n---\n\n### Actionable Managerial Recommendations\n\n#### Immediate (Next 24\u201348 Hours)\n*   **Audit Frying Oil:** Implement a mandatory oil-testing log. If oil is dark or produces a burnt smell, it must be changed immediately.\n*   **Storage Review:** Inspect all display cases and walk-in storage. Ensure that lids are not trapping condensation over prepared food and that all dry goods (chips) are stored in airtight, moisture-proof containers.\n*   **Staff Briefing:** Hold a mandatory kitchen meeting to reiterate the \"Cook-to-Order\" policy. Explicitly forbid the practice of re-frying or reheating appetizers to \"save time.\"\n\n#### Long-Term (Strategic)\n*   **Standardized Prep-to-Order SOPs:** Develop a strict prep schedule that minimizes the time between frying and service. If an item cannot be served fresh, it must be discarded rather than held.\n*   **Inventory Rotation (FIFO):** Enforce a strict First-In, First-Out (FIFO) system for all dry goods to prevent the service of stale chips.\n*   **Quality Assurance Checkpoints:** Implement a \"Pass/Window\" check where the expeditor or lead cook must verify the texture and temperature of fried items before they leave the kitchen.\n\n---\n\n### Risk & Business Impact Analysis\n*   **Customer Retention:** The reviews indicate that these issues lead to permanent loss of patronage. Guests explicitly stated they are \"moving on\" after repeated lackluster experiences [Source #2].\n*   **Brand Reputation:** Terms like \"unsanitary,\" \"nasty,\" and \"gross\" are being associated with the brand, which significantly damages public perception [Source #1, Source #3].\n*   **Operational Inefficiency:** Re-frying food is a false economy; it results in wasted product (when customers send it back or refuse to return) and increased labor costs due to the need for remakes and service recovery efforts.",
+      "expected_output": "Soggy fried items stem from fryer oil temperature drops during overloaded basket batches and holding fried goods in unvented packaging.",
+      "latency_ms": 5521.64,
+      "status": "evaluated",
+      "deepeval_scores": {
+        "faithfulness": 0.95,
+        "answer_relevancy": 1.0,
+        "contextual_precision": 0.8,
+        "contextual_recall": 0.0,
+        "recommendation_quality": 1.0
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.2385,
+        "heuristic_answer_relevancy": 0.6667,
+        "heuristic_context_precision": 1.0,
         "heuristic_context_recall": 0.1875
+      },
+      "reasons": {
+        "faithfulness": "The response is almost entirely grounded in the retrieved context, though it makes slight extrapolations about storage condensation combining details from different reviews.",
+        "answer_relevancy": "The response directly and thoroughly addresses the query about why reviews mention soggy appetizers and stale chips by synthesizing the provided feedback.",
+        "contextual_precision": "The retriever ranked the most relevant evidence chunks mentioning chips and fried items in the top positions.",
+        "contextual_recall": "The retrieved context completely missed the specific technical reasons mentioned in the reference expected output (oil temperature drops from overloaded baskets and unvented packaging), relying instead on customer complaints.",
+        "recommendation_quality": "The generated recommendations are highly actionable, specific, and directly target the root causes of food quality failure identified in the text."
+      },
+      "error": null
+    },
+    {
+      "id": "TC_09",
+      "category": "Service Quality",
+      "query": "What operational issues cause server inattentiveness and neglected dining sections?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Diagnosis & Problem Classification\nBased on the provided reviews, server inattentiveness and neglected dining sections are not isolated incidents but symptoms of systemic operational failures. The issues fall into three primary categories:\n1.  **Management-Sanctioned Neglect:** Leadership explicitly condones or models poor service, creating a culture where staff feel empowered to ignore guests [Source #5, #3].\n2.  **Poor Floor Management & Communication:** A disconnect between visible table availability and seating protocols, often exacerbated by a lack of floor presence by management [Source #1, #3, #4].\n3.  **Staff Distraction & Misalignment:** Servers prioritizing social interactions or personal tasks over guest needs, often occurring even during \"slow\" periods [Source #2, #5].\n\n---\n\n### Root-Cause Evidence Breakdown\n\n*   **Cultural Normalization of Poor Service:** At *Rode's Fireside*, the owner explicitly defended a server prioritizing social interactions with friends over attending to assigned tables [Source #5]. Similarly, at *Toyama Japanese Steak House*, the manager/owner models abrasive behavior and is observed preoccupied with personal tasks (laptop) rather than floor management [Source #3].\n*   **Failure of \"Short-Staffed\" Protocols:** At *Square 1682*, the \"short-staffed\" excuse is invalidated by the fact that the restaurant was \"bare inside,\" indicating a failure in deployment or a lack of managerial oversight to assist during service gaps [Source #4].\n*   **Inconsistent Service Standards:** Servers are failing to perform basic \"table maintenance\" (refilling drinks, providing silverware/napkins) even when the restaurant is not at capacity [Source #2].\n*   **Host/Server Friction:** Rigid or arbitrary seating policies (e.g., forcing entree orders on a patio) create adversarial relationships between staff and guests before service even begins [Source #1].\n\n---\n\n### Actionable Managerial Recommendations\n\n#### Immediate (Next 48 Hours)\n*   **Implement \"Table Touch\" Protocols:** Mandate that managers perform a physical floor sweep every 30 minutes. If a section is neglected, the manager must personally intervene to provide the missing service (e.g., refilling drinks, delivering cutlery) [Source #2, #4].\n*   **Ban Personal Distractions:** Enforce a strict policy prohibiting staff from socializing with friends or using personal devices while on the floor. If a server is not busy, they must be performing side-work or checking on tables, not chatting [Source #5].\n*   **Standardize Seating Logic:** Review host-stand protocols. If tables are empty, guests should be seated promptly unless there is a documented, legitimate staffing shortage. Do not use \"short-staffing\" as a blanket excuse for poor service [Source #1, #3, #4].\n\n#### Long-Term (Strategic)\n*   **Cultural Reset:** Leadership must stop defending poor service in public forums. Acknowledge failures and demonstrate a commitment to guest satisfaction to rebuild brand reputation [Source #5].\n*   **Managerial Accountability:** Managers must be visible and active. If a manager is observed \"sitting on their butt\" while guests are neglected, they are failing their primary duty of floor supervision [Source #3].\n*   **Service Recovery Training:** Train staff on how to handle service gaps. If a mistake occurs (e.g., improper food preparation), the response must be professional and apologetic, not dismissive or rude [Source #5].\n\n---\n\n### Risk & Business Impact Analysis\n*   **Revenue Loss:** Neglected sections and rude management lead to immediate loss of hundreds of dollars per incident and long-term loss of repeat business [Source #3].\n*   **Brand Erosion:** When guests feel \"embarrassed\" for recommending a restaurant, the establishment loses its most valuable marketing asset: word-of-mouth advocacy [Source #1].\n*   **Competitive Disadvantage:** Guests are actively comparing your service to nearby competitors. If your service is perceived as \"mediocre\" or \"rude,\" guests will shift their loyalty to competitors who demonstrate \"appreciation for their guests\" [Source #1, #3].",
+      "expected_output": "Inattentive service is triggered by assigning servers oversized 6+ table sections, absence of dedicated food runners, and inadequate floor manager zoning audits.",
+      "latency_ms": 11504.63,
+      "status": "evaluated",
+      "deepeval_scores": {
+        "faithfulness": 0.5,
+        "answer_relevancy": 0.85,
+        "contextual_precision": 0.6,
+        "contextual_recall": 0.0,
+        "recommendation_quality": 0.8
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.3209,
+        "heuristic_answer_relevancy": 0.8889,
+        "heuristic_context_precision": 1.0,
+        "heuristic_context_recall": 0.3529
+      },
+      "reasons": {
+        "faithfulness": "The response hallucinates multiple restaurant names and sources (e.g., 'Rode's Fireside', 'Toyama Japanese Steak House', 'Square 1682', Source #5) that are completely absent from the provided context chunks.",
+        "answer_relevancy": "The response effectively categorizes and addresses the causes of server inattentiveness based on customer feedback.",
+        "contextual_precision": "The retrieved context chunks are customer complaint reviews rather than operational documents, which makes pinpointing precise operational root causes difficult.",
+        "contextual_recall": "The retrieved context entirely misses the specific operational causes mentioned in the reference output, such as oversized 6+ table sections, absence of food runners, and inadequate zoning audits.",
+        "recommendation_quality": "The actionable recommendations provided are practical and clearly targeted toward improving floor management and service standards."
+      },
+      "error": null
+    },
+    {
+      "id": "TC_10",
+      "category": "Service Quality",
+      "query": "Why do guests complain that drink refills take 20 minutes and water carafes are never replenished?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Diagnosis & Problem Classification\nThe recurring complaints regarding drink service and water replenishment are symptomatic of **systemic service abandonment** and **operational negligence**. The issues are not isolated to a single station but reflect a breakdown in three key areas:\n1.  **Staff Accountability:** Servers are failing to follow up on initial requests or are abandoning tables entirely after initial contact [Source #5].\n2.  **Infrastructure Maintenance:** Failure to maintain self-service equipment (soda fountains) and inventory (expired products) creates a \"bottleneck\" that staff ignores [Source #1, Source #2].\n3.  **Communication Failures:** A lack of proactive table management leads to guests feeling ignored, resulting in them having to hunt down staff to resolve basic needs [Source #1, Source #4, Source #5].\n\n---\n\n### Root-Cause Evidence Breakdown\n*   **Staff Negligence & Abandonment:** Guests report waiting up to 45 minutes without being approached for water [Source #5] or 25 minutes just to place a water order [Source #4]. In one instance, a server took an order and was \"never seen or heard from again\" [Source #5].\n*   **Equipment & Inventory Neglect:** Management is failing to maintain self-service infrastructure. Guests reported broken soda fountains that were never repaired during their visit [Source #1] and expired soda products in refrigerators [Source #2].\n*   **Management Indifference:** When guests escalate issues, management is perceived as dismissive, citing \"we're busy\" rather than offering solutions [Source #5]. This creates a culture where staff feels empowered to ignore guest needs without consequence [Source #2].\n\n---\n\n### Actionable Managerial Recommendations\n\n#### Immediate (Next 48 Hours)\n*   **Implement a \"First Touch\" Standard:** Mandate that all guests must be greeted and offered water within 2 minutes of being seated. If a server is busy, the host or a runner must fulfill the water request immediately.\n*   **Equipment Audit:** Conduct an immediate inspection of all soda fountains and refrigeration units. If equipment is broken, it must be clearly marked \"Out of Order\" with an estimated repair time, or removed from the floor to prevent guest frustration.\n*   **Inventory Purge:** Perform a physical check of all bottled/canned beverages to ensure no expired products are being served [Source #2].\n\n#### Long-Term (30\u201390 Days)\n*   **Table Management Training:** Retrain staff on \"table ownership.\" Servers must be held accountable for their assigned sections. If a server is overwhelmed, the floor manager must proactively reassign tables or assist with drink runs.\n*   **Managerial Presence:** Shift management focus from \"putting butts in seats\" to \"floor presence.\" Managers must actively monitor the floor for tables that have been without water or service for more than 10 minutes.\n*   **Feedback Loop:** Establish a system where staff must report equipment failures to a manager immediately, rather than waiting for a guest to complain [Source #1].\n\n---\n\n### Risk & Business Impact Analysis\n*   **Revenue Loss:** Guests are leaving before ordering or paying, directly impacting the bottom line [Source #1, Source #5].\n*   **Brand Erosion:** The reviews indicate a pattern of \"echoing\" complaints over several years [Source #5]. This suggests that the restaurant is gaining a reputation for poor service, which will eventually deter new customers and destroy local loyalty.\n*   **Operational Liability:** Serving expired products [Source #2] and failing to provide basic hydration (water) creates significant health and safety risks, as well as potential legal liabilities. Continued indifference to these complaints will lead to permanent loss of market share to competitors [Source #5].",
+      "expected_output": "Refill delays stem from beverage station syrup backlogs, servers prioritizing check drop-offs, and lack of dedicated busser water replenishment protocols.",
+      "latency_ms": 5221.62,
+      "status": "evaluated",
+      "deepeval_scores": {
+        "faithfulness": 0.9,
+        "answer_relevancy": 0.85,
+        "contextual_precision": 0.8,
+        "contextual_recall": 0.4,
+        "recommendation_quality": 0.95
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.2311,
+        "heuristic_answer_relevancy": 0.6364,
+        "heuristic_context_precision": 1.0,
+        "heuristic_context_recall": 0.1579
+      },
+      "reasons": {
+        "faithfulness": "The response stays closely tied to the retrieved contexts regarding slow service and equipment failures, though it cites some non-existent source numbers (e.g., Source #5).",
+        "answer_relevancy": "The response thoroughly addresses why guests complain about drink service, though it focuses more on general staff abandonment than the specific syrup backlogs or water carafe protocols mentioned in the reference.",
+        "contextual_precision": "The retrieved context chunks directly contain customer complaints regarding wait times and broken soda fountains, though they lack the precise operational root causes found in the reference.",
+        "contextual_recall": "The retrieved context fails to mention syrup backlogs, check drop-offs, or busser protocols, leading to a low recall score compared to the reference expected output.",
+        "recommendation_quality": "The actionable recommendations provided are extremely practical, structured, and directly target the root causes of poor table service and equipment neglect."
+      },
+      "error": null
+    },
+    {
+      "id": "TC_11",
+      "category": "Service Quality",
+      "query": "What factors lead to disorganized service during shift transitions and server handoffs?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Diagnosis & Problem Classification\nBased on the provided review context, disorganized service during shift transitions and server handoffs is primarily driven by a lack of inter-server communication, poor floor management oversight, and treating shift changes as an acceptable excuse to neglect incoming or seated guests [Source #2, Source #3]. \n\n---\n\n### Root-Cause Evidence Breakdown\n1. **Lack of Server Communication & Handoff Coordination:** \n   - During a 15-person group event at The Empress Tea Room & Bistro, three different servers handled the table without communicating with one another. This resulted in repeated errors (miscounted table settings taking 10 minutes to resolve, constantly bringing/removing chairs and plates, and forgotten reorders), forcing the guests to manage multiple disconnected staff members [Source #3].\n2. **Operational Abandonment During Shift Changes:** \n   - At Dave & Buster's, customers experienced a 20-minute wait for a server before having to flag down two waitresses. The manager justified this lapse by stating it was \"shift change\" and offered no proactive solution or recovery other than a \"pitiful explanation\" and a refusal to refund parking [Source #2].\n3. **Managerial Disengagement:** \n   - Management visibility and active support during operational crunches are severely lacking. At McDonald's, the shift manager watched the front counter struggle during prime dinner time while refusing to assist [Source #4]. Similarly, at Toyama Japanese Steak House, the manager was described as being preoccupied with a laptop rather than managing incoming guests or service flow [Source #1].\n\n---\n\n### Actionable Managerial Recommendations\n\n#### Immediate Actions:\n- **Mandate Structured Handoff Overlap:** Eliminate the practice of servers disappearing or dropping tables during shift changes. Require incoming and outgoing servers to conduct a 2-minute verbal and physical walkthrough of all active tables together.\n- **Proactive Floor Management:** Shift managers must actively monitor the floor during shift transitions. If a table goes unassigned or unacknowledged for more than a few minutes during a handoff, management must step in immediately rather than using \"shift change\" as an excuse [Source #2].\n- **Designate Single-Point-of-Contact for Large Parties:** For larger groups (such as the 15-person event noted in [Source #3]), assign a dedicated lead server or captain to prevent multi-server miscommunication, redundant table adjustments, and dropped orders.\n\n#### Long-Term Actions:\n- **Implement Cross-Communication Checklists:** Introduce digital or physical POS handoff checklists where outgoing servers must log the exact status of each table (e.g., drinks refilled, check dropped, pending reorders) before clocking out.\n- **Service Recovery Training:** Retrain management and staff to ensure that operational excuses (like shift changes) are never communicated to guests as a reason for poor service. Instead, train managers to offer immediate service recovery (such as comps, expedited service, or parking validation) when handoff lapses occur [Source #2].\n\n---\n\n### Risk & Business Impact Analysis\n* **Immediate Revenue Loss:** Unmanaged shift changes and poor handoffs directly drive customers away before ordering, as seen when a customer walked out after waiting 20 minutes for a server during a shift change [Source #2].\n* **Permanently Damaged Guest Loyalty:** Disorganized multi-server handling creates a \"slapdash\" and unprofessional environment, ruining special events, lowering perceived food/service quality, and ensuring that large groups and frequent patrons will not return [Source #3].\n* **Brand Reputation Degradation:** Allowing internal operational shifts to visibly impact the guest experience leads to scathing public reviews, highlighting management apathy and directly impacting future foot traffic and revenue.",
+      "expected_output": "Shift transition service breakdowns occur when table handoff notes are skipped between departing and incoming servers without floor manager sign-off.",
+      "latency_ms": 6682.33,
+      "status": "evaluated",
+      "deepeval_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 1.0,
+        "contextual_precision": 0.5,
+        "contextual_recall": 0.0,
+        "recommendation_quality": 1.0
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.3116,
+        "heuristic_answer_relevancy": 0.8,
+        "heuristic_context_precision": 0.8,
+        "heuristic_context_recall": 0.4444
+      },
+      "reasons": {
+        "faithfulness": "The generated response is completely grounded in the provided context without introducing any external hallucinations.",
+        "answer_relevancy": "The response directly and thoroughly addresses the query regarding factors causing disorganized service during shift transitions and handoffs.",
+        "contextual_precision": "While the relevant evidence (Source 2 and 3) was present in the context, lower-ranked or unrelated snippets (Sources 1 and 4) required filtering.",
+        "contextual_recall": "The retrieved context and reference output focus specifically on skipped handoff notes and manager sign-offs, which the context minimally touches upon compared to general poor service.",
+        "recommendation_quality": "The recommendations provided are exceptionally specific, highly feasible, and directly target the root causes of shift-change and handoff failures."
+      },
+      "error": null
+    },
+    {
+      "id": "TC_12",
+      "category": "Service Quality",
+      "query": "Why are weekday lunch customers struggling to get their bill and finalize payment within 15 minutes?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Diagnosis & Problem Classification\nBased on the provided operational reviews, weekday lunch customers struggling to finalize payments within a 15-minute window face a critical breakdown in **Service Quality** and **Payment/Billing Procedures**. While the context does not feature a single restaurant experiencing all these issues simultaneously, historical review data highlights two primary operational failures that directly stall the billing and payment process during time-sensitive lunch rushes: premature/unsolicited check dropping paired with arbitrary payment rejections [Source #1], and staff inattentiveness leading to extended waiting times [Source #2].\n\n---\n\n### Root-Cause Evidence Breakdown\n1. **Unpredictable and Intrusive Check Delivery:** \n   - Servers have been documented dropping the check unprompted *mid-meal* (e.g., 8 minutes after soup is served) without the customer asking for it [Source #1]. Conversely, customers often have to actively flag down inattentive staff just to get assistance or place orders when no other patrons are present [Source #1].\n2. **Cumbersome and Unreasonable Payment Acceptance Standards:** \n   - Management and staff have imposed strict, subjective rules regarding physical currency (e.g., rejecting legal tender simply because a $10 bill is \"wrinkly\" rather than damaged) [Source #1]. This forces customers to scramble for alternative payment methods (like credit cards), drastically elongating the finalization process.\n3. **General Staff Inattentiveness and Delays:** \n   - Customers experience extended unassisted waiting periods (such as waiting 15 minutes just for an employee to check on them or handle basic front-of-house tasks) [Source #2]. During a high-stakes weekday lunch rush, any delay in staff response directly violates the 15-minute bill-to-payment threshold.\n4. **Premature Closing/Rush-Out Mentalities:** \n   - During lunch service, staff have exhibited visible frustration toward customers arriving later in the lunch window (e.g., after 12:30), signaling an operational rush to close down rather than accommodate standard midday diners [Source #4].\n\n---\n\n### Actionable Managerial Recommendations\n\n#### Immediate (Short-Term) Actions:\n* **Establish Clear Check-Drop Protocols:** Retrain floor staff to *never* drop checks unprompted mid-meal. Implement a standard where checks are presented only upon request or immediately upon completion of the meal to respect the customer's time and dining pace.\n* **Standardize Cash Acceptance Policies:** Clarify and communicate to all front-of-house and management staff that standard, non-torn, non-damaged currency must be accepted without question. Eliminate arbitrary currency standards (such as rejecting \"wrinkly\" bills) [Source #1] to prevent unnecessary payment friction and customer alienation.\n* **Enforce Active Floor Monitoring During Lunch:** Mandate that servers check in on tables every 5\u20137 minutes during the weekday lunch rush to ensure fast turnaround times for processing bills and payments within the 15-minute limit.\n\n#### Long-Term Strategic Initiatives:\n* **Implement Mobile/Tabletop Payment Solutions:** Introduce handheld credit card terminals or QR-code mobile payment options at the table. This allows weekday lunch customers\u2014who are typically on strict time constraints\u2014to view, split, and settle their bills instantly without waiting for a server.\n* **Service Mindset & Hospitality Training:** Conduct regular service audits to eliminate the \"rushed closing\" mentality often displayed toward late-lunch customers [Source #4]. Ensure staff understand that the lunch period requires peak efficiency and welcoming hospitality.\n\n---\n\n### Risk & Business Impact Analysis\n* **Loss of Regular and Lunch Clientele:** Weekday lunch customers rely heavily on speed and convenience. If patrons cannot successfully obtain and pay their bill within 15 minutes, they will permanently abandon the restaurant for faster competitors.\n* **Reputational Damage:** Arbitrary payment policies (such as policing the condition of paper money) [Source #1] and slow service create humiliating and frustrating experiences, driving negative public reviews that deter future daytime business.\n* **Revenue Leakage:** Slow payment processing creates table bottlenecks. If lunch tables cannot finalize payments quickly, table turnover rates drop, directly limiting midday revenue potential.",
+      "expected_output": "Slow payment processing during lunch is caused by POS station terminal congestion and failure to offer tableside mobile checkout options.",
+      "latency_ms": 7117.22,
+      "status": "evaluated",
+      "deepeval_scores": {
+        "faithfulness": 0.8,
+        "answer_relevancy": 0.9,
+        "contextual_precision": 0.4,
+        "contextual_recall": 0.0,
+        "recommendation_quality": 0.8
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.2475,
+        "heuristic_answer_relevancy": 1.0,
+        "heuristic_context_precision": 1.0,
+        "heuristic_context_recall": 0.1333
+      },
+      "reasons": {
+        "faithfulness": "The response accurately synthesizes the provided context, though it infers a 'systemic' issue that the individual anecdotes do not explicitly confirm as a universal operational policy.",
+        "answer_relevancy": "The response directly addresses the user's query by identifying potential service and payment friction points found in the provided reviews.",
+        "contextual_precision": "The retrieved context contains mostly anecdotal customer complaints rather than specific operational data, making the top-ranked evidence only tangentially related to the query.",
+        "contextual_recall": "The retrieved context completely fails to mention the POS terminal congestion or lack of mobile checkout options identified in the reference output.",
+        "recommendation_quality": "The recommendations are highly actionable and logically derived from the provided context, even though they miss the specific technical root causes mentioned in the reference."
+      },
+      "error": null
+    },
+    {
+      "id": "TC_13",
+      "category": "Staff Behavior",
+      "query": "What operational stress factors trigger rude server interactions and dismissive attitudes toward guests?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Diagnosis & Problem Classification\n\nBased on the provided Yelp reviews, rude server interactions and dismissive attitudes toward guests are triggered by specific operational stress factors, primarily revolving around **capacity strain, large group management breakdowns, and front-of-house/back-of-house miscommunication**. \n\nRather than isolated incidents of poor temperament, dismissiveness and abrasive behavior manifest when staff are overwhelmed by table counts, disorganized large party logistics, or frustrated by rigid operational policies.\n\n---\n\n### Root-Cause Evidence Breakdown\n\nThe historical data highlights several distinct operational triggers that lead directly to rude or dismissive guest interactions:\n\n1. **Large Party Disorganization and Miscommunication:**\n   * When handling large groups (e.g., 15-person tables), poor internal communication among multiple servers leads to chaotic execution\u2014such as miscounted table settings, redundant or missing chairs, and repeated forgotten orders [Source #5]. \n   * This chaos creates friction; staff become overwhelmed, start ignoring the large table in favor of smaller groups, and resort to crass or dismissive remarks (e.g., a server claiming they only saw the table \"out of the corner of my eye\") [Source #5].\n\n2. **Policy Enforcement Anxiety and Condescending Upselling:**\n   * Rigid formatting or forced purchasing rules (e.g., requiring patio guests to order full entrees rather than appetizers) place servers in an uncomfortable mediator role [Source #2]. \n   * When guests push back or feel coerced into unwanted purchases, servers may react defensively or make passive-aggressive, insulting parting comments on the check (e.g., telling guests \"you were not as bad as she expected\" and to get babysitters next time) [Source #2].\n\n3. **Management Burnout and Abrasiveness:**\n   * Operational stress is modeled from the top down. When owners or managers are visibly burnt out, preoccupied with personal devices (e.g., sitting on a laptop), or hostile about closing times, their abrasive responses set a toxic tone for the entire establishment [Source #1]. \n\n4. **Guaranteed Gratuity Complacency:**\n   * Automatic large-party gratuities (e.g., an 18% auto-gratuity for large events) can inadvertently degrade service motivation. Staff may feel secure in their tip regardless of performance, leading to a noticeable drop in attentiveness, care, and hospitality [Source #5].\n\n5. **Condescending Educational Correction (Arrogance):**\n   * Staff responding defensively or berating guests for minor inquiries (e.g., berating a customer for asking for butter instead of Devonshire cream in a tea house) signals a culture of staff superiority over guest hospitality [Source #5].\n\n---\n\n### Actionable Managerial Recommendations\n\n#### Immediate (Short-Term) Actions:\n* **Establish Clear Protocols for Large Parties:** Implement a dedicated station/server assignment sheet for groups over 10 to eliminate the multi-server communication confusion that leads to neglected tables and mutual finger-pointing [Source #5].\n* **Review and Soften Restrictive Patio/Menu Policies:** If patio seating requires food purchases, ensure hosts clearly communicate this *before* seating or waitlisting guests, preventing servers from having to force unwanted entrees onto frustrated patrons [Source #2].\n* **Address Leadership Attitude:** Management must audit their own floor presence. Preoccupied, hostile, or visibly miserable leadership directly triggers negative guest-facing friction [Source #1].\n\n#### Long-Term Strategic Actions:\n* **Retrain Staff on Hospitality vs. Correction:** Conduct guest-service training emphasizing that customer preferences (even uneducated ones, like asking for butter over Devonshire cream) must be handled with polite hospitality rather than public berating [Source #5].\n* **Monitor Auto-Gratuity Performance:** Tie large-party service standards to ongoing reviews, ensuring that a guaranteed 18% gratuity does not translate into complacent or dismissive attitudes [Source #5].\n* **Manage Seating Flow vs. Waitlist Transparency:** Avoid the friction of empty tables paired with long wait times. If tables are open, seat guests efficiently rather than imposing arbitrary delays that sour the customer's mood before they even interact with a server [Source #1, Source #2].\n\n---\n\n### Risk & Business Impact Analysis\n\n* **Immediate Revenue Loss:** Rude interactions and arbitrary wait times directly cause walkouts and lost business, resulting in immediate losses of hundreds of dollars per incident from groups taking their business elsewhere [Source #1].\n* **Long-Term Brand Erosion:** Treating loyal, long-term patrons or guests hosting large events with condescension destroys local word-of-mouth marketing. Customers who once recommended the restaurant will actively warn others away (\"Do not come here, go anywhere else\") [Source #1, Source #2, Source #5].\n* **Damaged Event Business:** Dismissive service, sloppily presented family-style food, and burnt menu items during large group bookings ensure that high-value group events and private parties will never return [Source #5].",
+      "expected_output": "Rude staff interactions arise from back-to-back double shifts without meal breaks, peak shift fatigue, and lack of customer de-escalation training.",
+      "latency_ms": 10082.71,
+      "status": "evaluated",
+      "deepeval_scores": {
+        "faithfulness": 0.2,
+        "answer_relevancy": 0.8,
+        "contextual_precision": 0.4,
+        "contextual_recall": 0.0,
+        "recommendation_quality": 0.7
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.3419,
+        "heuristic_answer_relevancy": 0.9167,
+        "heuristic_context_precision": 1.0,
+        "heuristic_context_recall": 0.3889
+      },
+      "reasons": {
+        "faithfulness": "The response hallucinates multiple sources (Source #5) and specific operational details not present in the provided context.",
+        "answer_relevancy": "The response directly addresses the query about operational stress factors, though it relies on fabricated evidence to do so.",
+        "contextual_precision": "The retriever provided relevant evidence in the first two ranks, but the model ignored the provided context in favor of hallucinated data.",
+        "contextual_recall": "The retrieved context did not contain the information regarding double shifts or de-escalation training mentioned in the reference output, resulting in a failure to capture those specific facts.",
+        "recommendation_quality": "The recommendations are logically sound and actionable for a restaurant manager, even though they are based on hallucinated root causes."
+      },
+      "error": null
+    },
+    {
+      "id": "TC_14",
+      "category": "Staff Behavior",
+      "query": "Why are guests reporting confrontational or defensive behavior from shift managers when handling complaints?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Diagnosis & Problem Classification\n\nThe recurring reports of confrontational, defensive, and abrasive behavior from management stem from a systemic breakdown in guest relations, conflict de-escalation, and professional accountability. Based on the provided review data, leadership is actively alienating patrons through hostile communication styles, misdirected accusations, and a lack of basic hospitality training. \n\nThis issue is classified under **Service Quality & Staff Behavior Failures**, specifically driven by:\n*   **Hostile In-Person Interactions:** Managers responding with abrasive tones, snapping at guests, and lecturing or berating patrons instead of listening to concerns [Source #1, Source #5].\n*   **Defensive Shift-Change/Policy Excuses:** Using internal operational transitions (like shift changes) or strict policies as dismissive justifications for poor service rather than offering service recoveries [Source #4].\n*   **Lack of Receptivity and Accountability:** Exhibiting visibly miserable demeanors, dismissing customer friction, and normalizing bad management behavior internally (e.g., staff excusing a manager with \"sorry that's just how he is\") [Source #1, Source #5].\n\n---\n\n### Root-Cause Evidence Breakdown\n\nThe retrieved operational data highlights specific incidents where management escalated minor friction into severe customer alienation:\n\n1.  **Abrasive Communication & Dismissiveness:** At Toyama Japanese Steak House, an older manager/owner routinely displays an unwelcoming demeanor, \"snapped\" at guests arriving just before a closing time, and offered abrasive responses regarding seating and hours [Source #1]. This directly mirrors the root cause of guests feeling attacked when they inquire about basic service details.\n2.  **Unjustified Accusations & Public Berating:** At National Underground, a manager aggressively approached a bachelorette party, falsely accusing them of harassing other customers and yelling at them repeatedly instead of verifying the situation calmly [Source #5]. Another staff member excused this behavior by saying, *\"sorry that's just how he is\"* [Source #5], proving a toxic normalization of poor temperament within the leadership team.\n3.  **Defensiveness Over Internal Operations:** At Dave & Buster's, when a customer experienced a 20-minute wait due to a shift change, the manager offered a \"pitiful explanation\" and flatly refused to refund parking or provide any service recovery, hiding behind internal scheduling as an excuse for poor guest experience [Source #4].\n\n---\n\n### Actionable Managerial Recommendations\n\n#### Immediate Actions (Next 0\u201330 Days)\n*   **Implement De-Escalation & Conflict Resolution Training:** Mandate immediate coaching for all shift managers focusing on active listening, empathy, and de-escalation techniques. Shift managers must learn to separate personal frustration from guest interactions.\n*   **Abolish \"Internal Operations\" as an Excuse:** Establish a strict policy that internal bottlenecks (e.g., shift changes, staffing shortages) should *never* be communicated to guests as a justification for poor service. Instead, train managers to lead with empathy, apologies, and proactive service recoveries (e.g., complimentary items, parking validation as seen in Source #4).\n*   **Establish a Zero-Tolerance Policy for Public Confrontations:** Set clear behavioral standards. Managers must never yell, lecture, or publicly berate customers [Source #5]. Any complaints regarding aggressive manager behavior must trigger an immediate review by senior ownership.\n\n#### Long-Term Strategy (1\u20136 Months)\n*   **Revise Performance Metrics & Leadership Evaluations:** Shift management evaluations away from purely operational throughput to include customer satisfaction scores, review tracking, and direct observation of guest interactions. \n*   **Eliminate Toxic \"Normalization\":** Address environments where staff excuse bad manager behavior (\"that's just how he is\") [Source #5]. Cultivate a culture of accountability where toxic leadership traits are corrected or result in replacement.\n*   **Mystery Shopper & Feedback Audits:** Institute regular mystery shopper programs specifically designed to test shift managers' handling of complaints, wait times, and customer inquiries to catch defensive behaviors early.\n\n---\n\n### Risk & Business Impact Analysis\n\n*   **Severe Revenue Loss:** Unwelcoming and confrontational managers directly turn away large groups and repeat customers. As noted in Source #1, single hostile encounters immediately cost establishments hundreds of dollars in lost business from the affected parties and those standing nearby.\n*   **Permanent Brand Destruction:** When managers aggressively lecture or yell at guests (such as bachelorette parties or families), those customers share negative word-of-mouth and detailed public reviews [Source #1, Source #5], permanently damaging the restaurant's local reputation.\n*   **Cultural Decay:** When toxic and defensive manager behaviors are tolerated or excused by the team, employee morale plummets, creating an overall hostile environment that accelerates staff turnover and systemic service failures.",
+      "expected_output": "Confrontational management behavior stems from lack of executive guest-recovery autonomy, punitive corporate food-cost policies, and absence of service recovery coaching.",
+      "latency_ms": 8080.9,
+      "status": "evaluated",
+      "deepeval_scores": {
+        "faithfulness": 0.6,
+        "answer_relevancy": 0.9,
+        "contextual_precision": 0.8,
+        "contextual_recall": 0.3,
+        "recommendation_quality": 0.9
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.2365,
+        "heuristic_answer_relevancy": 0.9091,
+        "heuristic_context_precision": 1.0,
+        "heuristic_context_recall": 0.3333
+      },
+      "reasons": {
+        "faithfulness": "The response hallucinates 'Source #5' and specific details about a 'bachelorette party' and 'National Underground' which are not present in the provided context.",
+        "answer_relevancy": "The response provides a highly structured and comprehensive analysis that directly addresses the user's query about confrontational management behavior.",
+        "contextual_precision": "The top-ranked evidence chunks provided relevant examples of rude management, though the model supplemented this with external/hallucinated data.",
+        "contextual_recall": "The retrieved context failed to provide information regarding 'executive guest-recovery autonomy' or 'punitive corporate food-cost policies' mentioned in the reference output.",
+        "recommendation_quality": "The recommendations are highly actionable, professional, and logically derived from the identified behavioral issues in the provided text."
+      },
+      "error": null
+    },
+    {
+      "id": "TC_15",
+      "category": "Staff Behavior",
+      "query": "What causes front-door hostess stand unwelcoming greetings and dismissive seating responses?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Diagnosis & Problem Classification\n\nBased on the retrieved Yelp reviews, front-door greeting failures, unwelcoming hostess behavior, and dismissive seating responses stem from a combination of **operational neglect, staff burnout/poor morale, and a lack of defined front-of-house (FOH) accountability**. \n\nProblem classifications identified across the reviews include:\n*   **Front-Door Abandonment & Lack of Coverage:** Instances where no host is stationed at the entrance, leaving guests stranded and ignored [Source #3, Source #4].\n*   **Host/Manager Apathy and Abrasiveness:** Front-line staff and managers displaying overt frustration, dismissiveness, or hostility toward arriving guests [Source #1, Source #2].\n*   **Ineffective Waitlist & Seating Execution:** Arbitrary seating that bypasses waitlist order, and providing confusing or dismissive seating options (e.g., forcing guests into server work areas or turning them away improperly) [Source #1, Source #4, Source #5].\n\n---\n\n### Root-Cause Evidence Breakdown\n\nThe retrieved historical reviews highlight specific operational breakdowns causing these guest-facing failures:\n\n1.  **Absent or Unattended Host Stations:**\n    *   *Evidence:* At Jackson's Bar & Bistro, guests walked into a busy lunch service to \"find no entryway/hostess stand and stood uncomfortably in the middle of a busy dining area\" [Source #4]. At Barone's Tuscan Grill, a guest stood for nearly 10 minutes without a greeting because \"no one knew that I wasn't being served and no one did enough to try and find that out\" [Source #3].\n2.  **Multitasking Front-Staff with Negative Framing:**\n    *   *Evidence:* Employees at Barone's were multitasking away from the door (e.g., opening wine bottles, roaming) and failed to acknowledge eye contact or establish clear handoffs [Source #3]. At Jackson's Bar & Bistro, the bar area doubled as a server/hostess station where employees were openly \"complaining of needing a stiff drink,\" creating an unwelcoming atmosphere [Source #4].\n3.  **Managerial Burnout and Hostile Front-Door Tone:**\n    *   *Evidence:* At Toyama Japanese Steak House, the manager/owner displayed \"a constant look on his face as if he hates his life and job,\" snapping at guests and showing preoccupation with his laptop rather than welcoming customers [Source #2]. \n4.  **Flawed Queue Management & Broken Promises:**\n    *   *Evidence:* At Milktooth, a hostess mismanaged a quoted wait time (telling guests 45 minutes, extending it to 75\u201390 minutes), was dismissive and rude on a major holiday, and violated queue integrity by seating a couple who arrived 30 minutes later ahead of them [Source #1]. \n5.  **Miscommunication Between Phone Staff and Floor Staff:**\n    *   *Evidence:* At The Farm and Fisherman, a guest was told over the phone not to worry about a reservation for a late-night arrival, only to be met by a reluctant server making facial expressions, followed by a kitchen rejection that turned paying guests away [Source #5].\n\n---\n\n### Actionable Managerial Recommendations\n\n#### Immediate (Short-Term) Actions:\n*   **Establish Dedicated Door Coverage:** Implement a strict \"eyes up, greet within 5 seconds\" policy. During peak hours (e.g., Saturday lunch/Mother's Day), a dedicated host must be stationed at the door; if secondary staff must cover, assign clear accountability so guests are never left waiting in entryways [Source #1, #3, #4].\n*   **Audit Phone-to-Floor Communication:** Ensure front-desk and phone staff are aligned on walk-in policies, kitchen closing times, and late-night seating protocols to prevent conflicting instructions that anger arriving guests [Source #2, #5].\n*   **Enforce Waitlist Integrity:** Retrain hosts on queue management software or pen-and-paper tracking to ensure parties are seated strictly in the order they arrived, eliminating the favoritism or disorganization reported by waiting guests [Source #1].\n*   **Eliminate FOH \"Backstage\" Behaviors in Public Views:** Prohibit staff from rolling silverware, polishing napkins, or complaining about needing drinks within sight or earshot of arriving guests at bar/host hybrid stations [Source #4].\n\n#### Long-Term Strategic Actions:\n*   **Management & Staff Attitude Overhauls:** Institute hospitality-focused retraining. Address toxic behaviors or visible burnout among managers and owners who project frustration onto incoming patrons [Source #2]. \n*   **Redesign Entryways and Host Stations:** If an entryway lacks a clear hostess stand (as seen in Source #4), invest in a distinct physical station or podium that clearly directs incoming traffic and keeps server side-work out of the guest arrival path.\n*   **Implement Service Recovery Protocols:** Empower hosts and floor managers to handle waitlist overages gracefully (e.g., offering complimentary items or honest, polite communication) rather than resorting to dismissiveness or rude dismissals [Source #1, #2].\n\n---\n\n### Risk & Business Impact Analysis\n\n*   **Revenue Loss:** Dismissive greetings and rude management directly result in immediate walkouts and lost business from whole groups (e.g., Toyama Japanese Steak House noting lost hundreds of dollars of business from multiple groups in a single instance) [Source #2].\n*   **Reputational Damage:** Unwelcoming hosts and long, mismanaged waits inspire scathing 1-star reviews\u2014especially on high-volume holidays like Mother's Day\u2014driving prospective customers away permanently [Source #1].\n*   **Word-of-Mouth Attrition:** Mistreated guests actively warn their coworkers, friends, and family to stay away, permanently stunting local repeat business and community goodwill [Source #2, #5].",
+      "expected_output": "Unwelcoming host greetings stem from insufficient front-of-house hospitality onboarding, lack of eye-contact standards, and phone distraction at the podium.",
+      "latency_ms": 8435.82,
+      "status": "evaluated",
+      "deepeval_scores": {
+        "faithfulness": 0.8,
+        "answer_relevancy": 1.0,
+        "contextual_precision": 1.0,
+        "contextual_recall": 0.9,
+        "recommendation_quality": 1.0
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.3405,
+        "heuristic_answer_relevancy": 0.8182,
+        "heuristic_context_precision": 1.0,
+        "heuristic_context_recall": 0.375
+      },
+      "reasons": {
+        "faithfulness": "The response includes references to 'Source #5' and 'The Farm and Fisherman', which are not present in the provided retrieved context, constituting a hallucination.",
+        "answer_relevancy": "The response directly addresses the query by categorizing the causes of poor front-door service and providing a structured analysis.",
+        "contextual_precision": "The top-ranked evidence chunks are highly relevant and directly support the identified operational failures.",
+        "contextual_recall": "The context covers the majority of the issues, though it misses the specific 'onboarding' aspect mentioned in the reference output.",
+        "recommendation_quality": "The recommendations are highly actionable, specific to the identified root causes, and demonstrate expert-level operational insight."
+      },
+      "error": null
+    },
+    {
+      "id": "TC_16",
+      "category": "Staff Behavior",
+      "query": "Why do reviews mention kitchen crew shouting or using inappropriate language audible in the dining room?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Diagnosis & Problem Classification\nBased on the provided review data, there is **no direct evidence** in the retrieved context that explicitly mentions \"kitchen crew shouting\" or \"inappropriate language\" occurring specifically within the kitchen environment or being audible in the dining room.\n\nHowever, the reviews do highlight a critical **Professionalism and Conduct Gap** within your staff. The reported issues are classified as:\n*   **Management/Staff Conduct:** Direct harassment and derogatory comments toward guests [Source #2, Source #5].\n*   **Operational Negligence:** Lack of accountability for service standards and unprofessional social behavior by staff [Source #1].\n\n### Root-Cause Evidence Breakdown\nWhile the specific \"shouting\" complaint is not present in the provided sources, the following incidents indicate a culture where staff feel empowered to act inappropriately:\n\n*   **Harassment & Unprofessionalism:** At *Allegro Pizza*, a male employee harassed a guest and refused to stop when asked [Source #5]. At *Baileys' Range*, management itself provided \"derogatory comments\" to guests [Source #2].\n*   **Lack of Oversight:** At *Rode's Fireside Restaurant & Tavern*, the owner explicitly endorsed a culture where servers prioritize socializing with friends over attending to tables, signaling a lack of professional boundaries [Source #1].\n*   **Environmental Neglect:** The presence of pests (roaches and mice) in dining areas [Source #3, Source #4] suggests a high-stress, poorly managed back-of-house environment, which often correlates with the \"shouting\" or chaotic kitchen atmosphere you are concerned about.\n\n### Actionable Managerial Recommendations\n\n#### Immediate (Next 24\u201348 Hours)\n1.  **Conduct a \"Zero-Tolerance\" Briefing:** Hold an all-staff meeting to reiterate the code of conduct. Explicitly state that any shouting, derogatory language, or harassment of guests will result in immediate disciplinary action.\n2.  **Implement a \"Dining Room Presence\" Policy:** Prohibit staff from socializing with friends or non-working colleagues while on the clock to prevent the \"clique\" behavior noted in Source #1.\n3.  **Audit Management Behavior:** Ensure that managers are not the source of the problem. If management is engaging in derogatory comments [Source #2], they must be coached or replaced immediately.\n\n#### Long-Term (30\u201390 Days)\n1.  **Standardize Communication Protocols:** Implement a \"Kitchen-to-Dining\" communication policy. Use low-volume, professional verbal cues or digital KDS (Kitchen Display Systems) to reduce the need for shouting.\n2.  **Professionalism Training:** Invest in hospitality training that emphasizes guest comfort and the impact of staff behavior on the dining atmosphere.\n3.  **Operational Audit:** Given the reports of pests and poor service, conduct a deep-dive audit of kitchen operations. A chaotic, loud kitchen is often a symptom of poor workflow and high stress; streamlining the kitchen process will naturally reduce the need for shouting.\n\n### Risk & Business Impact Analysis\n*   **Reputational Risk:** The reviews indicate that guests are already sensitive to \"uncomfortable\" environments [Source #5]. If staff shouting is audible, it will exacerbate the perception of a low-quality, unprofessional establishment.\n*   **Legal/Liability Risk:** Harassment of guests [Source #5] and derogatory comments from management [Source #2] are significant legal liabilities that can lead to lawsuits and permanent loss of local patronage.\n*   **Customer Retention:** The combination of poor service, unprofessional conduct, and hygiene issues (pests) is driving a \"never return\" sentiment across multiple sources [Source #1, #2, #4]. Addressing the \"shouting\" is a necessary step in reclaiming the professional standard of your dining room.",
+      "expected_output": "Audible kitchen disruption occurs when kitchen pass doors are propped open during ticket rushes and expo line acoustic dampening is absent.",
+      "latency_ms": 5550.8,
+      "status": "evaluated",
+      "deepeval_scores": {
+        "faithfulness": 0.6,
+        "answer_relevancy": 0.8,
+        "contextual_precision": 0.2,
+        "contextual_recall": 0.0,
+        "recommendation_quality": 0.7
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.1818,
+        "heuristic_answer_relevancy": 0.9091,
+        "heuristic_context_precision": 0.6,
+        "heuristic_context_recall": 0.1176
+      },
+      "reasons": {
+        "faithfulness": "The model hallucinates external sources (Source #5) and specific restaurant names not present in the provided context.",
+        "answer_relevancy": "The response addresses the user's query by acknowledging the lack of direct evidence while providing helpful operational context.",
+        "contextual_precision": "The retrieved context contains no information regarding kitchen shouting or acoustic issues, making the ranking irrelevant to the specific query.",
+        "contextual_recall": "The retrieved context completely failed to provide the information found in the reference output regarding kitchen pass doors and acoustic dampening.",
+        "recommendation_quality": "The recommendations are professional and actionable, though they are based on inferred problems rather than the specific root cause provided in the reference."
+      },
+      "error": null
+    },
+    {
+      "id": "TC_17",
+      "category": "Cleanliness",
+      "query": "Why are guests seated at sticky dining tables with food crumbs underneath chairs?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Diagnosis & Problem Classification\nThe issue of sticky tables and debris under chairs is not an isolated incident but a systemic failure in **Front-of-House (FOH) sanitation protocols and management oversight**. Based on the provided reviews, your restaurant is suffering from a \"culture of neglect\" where cleanliness standards are either non-existent, poorly communicated, or ignored by staff.\n\n**Problem Classification:**\n*   **Operational Negligence:** Failure to execute basic \"table turn\" sanitation procedures.\n*   **Management Oversight:** A lack of floor supervision, allowing staff to ignore visible messes during non-peak hours.\n*   **Sanitation Breakdown:** Inadequate cleaning supplies or techniques (e.g., failing to remove grease buildup, which is being mistaken for table varnish).\n\n---\n\n### Root-Cause Evidence Breakdown\n*   **Failure of Supervision:** At *Newk's Eatery*, a manager was observed walking past multiple dirty tables and floor debris without intervening, signaling to staff that cleanliness is not a priority [Source #2].\n*   **Inadequate Cleaning Techniques:** Sticky surfaces are a recurring theme. At *Greek Sotir Grill*, the issue is pervasive across all furniture [Source #4]. At *Red Lobster*, what appeared to be \"table varnish\" was actually accumulated grease/butter, indicating that tables are being wiped with ineffective cloths or cleaning agents that do not cut through food residue [Source #5].\n*   **Neglect of \"Hidden\" Areas:** Debris is not just on the surface; *Red Lobster* reports that \"crumb catchers\" in booths are full of food particles, and *Newk's Eatery* reports food crumbs under chairs [Source #2, Source #5].\n*   **Staff Accountability:** At *Newk's Eatery*, a busser was explicitly witnessed failing to wash tables [Source #2].\n\n---\n\n### Actionable Managerial Recommendations\n\n#### Immediate (Next 24\u201348 Hours)\n1.  **Implement a \"Clean-as-You-Go\" Audit:** Require all FOH staff to use a standardized, heavy-duty degreaser on all tables\u2014not just a damp cloth. The \"sticky\" residue reported suggests current cleaning solutions are insufficient.\n2.  **Mandatory Floor/Booth Sweep:** Assign a specific team member to vacuum or sweep \"crumb catchers\" and under-chair areas every 30 minutes, regardless of how busy the restaurant is.\n3.  **Managerial \"Floor Presence\":** Managers must actively inspect tables *before* seating guests. If a table is not clean, the host must be instructed to skip that table in the rotation until it is sanitized.\n\n#### Long-Term (Strategic)\n1.  **Revise Closing/Opening Checklists:** Update checklists to include \"deep-wipe\" protocols for booth crevices and chair legs, which are currently being overlooked.\n2.  **Staff Training on Sanitation:** Conduct a training session demonstrating the difference between \"wiping\" a table and \"sanitizing\" a table. Use the *Red Lobster* feedback as a case study to show how grease buildup creates a negative perception of quality [Source #5].\n3.  **Accountability Metrics:** Integrate cleanliness inspections into the daily manager log. If a manager walks past a dirty table without addressing it, it must be treated as a performance issue.\n\n---\n\n### Risk & Business Impact Analysis\n*   **Brand Erosion:** Guests are explicitly linking dirty dining areas to potential kitchen hygiene issues (\"If the dining area is dirty, what's the kitchen like?\") [Source #2]. This creates a \"fear factor\" that drives away repeat business.\n*   **Safety Liability:** Slick, greasy floors (especially near kitchens) pose a significant slip-and-fall liability [Source #1].\n*   **Revenue Loss:** Cleanliness is a primary driver of the \"value\" perception. When guests pay premium prices for food but sit in a dirty environment, they perceive the experience as a poor value, leading to negative reviews and lost future revenue [Source #1, Source #5].",
+      "expected_output": "Sticky tables and debris result from bussers using dirty sanitizing rag solution buckets and rushing table resets without 2-step surface cleaning.",
+      "latency_ms": 5479.39,
+      "status": "evaluated",
+      "deepeval_scores": {
+        "faithfulness": 0.6,
+        "answer_relevancy": 0.9,
+        "contextual_precision": 1.0,
+        "contextual_recall": 0.2,
+        "recommendation_quality": 0.9
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.2538,
+        "heuristic_answer_relevancy": 0.8,
+        "heuristic_context_precision": 1.0,
+        "heuristic_context_recall": 0.2778
+      },
+      "reasons": {
+        "faithfulness": "The response hallucinates specific restaurant names (Red Lobster, Greek Sotir Grill) and source numbers that are not present in the provided context.",
+        "answer_relevancy": "The response provides a highly structured and comprehensive operational analysis that directly addresses the user's query about dining room cleanliness.",
+        "contextual_precision": "The retrieved context is highly relevant to the query, and the model correctly identifies the key issues of management oversight and staff negligence from the top-ranked evidence.",
+        "contextual_recall": "The retrieved context fails to mention the specific root causes identified in the reference output, such as dirty sanitizing buckets or the lack of 2-step cleaning processes.",
+        "recommendation_quality": "The recommendations are highly actionable, professional, and logically derived from the operational failures identified in the context."
+      },
+      "error": null
+    },
+    {
+      "id": "TC_18",
+      "category": "Cleanliness",
+      "query": "What causes frequent customer complaints about unsanitary restrooms, empty soap dispensers, and bad odors?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Diagnosis & Problem Classification\nThe frequent complaints regarding unsanitary restrooms, odors, and lack of supplies are not isolated incidents but symptoms of **systemic operational neglect** and **cultural apathy** within the staff. The issues are classified into three primary categories:\n1.  **Accountability Failure:** Staff actively dismiss or berate customers who report sanitation issues [Source #1].\n2.  **Infrastructure & Maintenance Neglect:** Failure to address broken fixtures (e.g., toilets) and external waste management (e.g., overflowing dumpsters/oil) [Source #1, Source #2].\n3.  **Lack of Standardized Maintenance Protocols:** Absence of routine cleaning schedules, leading to visible filth in high-traffic areas [Source #2, Source #5].\n\n---\n\n### Root-Cause Evidence Breakdown\n*   **Staff Apathy & Hostility:** Employees have been documented expressing open disdain for customers who report cleanliness issues, with one staff member explicitly stating they \"don't fix\" restrooms [Source #1]. This creates a culture where reporting a problem is met with conflict rather than resolution.\n*   **External Sanitation Failures:** Odors are linked to poor waste management, specifically overflowing dumpsters and rancid cooking oil storage, which creates a \"dead rat\" smell that permeates the premises [Source #2].\n*   **Operational Disengagement:** The presence of \"late employees\" without uniforms, staff on personal phones, and general confusion suggests a lack of managerial oversight during shifts [Source #2, Source #4].\n*   **Systemic Neglect:** Multiple sources indicate that these are not one-off events but recurring issues that have led to \"Major Violations\" in city sanitation reports [Source #2, Source #3].\n\n---\n\n### Actionable Managerial Recommendations\n\n#### Immediate (Next 24\u201348 Hours)\n*   **Implement a Restroom Checklist:** Install a physical log on the back of every restroom door requiring hourly checks for cleanliness, soap, paper products, and toilet functionality.\n*   **Waste Management Audit:** Immediately inspect the exterior dumpster and grease trap areas. Schedule an emergency pickup if overflow is detected to eliminate the source of external odors [Source #2].\n*   **Service Recovery Training:** Conduct a mandatory briefing on the \"Service Recovery\" protocol. Staff must be trained to thank customers for reporting issues and immediately notify a manager, rather than engaging in defensive or hostile dialogue [Source #1].\n\n#### Long-Term (30\u201390 Days)\n*   **Standard Operating Procedures (SOPs):** Formalize a \"Cleanliness First\" policy. Include specific tasks for opening, mid-shift, and closing, with a designated \"Manager on Duty\" (MOD) sign-off required for each.\n*   **Staff Accountability:** Link performance reviews and shift assignments to adherence to sanitation and service standards. Address the \"hipster/rude\" culture by enforcing professional dress codes and prohibiting personal phone use on the floor [Source #2, Source #4].\n*   **Third-Party Sanitation Audit:** Engage an external health and safety consultant to conduct a mock inspection to identify hidden violations before they result in official city citations [Source #2, Source #3].\n\n---\n\n### Risk & Business Impact Analysis\n*   **Reputational Risk:** The current state of operations is driving customers to competitors. Reviews explicitly mention \"avoiding the place like the plague\" and advising others to stay away for months [Source #2, Source #3].\n*   **Regulatory Risk:** The mention of \"Major Violations\" and \"Board of Health\" trouble indicates a high risk of forced closure or heavy fines [Source #2, Source #3].\n*   **Revenue Impact:** Customers are currently viewing the establishment as a \"pay toilet\" rather than a dining destination [Source #1]. Continued neglect will result in a total loss of repeat business and a permanent decline in brand equity.",
+      "expected_output": "Restroom sanitation failures occur due to skipped 30-minute maintenance log audits, unmonitored dispenser restocking, and floor drain trap drying.",
+      "latency_ms": 4606.52,
+      "status": "evaluated",
+      "deepeval_scores": {
+        "faithfulness": 0.9,
+        "answer_relevancy": 1.0,
+        "contextual_precision": 0.8,
+        "contextual_recall": 0.4,
+        "recommendation_quality": 0.9
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.2846,
+        "heuristic_answer_relevancy": 0.5833,
+        "heuristic_context_precision": 0.8,
+        "heuristic_context_recall": 0.1333
+      },
+      "reasons": {
+        "faithfulness": "The response is highly grounded in the provided evidence, though it references a 'Source #5' which does not exist in the provided context.",
+        "answer_relevancy": "The response directly addresses the user's query by diagnosing the operational failures and providing a structured plan.",
+        "contextual_precision": "The most relevant evidence regarding staff behavior and sanitation issues was correctly prioritized in the top ranks.",
+        "contextual_recall": "The retrieved context failed to mention specific technical causes like 'floor drain trap drying' or '30-minute log audits' found in the reference output.",
+        "recommendation_quality": "The recommendations are highly actionable, professional, and directly address the root causes identified in the context."
+      },
+      "error": null
+    },
+    {
+      "id": "TC_19",
+      "category": "Cleanliness",
+      "query": "Why are customers finding water spots on glassware and food residue on forks?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Diagnosis & Problem Classification\nThe issues you are experiencing\u2014water spots on glassware and food residue on forks\u2014are classified as **Sanitation and Warewashing Failures**. Based on the provided data, these are not isolated incidents but symptoms of a systemic breakdown in food contact surface hygiene and maintenance protocols.\n\n### Root-Cause Evidence Breakdown\nWhile the provided reviews cover various restaurants, the evidence from **Wok On the Wild Side [Source #3]** provides a direct correlation to your specific problem:\n\n*   **Systemic Sanitation Failure:** Multiple health inspections at *Wok On the Wild Side* explicitly cited \"Food contact surfaces: clean and sanitized\" as a **MAJOR VIOLATION** across three separate years (2014, 2015, and 2016). \n*   **Operational Neglect:** The presence of food residue on cutlery and water spots on glassware indicates that your dishwashing process is failing at two stages:\n    1.  **Pre-wash/Scrubbing:** Failure to remove physical debris (food residue) before the items enter the machine.\n    2.  **Chemical/Mechanical Failure:** Water spots suggest improper water hardness levels, insufficient rinse-aid agent, or a malfunctioning high-temperature sanitizing cycle.\n*   **Cultural Indicators:** As seen in **Smashburger [Source #4]**, when staff are observed \"clowning around\" and the environment is generally dirty, it indicates a lack of managerial oversight regarding sanitation standards. If staff are not held accountable for the cleanliness of the dining room, they are unlikely to be diligent regarding the technical aspects of the dish pit.\n\n### Actionable Managerial Recommendations\n\n#### Immediate (Next 24\u201348 Hours)\n1.  **Audit the Dish Machine:** Verify the chemical levels (detergent and rinse aid) in your dish machine. Water spots are a primary indicator of empty rinse-aid reservoirs or mineral buildup in the machine.\n2.  **Implement a \"Spot-Check\" Protocol:** Require a lead staff member to inspect 100% of cutlery and glassware as it exits the machine. Any item with visible residue or spots must be re-washed immediately.\n3.  **Deep Clean the Dish Pit:** Ensure the spray arms and nozzles of the dish machine are not clogged with debris, which prevents proper water pressure and chemical distribution.\n\n#### Long-Term (Ongoing)\n1.  **Standardize Pre-Soak Procedures:** Ensure all cutlery is being properly pre-soaked and scrubbed before entering the machine. The machine is a sanitizer, not a primary cleaner for heavy food residue.\n2.  **Staff Accountability:** Address the \"unprofessional\" culture identified in **Smashburger [Source #4]**. Sanitation must be a core performance metric. If staff are not taking pride in the cleanliness of the dining room, they will not take pride in the cleanliness of the tools used to eat.\n3.  **Health Compliance Training:** Use the findings from **Wok On the Wild Side [Source #3]** as a case study for your team. Emphasize that \"Food contact surface\" violations are major health risks that can lead to regulatory shutdowns.\n\n### Risk & Business Impact Analysis\n*   **Regulatory Risk:** As evidenced by the major violations in **Source #3**, failure to maintain clean food contact surfaces is a primary trigger for health department citations and potential closure.\n*   **Reputational Damage:** Customers associate dirty cutlery with poor food safety. If a customer finds food residue on a fork, they will assume the kitchen is equally unsanitary, leading to the \"food poisoning\" concerns noted in **Source #3** and **Source #5**.\n*   **Customer Retention:** Cleanliness is a baseline expectation. As noted in **Source #4**, once a customer perceives a lack of cleanliness, they are unlikely to return, regardless of the quality of the food.",
+      "expected_output": "Residue on tableware stems from commercial dish machine rinse temperature drops, low detergent titration levels, and lack of post-wash inspection.",
+      "latency_ms": 10951.49,
+      "status": "evaluated",
+      "deepeval_scores": {
+        "faithfulness": 0.7,
+        "answer_relevancy": 0.9,
+        "contextual_precision": 0.2,
+        "contextual_recall": 0.2,
+        "recommendation_quality": 0.9
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.2143,
+        "heuristic_answer_relevancy": 1.0,
+        "heuristic_context_precision": 1.0,
+        "heuristic_context_recall": 0.1765
+      },
+      "reasons": {
+        "faithfulness": "The response hallucinates specific restaurant names (Wok On the Wild Side, Smashburger) that are not present in the provided context snippets.",
+        "answer_relevancy": "The response directly addresses the user's query by providing a clear diagnosis and actionable steps for the identified sanitation issues.",
+        "contextual_precision": "The retrieved context contains general complaints about service and cleanliness but lacks specific technical data regarding dish machine operations, forcing the model to rely on external knowledge.",
+        "contextual_recall": "The provided context fails to mention technical causes like rinse temperature or detergent titration, which are critical to the reference expected output.",
+        "recommendation_quality": "The recommendations are highly professional, structured, and directly address the root causes of the described sanitation failures."
+      },
+      "error": null
+    },
+    {
+      "id": "TC_20",
+      "category": "Cleanliness",
+      "query": "What triggers reports of fruit flies or pest sightings around the bar and floor drain areas?",
+      "is_out_of_scope": false,
+      "actual_output": "### Executive Diagnosis & Problem Classification\nBased on the provided reviews, the presence of pests (fruit flies and roaches) is classified as a **Critical Sanitation Failure**. The reports indicate that pest issues are not isolated incidents but are symptomatic of systemic operational neglect, specifically regarding waste management, bar maintenance, and food handling protocols.\n\n### Root-Cause Evidence Breakdown\nThe data identifies three primary triggers for pest activity:\n\n*   **Improper Waste & Grease Management:** External filth, specifically overflowing dumpsters and rancid cooking oil, creates an environment that attracts pests to the building perimeter [Source #1].\n*   **Bar Sanitation Neglect:** The bar area is a high-risk zone due to the accumulation of organic matter. Specific triggers include:\n    *   **Standing Liquids:** Cups of oil containing dead flies [Source #3].\n    *   **Surface Contamination:** Sticky bar surfaces and the presence of soiled bar rags [Source #3].\n    *   **Equipment Maintenance:** Dirty shakers and muddlers left in the service area [Source #3].\n*   **Food Handling & Exposure:** Leaving prepared meals in the service window for extended periods (10+ minutes) allows flies to congregate on food before it reaches the guest [Source #3].\n*   **General Facility Hygiene:** The presence of roaches in daylight hours [Source #2] and persistent fruit fly infestations [Source #5] suggest that deep-cleaning schedules for floor drains and hidden crevices are either non-existent or ineffective.\n\n### Actionable Managerial Recommendations\n\n#### Immediate (Next 24\u201348 Hours)\n1.  **Deep Clean & Sanitize:** Conduct an immediate deep clean of all bar floor drains, soda gun lines, and under-bar equipment. These areas are primary breeding grounds for fruit flies.\n2.  **Waste Audit:** Inspect the exterior dumpster and grease trap areas. Ensure all lids are tightly sealed and the surrounding area is power-washed to remove rancid residue that attracts pests [Source #1].\n3.  **Implement \"First-In, First-Out\" (FIFO) Window Protocol:** Enforce a strict rule that no food sits in the window for more than 2 minutes. If a runner is not available, the kitchen must hold the order under heat lamps or in the kitchen, not in the service window [Source #3].\n\n#### Long-Term (Ongoing)\n1.  **Bar Maintenance Standard:** Remove all \"clutter\" from the bar top. Implement a policy where bar rags are replaced every hour and stored in sanitizer buckets, never left on the bar surface [Source #3].\n2.  **Pest Control Contract Review:** Engage a professional pest control service to perform a site inspection specifically targeting floor drains and wall voids. Ensure they provide a written report of findings and a treatment plan.\n3.  **Sanitation Training:** Re-train staff on the link between \"bad sanitation\" and \"deadly\" health outcomes [Source #1]. Shift the culture from \"giving up\" [Source #3] to a high-standard service environment.\n\n### Risk & Business Impact Analysis\n*   **Regulatory Risk:** The mention of \"MAJOR Violations\" in city sanitation reports [Source #1] indicates a high probability of health department intervention, fines, or forced closure.\n*   **Reputational Damage:** Pest sightings are a \"death knell\" for restaurant reviews. Customers explicitly link these sightings to a lack of trust in the kitchen's overall hygiene [Source #1].\n*   **Revenue Loss:** As seen in [Source #5], pest issues correlate with empty dining rooms and last-minute reservation availability, indicating that the market is already avoiding the establishment due to its poor reputation.",
+      "expected_output": "Fruit fly presence is caused by organic sugar sludge buildup in bar floor drains, unemptied overnight bar fruit bins, and missed enzymatic drain dosing.",
+      "latency_ms": 7448.42,
+      "status": "evaluated",
+      "deepeval_scores": {
+        "faithfulness": 0.8,
+        "answer_relevancy": 0.9,
+        "contextual_precision": 0.7,
+        "contextual_recall": 0.2,
+        "recommendation_quality": 0.9
+      },
+      "heuristic_proxies": {
+        "heuristic_faithfulness": 0.1865,
+        "heuristic_answer_relevancy": 0.8182,
+        "heuristic_context_precision": 0.8,
+        "heuristic_context_recall": 0.125
+      },
+      "reasons": {
+        "faithfulness": "The response includes a hallucinated reference to 'Source #5' which does not exist in the provided context.",
+        "answer_relevancy": "The response directly addresses the query by synthesizing operational triggers from the provided reviews.",
+        "contextual_precision": "The most relevant evidence regarding bar sanitation (Evidence 3) was correctly identified, though the context set was limited.",
+        "contextual_recall": "The retrieved context completely failed to provide the technical root causes (organic sugar sludge, enzymatic dosing) mentioned in the reference output.",
+        "recommendation_quality": "The recommendations are highly professional, actionable, and directly address the sanitation failures identified in the context."
       },
       "error": null
     }

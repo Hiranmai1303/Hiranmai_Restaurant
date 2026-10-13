@@ -49,6 +49,7 @@ data/raw/*.json
 datasets/*.json
 !datasets/.gitkeep
 !data/sample_data/processed_reviews_sample.csv
+data/eval_results/eval_results_*.json
 
 # Pytest / Coverage
 .pytest_cache/

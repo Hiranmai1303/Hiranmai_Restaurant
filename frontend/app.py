@@ -1740,19 +1740,19 @@ elif nav_selection == "📈 Evaluation & Quality":
         with c_scope:
             bench_mode = st.selectbox(
                 "Benchmark Scope",
-                options=[2, 3, 5],
-                format_func=lambda x: f"⚡ Fast ({x} Cases ~12s)" if x == 2 else (f"🔬 Standard ({x} Cases ~20s)" if x == 3 else f"📊 Full ({x} Cases ~35s)"),
+                options=[2, 5, 10, 20],
+                format_func=lambda x: f"⚡ Turbo ({x} Cases ~4s)" if x == 2 else (f"⚡ Fast ({x} Cases ~8s)" if x == 5 else (f"🔬 Extended ({x} Cases ~15s)" if x == 10 else f"🏆 Comprehensive ({x} Cases ~25s)")),
                 index=0,
                 label_visibility="collapsed"
             )
         with c_btn:
-            if st.button("⚡ Run Benchmark", use_container_width=True, help="Executes real DeepEval evaluations across benchmark cases using Google Gemini"):
+            if st.button("⚡ Run Benchmark", use_container_width=True, help="Executes real DeepEval & RAGAS evaluations across benchmark cases using Google Gemini"):
                 with st.status(f"⚡ Running live evaluation on {bench_mode} cases with Google Gemini...", expanded=True) as status_box:
                     status_box.write("1. Retrieving operational review evidence via BM25 + Vector Hybrid search...")
                     from backend.app.evaluation.evaluator import get_rag_evaluator
                     ev = get_rag_evaluator()
-                    status_box.write("2. Evaluating Faithfulness, Relevancy, Precision, Recall in parallel threads...")
-                    new_res = ev.run_benchmark_evaluation(max_cases=bench_mode)
+                    status_box.write("2. Evaluating Faithfulness, Relevancy, Precision, Recall & Recommendation Quality concurrently...")
+                    new_res = ev.run_benchmark_evaluation(max_cases=bench_mode, fast_mode=True)
                     status_box.update(label=f"✅ Benchmark Complete! Evaluated {new_res.get('evaluated_cases')} cases.", state="complete")
                 st.rerun()
 
