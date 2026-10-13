@@ -558,18 +558,126 @@ class OperationsAnalystService:
                 "priority": {
                     "level": "LOW",
                     "score": 0.0,
-                    "badge": "🟢 Low",
-                    "factors": {}
+                    "badge": "ℹ️ Info",
+                    "description": "Informational query"
                 },
-                "possible_root_causes": [],
-                "evidence_reasoning_matrix": [],
-                "recommended_actions": [],
-                "executive_summary": general_answer,
-                "supporting_reviews": [],
-                "retrieval_metrics": {
-                    "total_retrieved": 0,
-                    "dense_retrieved": 0,
-                    "sparse_retrieved": 0
+                "recommendations": {
+                    "immediate_actions": [],
+                    "long_term_initiatives": [],
+                    "estimated_resolution_days": 0,
+                    "responsible_roles": []
+                },
+                "similar_restaurants": [],
+                "rag_analysis": {
+                    "answer": general_answer,
+                    "evidence_count": 0,
+                    "citations": []
+                }
+            }
+
+        # Step 1.5: Conversational Greeting check (hi, hello, good morning, etc.)
+        if guard_res.get("is_greeting"):
+            q_clean = query.strip().lower()
+            if "morning" in q_clean:
+                greet_prefix = "Good morning!"
+            elif "afternoon" in q_clean:
+                greet_prefix = "Good afternoon!"
+            elif "evening" in q_clean:
+                greet_prefix = "Good evening!"
+            else:
+                greet_prefix = "Hello!"
+
+            greeting_text = (
+                f"### {greet_prefix} 👋 Welcome to your AI Restaurant Operations Assistant\n\n"
+                "I am here to help you analyze customer reviews, diagnose root causes of operational friction, and generate actionable remediation plans across your restaurant locations.\n\n"
+                "**Here are a few questions you can ask me right now:**\n"
+                "- *\"What are the primary factors contributing to long customer wait times during peak dinner rushes?\"*\n"
+                "- *\"Why are guests reporting that hot entrees and soups are arriving cold or lukewarm?\"*\n"
+                "- *\"What operational issues cause server inattentiveness and neglected dining sections?\"*\n"
+                "- *\"Which issues should management prioritize first to reduce customer churn?\"*\n\n"
+                "How can I assist your team today?"
+            )
+
+            return {
+                "status": "success",
+                "is_valid": True,
+                "is_greeting": True,
+                "mode": "Conversational Assistant",
+                "query": query,
+                "executive_summary": greeting_text,
+                "general_llm_response": greeting_text,
+                "primary_category": "Greeting",
+                "intent": {
+                    "primary_category": "Greeting",
+                    "target_categories": ["General Assistance"],
+                    "detected_restaurant": None,
+                    "detected_location": None,
+                    "is_multi_issue": False,
+                    "is_restaurant_specific": False
+                },
+                "main_issue": {
+                    "category": "Operational Assistant",
+                    "badge": "👋 Greeting",
+                    "description": "Ready to assist with restaurant operations analytics."
+                },
+                "evidence_stats": {
+                    "total_reviews": 0,
+                    "relevant_reviews_count": 0,
+                    "negative_sentiment_ratio": 0.0,
+                    "avg_stars": 5.0,
+                    "average_review_rating": 5.0
+                },
+                "associated_issues": [],
+                "complaint_breakdown": {},
+                "severity": {
+                    "level": "INFO",
+                    "score": 0.0,
+                    "badge": "👋 Welcome",
+                    "description": "Assistant is online and ready."
+                },
+                "trend": {
+                    "direction": "STABLE",
+                    "percentage": 0.0,
+                    "pct_change": 0.0,
+                    "badge": "➡️ Ready",
+                    "description": "System ready"
+                },
+                "priority": {
+                    "level": "LOW",
+                    "score": 0.0,
+                    "badge": "ℹ️ Ready",
+                    "description": "Awaiting operational inquiry"
+                },
+                "root_cause_analysis": {
+                    "primary_root_cause": "Conversational Greeting",
+                    "confidence": 1.0,
+                    "contributing_factors": []
+                },
+                "recommendations": {
+                    "immediate_actions": [
+                        "Ask an operational question regarding wait times, food quality, service, or staff behavior.",
+                        "Select any of the quick-prompt chips or specify a restaurant name to filter evidence."
+                    ],
+                    "long_term_initiatives": [
+                        "Explore fleet-wide complaint distributions under Analytics & Trends.",
+                        "Track dynamic RAG quality telemetry under System Evaluation."
+                    ],
+                    "estimated_resolution_days": 0,
+                    "responsible_roles": ["Restaurant Manager", "Operations Lead"]
+                },
+                "action_items": [
+                    {
+                        "priority": "LOW",
+                        "action": "Ask an operational question regarding wait times, food quality, service, or staff behavior.",
+                        "owner": "Restaurant Manager",
+                        "timeframe": "Immediate"
+                    }
+                ],
+                "similar_restaurants": [],
+                "rag_analysis": {
+                    "answer": greeting_text,
+                    "evidence_count": 0,
+                    "citations": []
                 }
             }
 

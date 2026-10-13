@@ -399,6 +399,28 @@ elif nav_selection == "🎯 Central Operations Analyst":
             report = st.session_state["active_report"]
 
         # =========================================================
+        # CONVERSATIONAL GREETING HANDLING (hi, hello, good morning)
+        # =========================================================
+        if report.get("is_greeting"):
+            greeting_msg = report.get("executive_summary") or report.get("general_llm_response") or "Hello! 👋 Welcome to your AI Restaurant Operations Assistant."
+            st.markdown(
+                """
+                <div style="background: linear-gradient(135deg, rgba(20, 184, 166, 0.15), rgba(15, 23, 42, 0.95)); border: 1px solid rgba(20, 184, 166, 0.4); border-radius: 16px; padding: 22px 26px; margin-top: 20px; margin-bottom: 20px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 6px;">
+                        <span style="font-size: 2rem;">👋</span>
+                        <div>
+                            <span style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: #14B8A6; letter-spacing: 0.08em;">CONVERSATIONAL ASSISTANT</span>
+                            <h3 style="margin: 0; color: #F8FAFC; font-size: 1.3rem; font-weight: 800;">Welcome! How can I assist your restaurant operations?</h3>
+                        </div>
+                    </div>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+            st.markdown(greeting_msg)
+            st.stop()
+
+        # =========================================================
         # GUARDRAIL & RELEVANCE CHECK + GENERAL LLM RESPONSE
         # =========================================================
         if report.get("status") == "guardrail_rejected" or report.get("is_valid") is False:

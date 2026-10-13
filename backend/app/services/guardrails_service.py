@@ -111,6 +111,49 @@ class GuardrailsService:
             self._cached_restaurant_names = names
         return self._cached_restaurant_names
 
+    def is_greeting(self, query: str) -> bool:
+        """
+        Detects if query is a natural greeting (hi, hello, good morning, etc.)
+        without requiring domain-specific operational complaint keywords.
+        """
+        if not query:
+            return False
+        q_clean = re.sub(r"[^\w\s]", " ", query.strip().lower())
+        q_tokens = [w for w in q_clean.split() if w]
+        if not q_tokens:
+            return False
+
+        # Single-token greetings
+        single_greetings = {
+            "hi", "hello", "hey", "goodmorning", "goodafternoon", "goodevening",
+            "howdy", "hiya", "hola", "greetings", "morning", "afternoon", "evening"
+        }
+        if len(q_tokens) == 1 and q_tokens[0] in single_greetings:
+            return True
+
+        # Multi-token greetings
+        phrase = " ".join(q_tokens)
+        greeting_phrases = {
+            "good morning", "good afternoon", "good evening", "good day",
+            "hi there", "hello there", "hey there", "how are you",
+            "hows it going", "how are things", "whats up", "what is up",
+            "hi assistant", "hello assistant", "hey assistant",
+            "good morning assistant", "good afternoon assistant", "good evening assistant"
+        }
+        if phrase in greeting_phrases:
+            return True
+
+        # Short conversational greetings (e.g. "hi how are you doing", "hello good morning")
+        if len(q_tokens) <= 5:
+            for g in ["hi", "hello", "hey", "good morning", "good afternoon", "good evening"]:
+                if phrase.startswith(g):
+                    words = set(q_tokens)
+                    # If it does not contain explicit operational problem words, treat as greeting
+                    if not words.intersection(self._domain_keywords_set):
+                        return True
+
+        return False
+
     def validate_query(self, query: str) -> Dict[str, Any]:
         """
         Validates user query against length, prompt injection, and domain relevance rules.
@@ -150,7 +193,16 @@ class GuardrailsService:
                     "message": f"The query '{cleaned}' is outside the scope of restaurant operations and customer review analytics. Please enter an inquiry related to food quality, waiting time, customer service, cleanliness, pricing, staff behavior, or restaurant performance."
                 }
 
-        # 3. Check Domain Relevance (Keyword & Entity Match)
+        # 3. Check if query is a natural greeting (hi, hello, good morning, etc.)
+        if self.is_greeting(cleaned):
+            return {
+                "is_valid": True,
+                "is_greeting": True,
+                "reason": "GREETING",
+                "message": "Greeting recognized."
+            }
+
+        # 4. Check Domain Relevance (Keyword & Entity Match)
         # Tokenize query into words
         words = set(re.findall(r'\b[a-z]{3,}\b', q_lower))
         has_domain_keyword = bool(words.intersection(self._domain_keywords_set))
